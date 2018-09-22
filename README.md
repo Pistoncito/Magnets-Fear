@@ -4,6 +4,7 @@
 ### Creative Condors
 
 Álvaro Ramirez Míguez
+
 Víctor González Rivera
 
 ## Descripción del Juego
