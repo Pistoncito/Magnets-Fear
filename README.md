@@ -64,7 +64,7 @@ Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obt
 
 
 ## Interfaces
-(diagrama de flujo)
+![Error al cargar la imagen](diagrama de flujo)
 
 ### Pantalla de Inicio
 Se reflejarán las opciones:
