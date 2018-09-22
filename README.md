@@ -64,6 +64,7 @@ Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obt
 
 
 ## Interfaces
+### Diagrama de Flujo
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/Magnets%20Fear%20flow%20diagram.PNG)
 
 ### Pantalla de Inicio
