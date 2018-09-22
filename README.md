@@ -102,6 +102,7 @@ Cada jugador que crea una cuenta hace el papel de la IA que controla la esfera d
 ### Estética
 Estilo futurista-espacial simplificado. 
 Utilizamos colores vivos y saturados para diferenciar los distintos elementos en pantalla. La polaridad positiva se representa con rojo y la negativa con azul. Cada jugador podrá diferenciar la esfera que controla por una tonalidad más clara, mientras que la de su enemigo es más oscura. Lo mismo pasa con las bases de tu propia civilización y las enemigas. A continuación adjuntamos una imagen con el concepto.
+
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/Estetica%20in-game.png)
 
 ### Música y Sonido
