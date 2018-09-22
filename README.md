@@ -69,14 +69,14 @@ Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obt
 ### Pantalla de Inicio
 Se reflejarán las opciones:
 1. Jugar: Al seleccionar esta opción se abrirá otra interfaz donde podrás elegir jugar con un amigo o buscar un jugador de tu nivel, así como el modo de juego (*Clásico* o *Cooperativo*).
-  * Buscar Partida: se busca un jugador de tu nivel que también esté buscando partida.
-  * Jugar con un amigo: se introduce el usuario de un amigo y se envía una invitación de juego.
-  * Volver: vuelve al menú de inicio.
+   * Buscar Partida: se busca un jugador de tu nivel que también esté buscando partida.
+   * Jugar con un amigo: se introduce el usuario de un amigo y se envía una invitación de juego.
+   * Volver: vuelve al menú de inicio.
 2. Opciones: Se abre una nueva interfaz donde se podrá configurar:
-  * Controles: Se permiten cambiar los botones con los que se controla el movimiento y el cambio de polaridad al gusto del jugador.
-  * Audio: Se puede modificar el volumen del sonido y la música.
-  * Resolución: Se permite alterar la resolución.
-  * Volver: vuelve al menú de inicio.
+   * Controles: Se permiten cambiar los botones con los que se controla el movimiento y el cambio de polaridad al gusto del jugador.
+   * Audio: Se puede modificar el volumen del sonido y la música.
+   * Resolución: Se permite alterar la resolución.
+   * Volver: vuelve al menú de inicio.
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
 ## Arte
