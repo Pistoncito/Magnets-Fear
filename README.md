@@ -107,11 +107,11 @@ Utilizamos colores vivos y saturados para diferenciar los distintos elementos en
 * Música
   1. Menú de inicio, opciones.
   2. Durante la partida: Hay una base de fondo que se complementa dependiendo de la polaridad de los jugadores:
-    * Jugador 1 y 2 con polaridad positiva.
-    * Jugador 1 y 2 con polaridad negativa.
-    * Jugador 1 con polaridad positiva y Jugador 2 con polaridad negativa.
-    * Jugador 1 con polaridad negativa y Jugador 2 con polaridad positiva.
-  La música se acelera al acercarse a los 30 segundos finales de la partida.
+     * Jugador 1 y 2 con polaridad positiva.
+     * Jugador 1 y 2 con polaridad negativa.
+     * Jugador 1 con polaridad positiva y Jugador 2 con polaridad negativa.
+     * Jugador 1 con polaridad negativa y Jugador 2 con polaridad positiva.
+   La música se acelera al acercarse a los 30 segundos finales de la partida.
 
 * Sonido
   1. Colisión proyectil-pared
