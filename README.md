@@ -5,7 +5,7 @@
 
 Álvaro Ramirez Míguez
 
-Víctor González Ruiz
+Víctor González Rivera
 
 ## Descripción del Juego
 *Magnets Fear* es un juego arcade 2D en red para dos jugadores, de partidas 1vs1 de dos minutos.
