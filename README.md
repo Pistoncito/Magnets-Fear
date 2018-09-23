@@ -28,7 +28,6 @@ El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
 * Tanto las esferas como los proyectiles rebotan contra los limites del escenario.
 * Hay 3 bases por cada jugador que desaparecen cada 30 segundos generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
 * Si un proyectil choca contra una base, la destruye.
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/Magnets%20Fear%20flow%20diagram.PNG)
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/magnets%20fear%20classic%20design.png)
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
