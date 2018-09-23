@@ -42,7 +42,7 @@ El juego se desarrolla en todo momento en vista cenital.
 Controles por defecto:
 * Movimiento: W,A,S,D -> Arriba, Izquierda, Abajo y Derecha, respectivamente. Se permite la combinación de dos movimientos a la vez generando desplazamiento en diagonal (Ej: W + A -> Arriba + Izquierda). 
 * Cambio de polaridad: Barra espaciadora.
-
+[Magnets-Fear/magnets fear classic design.png]
 ## Modos de Juego
 ### Clásico 
 2 jugadores compiten entre ellos con las normas explicadas en *Reglas Básicas*, *Puntuación* y *Objetivo*.
