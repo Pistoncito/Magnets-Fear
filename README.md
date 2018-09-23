@@ -28,6 +28,7 @@ El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
 * Tanto las esferas como los proyectiles rebotan contra los limites del escenario.
 * Hay 3 bases por cada jugador que desaparecen cada 30 segundos generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
 * Si un proyectil choca contra una base, la destruye.
+[!Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/magnets%20fear%20classic%20design.png)
 
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
@@ -43,7 +44,6 @@ Controles por defecto:
 * Movimiento: W,A,S,D -> Arriba, Izquierda, Abajo y Derecha, respectivamente. Se permite la combinación de dos movimientos a la vez generando desplazamiento en diagonal (Ej: W + A -> Arriba + Izquierda). 
 * Cambio de polaridad: Barra espaciadora.
 
-(Magnets-Fear/magnets fear classic design.png)
 ## Modos de Juego
 ### Clásico 
 2 jugadores compiten entre ellos con las normas explicadas en *Reglas Básicas*, *Puntuación* y *Objetivo*.
