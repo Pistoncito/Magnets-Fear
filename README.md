@@ -51,11 +51,13 @@ Controles por defecto:
 2 jugadores compiten entre ellos con las normas explicadas en *Reglas Básicas*, *Puntuación* y *Objetivo*.
 
 ### Cooperativo 
-2 jugadores juegan contra *RIPPED* un enemigo controlado por la máquina. Éste se sitúa en el centro de la pantalla y lanza proyectiles en todas las direcciones periódicamente que amenazan la integridad de las bases repartidas por el mapa. El objetivo de los jugadores es repeler los proyectiles para que no lleguen a las bases a la vez que golpean al enemigo en puntos débiles para acabar con él. 
+2 jugadores juegan contra *RIPPED* un enemigo controlado por la IA. Éste se sitúa en el centro de la pantalla y lanza proyectiles en todas las direcciones periódicamente que amenazan la integridad de las bases repartidas por el mapa. El juego empieza con 5 bases, que pertenecen a ambos jugadores, y cada 30 segundos aparece una nueva.
 
-A diferencia del modo *Clásico* las bases son más resistentes, aguantando hasta tres golpes. Una vez que las bases de un jugador son destruídas éste es eliminado y sólo volverá a aparecer si el otro jugador es capaz de poteger sus bases durante 10 segundos. Al reaparecer un jugador, reaparece también su última base. 
+El objetivo de los jugadores es repeler los proyectiles para que no lleguen a las bases a la vez que golpean al *RIPPED* en puntos débiles para acabar con él. 
 
-El juego termina cuando *RIPPED* es derrotado o al eliminarse 2 jugadores a la vez.
+*RIPPED* se compone de 2 discos giratorios que protegen el núcleo. Cada disco tiene 2 compuertas que son a su vez sus puntos débiles y de las cuales salen los proyectiles. Cuando el jugador golpee los puntos débiles del disco éste se rompe y desaparece. Al golpear el núcleo *RIPPED* se rearma atrayendo todos los proyectiles del escenario  en línea recta hacia si mismo, volviendo a crear los discos. 
+
+El juego termina cuando *RIPPED* es derrotado o al llegar a un número determinado de bases destruídas.
 
 ## MatchMaking
 Los jugadores pueden jugar con un amigo conociendo su nombre de usuario o contra un jugador de su nivel buscando una partida de emparejamiento.
