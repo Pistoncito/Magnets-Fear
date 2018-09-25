@@ -29,8 +29,8 @@ El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
 * Hay 3 bases por cada jugador que desaparecen cada 30 segundos generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
 * Si un proyectil choca contra una base, la destruye.
 
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/images/magnets%20fear%20classic%20design.png)
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/images/magnets%20fear%20efecto%20de%20colision.png)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20classic%20design.png)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20efecto%20de%20colision.png)
 
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
@@ -70,7 +70,7 @@ Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obt
 
 ## Interfaces
 ### Diagrama de Flujo
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/images/Magnets%20Fear%20flow%20diagram.PNG)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20Fear%20flow%20diagram.PNG)
 
 ### Pantalla de Inicio
 Se reflejarán las opciones:
@@ -85,8 +85,8 @@ Se reflejarán las opciones:
    * Volver: vuelve al menú de inicio.
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/images/Magnets%20fear%20pantalla%20de%20inicio.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/images/Interfaz%20Opciones%20Prototipo.png)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20fear%20pantalla%20de%20inicio.png)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaz%20Opciones%20Prototipo.png)
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
