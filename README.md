@@ -86,6 +86,7 @@ Se reflejarán las opciones:
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Magnets%20fear%20pantalla%20de%20inicio.png)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Interfaz%20Opciones%20Prototipo.png)
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
