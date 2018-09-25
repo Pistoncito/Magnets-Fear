@@ -32,6 +32,17 @@ El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20classic%20design.png)
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20efecto%20de%20colision.png)
 
+### Power Ups
+Los Power Ups estarán representados gráficamente colisionando con todos los objetos moviéndose por toda la pantalla de juego.
+Cuando la esfera de un jugador choque con un Power Up, éste se activará temporalmente dependiendo del Power Up.
+
+ * Power Up 1: Las fuerzas de atracción y de repulsión de la esfera, se ven aumentadas.
+ * Power Up 2: El rango de acción de una esfera se vuelve mayor.
+ * Power Up 3: La esfera acelera más rapido.
+ * Power Up 4: Una de tus bases recibe un golpe extra antes de ser destruida.
+ * Power Up 5: Al cambiar la polaridad de tu esfera, cambias también la de tu enemigo.
+ 
+
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
 
