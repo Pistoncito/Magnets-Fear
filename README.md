@@ -60,13 +60,17 @@ El objetivo de los jugadores es repeler los proyectiles para que no lleguen a la
 El juego termina cuando *RIPPED* es derrotado o al llegar a un número determinado de bases destruídas.
 
 ## MatchMaking
-Los jugadores pueden jugar con un amigo conociendo su nombre de usuario o contra un jugador de su nivel buscando una partida de emparejamiento.
 
-Los emparejamientos de un jugador se efectuarán con otros jugadores con un *ELO* (habilidad relativa) similar.
-Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obtiene o pierde *ELO* en función de:
+La manera de medir el nivel de un jugador se llamará *HR* (habilidad relativa).
+
+Los emparejamientos de un jugador se efectuarán con otros jugadores según su *HR*.
+Cada vez que un jugador gana o es derrotado en una partida de emparejamiento obtiene o pierde *HR* en función de:
 * La diferencia de puntos entre el jugador y el oponente. 
-* La diferencia de puntuación al terminar la partida.
+* La racha de partidas que haya ganado o perdido, teniendo en cuenta las últimas 10 partidas.
 
+Cada jugador tendrá un *HR* para el modo *Clásico* y otro para el modo *Cooperativo*.
+
+Los jugadores pueden jugar con un amigo añadiendolo a su lista de amigos usando la opción con amigos de emparejamiento. En este tipo de matchmaking no se da ni quita *HR*.
 
 ## Interfaces
 ### Diagrama de Flujo
