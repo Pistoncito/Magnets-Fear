@@ -29,8 +29,9 @@ El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
 * Hay 3 bases por cada jugador que desaparecen cada 30 segundos generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
 * Si un proyectil choca contra una base, la destruye.
 
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/magnets%20fear%20classic%20design.png)
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/magnets%20fear%20efecto%20de%20colision.png)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/magnets%20fear%20classic%20design.png)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/magnets%20fear%20efecto%20de%20colision.png)
+
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
 
@@ -50,11 +51,13 @@ Controles por defecto:
 2 jugadores compiten entre ellos con las normas explicadas en *Reglas Básicas*, *Puntuación* y *Objetivo*.
 
 ### Cooperativo 
-2 jugadores juegan contra *RIPPED* un enemigo controlado por la máquina. Éste se sitúa en el centro de la pantalla y lanza proyectiles en todas las direcciones periódicamente que amenazan la integridad de las bases repartidas por el mapa. El objetivo de los jugadores es repeler los proyectiles para que no lleguen a las bases a la vez que golpean al enemigo en puntos débiles para acabar con él. 
+2 jugadores juegan contra *RIPPED* un enemigo controlado por la IA. Éste se sitúa en el centro de la pantalla y lanza proyectiles en todas las direcciones periódicamente que amenazan la integridad de las bases repartidas por el mapa. El juego empieza con 5 bases, que pertenecen a ambos jugadores, y cada 30 segundos aparece una nueva.
 
-A diferencia del modo *Clásico* las bases son más resistentes, aguantando hasta tres golpes. Una vez que las bases de un jugador son destruídas éste es eliminado y sólo volverá a aparecer si el otro jugador es capaz de poteger sus bases durante 10 segundos. Al reaparecer un jugador, reaparece también su última base. 
+El objetivo de los jugadores es repeler los proyectiles para que no lleguen a las bases a la vez que golpean al *RIPPED* en puntos débiles para acabar con él. 
 
-El juego termina cuando *RIPPED* es derrotado o al eliminarse 2 jugadores a la vez.
+*RIPPED* se compone de 2 discos giratorios que protegen el núcleo. Cada disco tiene 2 compuertas que son a su vez sus puntos débiles y de las cuales salen los proyectiles. Cuando el jugador golpee los puntos débiles del disco éste se rompe y desaparece. Al golpear el núcleo *RIPPED* se rearma atrayendo todos los proyectiles del escenario  en línea recta hacia si mismo, volviendo a crear los discos. 
+
+El juego termina cuando *RIPPED* es derrotado o al llegar a un número determinado de bases destruídas.
 
 ## MatchMaking
 Los jugadores pueden jugar con un amigo conociendo su nombre de usuario o contra un jugador de su nivel buscando una partida de emparejamiento.
@@ -82,6 +85,8 @@ Se reflejarán las opciones:
    * Volver: vuelve al menú de inicio.
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Magnets%20fear%20pantalla%20de%20inicio.png)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Interfaz%20Opciones%20Prototipo.png)
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
@@ -104,6 +109,7 @@ Cada jugador que crea una cuenta hace el papel de la IA que controla la esfera d
 ### Estética
 Estilo futurista-espacial simplificado. 
 Utilizamos colores vivos y saturados para diferenciar los distintos elementos en pantalla. La polaridad positiva se representa con rojo y la negativa con azul. Cada jugador podrá diferenciar la esfera que controla por una tonalidad más clara, mientras que la de su enemigo es más oscura. Lo mismo pasa con las bases de tu propia civilización y las enemigas. A continuación adjuntamos una imagen con el concepto.
+
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/readme-edit/Estetica%20in-game.png)
 
 ### Música y Sonido
@@ -128,3 +134,5 @@ Utilizamos colores vivos y saturados para diferenciar los distintos elementos en
 ## Tecnología Necesaria
 * Hardware: dos ordenadores con conexión a internet
 * Software: editor de imagen (Photoshop), editor de audio, editor de código (Netbeans), Navegador (Google Chrome, Firefox), lenguaje de programación (Javascript), motor de videojuegos 2D (Phaser), framework (Spring).
+
+
