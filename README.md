@@ -82,7 +82,9 @@ Se reflejarán las opciones:
    * Clásico
    * Cooperativo
    * Volver: Vuelve al menú de inicio.
+   
    Tanto si eliges el modo *Clásico* como el *Cooperativo* se abrirá una nueva interfaz para elegir entre buscar una partida online o emparejarte con un amigo.
+   
    * Buscar Partida: se busca un jugador de tu nivel que también esté buscando partida.
    * Jugar con un amigo: Si elige entre los usuarios de su lista de amigos manda una petición de juego, mientras que si buscas el nombre del usuario con el que quieres jugar y no está en tu lista de amigos se envía una petición de amistad.
    * Volver: vuelve a selección de modos de juego.
