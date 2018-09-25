@@ -134,3 +134,5 @@ Utilizamos colores vivos y saturados para diferenciar los distintos elementos en
 ## Tecnología Necesaria
 * Hardware: dos ordenadores con conexión a internet
 * Software: editor de imagen (Photoshop), editor de audio, editor de código (Netbeans), Navegador (Google Chrome, Firefox), lenguaje de programación (Javascript), motor de videojuegos 2D (Phaser), framework (Spring).
+
+
