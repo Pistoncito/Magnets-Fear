@@ -108,6 +108,7 @@ Se reflejarán las opciones:
 
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20fear%20pantalla%20de%20inicio.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaz%20Opciones%20Prototipo.png)
+*El color violeta indica opciones no interactuables y el color azul representa los que sí.*
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
