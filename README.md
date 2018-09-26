@@ -20,7 +20,7 @@ El objetivo del juego es crear una alternativa sencilla dentro de los juegos com
 
 ## Mecánicas
 ### Jugabilidad
-El jugador puede mover su esfera en ocho direcciones y cambiar su polaridad.
+El jugador puede cambiar su polaridad cada 0.5s y mover su esfera en ocho direcciones.
 
 ### Reglas Básicas
 * Hay 4 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
