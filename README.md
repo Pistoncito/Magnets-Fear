@@ -46,8 +46,8 @@ Cuando la esfera de un jugador choque con un Power Up, éste se activará tempor
 ### Puntuación
 Cada vez que una base sea destruída el jugador propietario gana 10 puntos.
 
-### Objetivo
-Gana el jugador con menor puntuación al acabar la partida.
+### Fin de Partida y Objetivo
+La partida acaba a los 2 minutos y gana el jugador con menor puntuación.
 
 ### Cámara
 El juego se desarrolla en todo momento en vista cenital.
