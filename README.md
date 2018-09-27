@@ -22,9 +22,10 @@ El objetivo del juego es crear una alternativa sencilla dentro de los juegos com
 ## Mecánicas
 ### Jugabilidad
 El jugador puede cambiar su polaridad cada 0.5 segundos, creando un campo magnético con un rango determinado, y mover su esfera en ocho direcciones. Además podrá utilizar una habilidad especial que dependerá del personaje elegido. Inicialmente habrá 3 personajes:
+* Saltador: Realiza un pequeño salto en su dirección de desplazamiento. Para poder volver a usar el salto tendrá que esperar 2 segundos.
 * Constructor: crea una pared en la dirección en la que se esté moviendo que aguanta un impacto de un proyectil. No podrá crear una nueva pared hasta que hayan pasado 10 segundos desde que se destruyó la anterior
-* Destructor: lanza un proyectil en la dirección en la que se esté desplazando que se destruye al impactar contra cualquier objeto. No podrá volver a lanzar un proyectil hasta que hayan pasado 6 segundos desde que desapareció el anterior
-* Saltador: se teletransporta hacia la dirección en la que se esté moviendo, llevándose consigo los proyectiles que se encuentren en su rango de magnetismo. Para poder volver a usar el teletransporte tendrá que esperar 8 segundos.
+* Destructor: lanza un proyectil en la dirección en la que se esté desplazando que se destruye al impactar contra cualquier objeto. No podrá volver a lanzar un proyectil hasta que hayan pasado 7 segundos desde que desapareció el anterior
+
 
 ### Reglas Básicas
 * Hay 4 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
