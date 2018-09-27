@@ -25,7 +25,7 @@ El jugador puede cambiar su polaridad cada 0.5 segundos, creando un campo magné
 * Saltador: Realiza un pequeño salto en su dirección de desplazamiento. Para poder volver a usar el salto tendrá que esperar 2 segundos.
 * Constructor: crea una pared en la dirección en la que se esté moviendo que aguanta un impacto de un proyectil. No podrá crear una nueva pared hasta que hayan pasado 10 segundos desde que se destruyó la anterior
 * Destructor: lanza un proyectil en la dirección en la que se esté desplazando que se destruye al impactar contra cualquier objeto. No podrá volver a lanzar un proyectil hasta que hayan pasado 7 segundos desde que desapareció el anterior
-
+* Tiempo bala: Proyectiles y esfera enemiga se mueven más lento durante 5 segundos, lo que permite al jugador posicionarse para realizar una estrategia. Si toca a un proyectil, se desactiva el tiempo bala. Esta habilidad se recarga cada 15 segundos y si colisiona la esfera con un proyectil, a este tiempo se le añaden 5 segundos.
 
 ### Reglas Básicas
 * Hay 4 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
