@@ -1,6 +1,7 @@
 # Magnets-Fear
 
 ## Documento de Diseño
+Versión 1.1
 ### Creative Condors
 
 Álvaro Ramirez Míguez
@@ -20,7 +21,10 @@ El objetivo del juego es crear una alternativa sencilla dentro de los juegos com
 
 ## Mecánicas
 ### Jugabilidad
-El jugador puede cambiar su polaridad cada 0.5s y mover su esfera en ocho direcciones.
+El jugador puede cambiar su polaridad cada 0.5 segundos, creando un campo magnético con un rango determinado, y mover su esfera en ocho direcciones. Además podrá utilizar una habilidad especial que dependerá del personaje elegido. Inicialmente habrá 3 personajes:
+* Constructor: crea una pared en la dirección en la que se esté moviendo que aguanta un impacto de un proyectil. No podrá crear una nueva pared hasta que hayan pasado 10 segundos desde que se destruyó la anterior
+* Destructor: lanza un proyectil en la dirección en la que se esté desplazando que se destruye al impactar contra cualquier objeto. No podrá volver a lanzar un proyectil hasta que hayan pasado 6 segundos desde que desapareció el anterior
+* Saltador: se teletransporta hacia la dirección en la que se esté moviendo, llevándose consigo los proyectiles que se encuentren en su rango de magnetismo. Para poder volver a usar el teletransporte tendrá que esperar 8 segundos.
 
 ### Reglas Básicas
 * Hay 4 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
@@ -56,6 +60,7 @@ El juego se desarrolla en todo momento en vista cenital.
 Controles por defecto:
 * Movimiento: W,A,S,D -> Arriba, Izquierda, Abajo y Derecha, respectivamente. Se permite la combinación de dos movimientos a la vez generando desplazamiento en diagonal (Ej: W + A -> Arriba + Izquierda). 
 * Cambio de polaridad: Barra espaciadora.
+* Utilizar habilidad: Shift.
 
 ## Modos de Juego
 ### Clásico 
@@ -99,6 +104,8 @@ Se reflejarán las opciones:
    * Buscar Partida: se busca un jugador de tu nivel que también esté buscando partida.
    * Jugar con un amigo: Si elige entre los usuarios de su lista de amigos manda una petición de juego, mientras que si buscas el nombre del usuario con el que quieres jugar y no está en tu lista de amigos se envía una petición de amistad.
    * Volver: vuelve a selección de modos de juego.
+   
+   Antes de comenzar la partida el jugador tiene 10 segundos para escoger al personaje que quiere utilizar
 2. Opciones: Se abre una nueva interfaz donde se podrá configurar:
    * Controles: Se permiten cambiar los botones con los que se controla el movimiento y el cambio de polaridad al gusto del jugador.
    * Audio: Se puede modificar el volumen del sonido y la música.
@@ -108,7 +115,7 @@ Se reflejarán las opciones:
 
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20fear%20pantalla%20de%20inicio.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaz%20Opciones%20Prototipo.png)
-*El color violeta indica opciones no interactuables y el color azul representa los que sí.*
+*El color violeta indica opciones no interactuables y el color azul representa las que sí.*
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
