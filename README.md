@@ -115,8 +115,8 @@ Se reflejarán las opciones:
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20fear%20pantalla%20de%20inicio.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Configuraci%C3%B3n.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Interfaz%20MensajeAviso%20Salir.png)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Configuraci%C3%B3n.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Modos%20de%20juego.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Emparejamiento.png)
 ![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Buscar-A%C3%B1adir%20amigo.png)
