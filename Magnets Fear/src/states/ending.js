@@ -1,8 +1,8 @@
-CatCatcher.endingState = function(game) {
+MagnetsFear.endingState = function(game) {
 
 }
 
-CatCatcher.endingState.prototype = {
+MagnetsFear.endingState.prototype = {
 
     preload: function() {
         

@@ -1,11 +1,11 @@
-var CatCatcher = {}
+var MagnetsFear = {}
 
-CatCatcher.bootState = function(game) {
+MagnetsFear.bootState = function(game) {
     
 
 }
 
-CatCatcher.bootState.prototype = {
+MagnetsFear.bootState.prototype = {
 
     preload: function() {
         
@@ -13,10 +13,10 @@ CatCatcher.bootState.prototype = {
     },
 
     create: function() {
-    	game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
     },
 
     update: function() {
-    	game.state.start('preloadState');
+    game.state.start('preloadState');
     }
 }
