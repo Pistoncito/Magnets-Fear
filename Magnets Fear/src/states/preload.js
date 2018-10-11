@@ -8,8 +8,9 @@ var LoadingStyle;
 MagnetsFear.preloadState.prototype = {
 
     preload: function() {
-    game.load.image('classic_bg',"assets/images/backgrounds/bg_classic.png");
-        
+        var loadingText="loading...";
+        var loadingStyle= {font:"50px", fill:"rgb(0,80,120)"};
+        game.add.text(0,0, loadingText, loadingStyle);
     },
 
     create: function() {
@@ -17,6 +18,7 @@ MagnetsFear.preloadState.prototype = {
     },
 
     update: function() {
-    
+     game.state.start('menuState');
     }
+
 }
