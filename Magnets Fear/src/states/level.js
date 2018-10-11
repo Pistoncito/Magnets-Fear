@@ -20,24 +20,15 @@ MagnetsFear.levelState = function(game) {
     
     //key controller
     this.possible_keys=[Phaser.Keyboard.W, Phaser.Keyboard.A, Phaser.Keyboard.S, Phaser.Keyboard.D, Phaser.Keyboard.SPACE];
-    this.keysPressed= new Array(this.possible_keys.length);
-
-    this.n_keysOnUse=3;
-    this.keysOnUse= new Array(this.n_keysOnUse);
-    this.next_key=0;
+ 
 
 }
-var sphere1_positive;
- 
 MagnetsFear.levelState.prototype = {
 
     preload: function() {
         //prevents possible keys from propagating to the browser
         game.input.keyboard.addKeyCapture(this.possible_keys);
-        for(i=0; i< this.keysPressed.length;i++)
-            {
-                this.keysPressed[i]= game.input.keyboard.addKey(this.possible_keys[i]);
-            }
+
 
  
 
@@ -45,15 +36,14 @@ MagnetsFear.levelState.prototype = {
     this.sphere1= new MagnetsFear.gameObject(0,0,this.n_sprites_sphere,1);
     this.sphere1.polaridad= new MagnetsFear.polaridad();
     this.sphere1.magnetismo= new MagnetsFear.magnetismo();
-    this.sphere1.sprites[0]="assets/images/sprites/sphere1-positive.png";
-    this.sphere1.sprites[1]= "assets/images/sprites/sphere1-negative.png";
+
 
         ////////////LOADS///////////
         //Background
         game.load.image("classic_bg", "assets/images/backgrounds/classic_bg.png");
         //Sprites
-        game.load.image("sphere1-positive", this.sphere1.sprites[0]);
-        game.load.image("sphere1-negative", this.sphere1.sprites[1]);
+        game.load.image("sphere1-positive", "assets/images/sprites/sphere1-positive.png");
+        game.load.image("sphere1-negative", "assets/images/sprites/sphere1-negative.png");
         ////////////LOADS///////////
 
         //////////PHYSICS////////////
@@ -61,7 +51,6 @@ MagnetsFear.levelState.prototype = {
     },
 
     create: function() {
-     
    classic_bg= game.add.image(0,0,'classic_bg');
    /*metodo de spawn pseudo- aleatorio de las dos esferas
             ^
@@ -71,9 +60,7 @@ MagnetsFear.levelState.prototype = {
             |
    en base a este, metodo pseudo- aleatorio para generar los proyectiles
    */
-  sphere1_positive= game.add.image(this.sphere1.x, this.sphere1.y, 'sphere1-positive');
-  sphere1_positive.x= this.sphere1.x;
-  sphere1_positive.y= this.sphere1.y;
+  this.sphere1.sprites[this.sphere1.currentSprite]= game.add.image(this.sphere1.control_manager.x, this.sphere1.control_manager.y, 'sphere1-positive');
 
  /*
    //civilizations
@@ -97,6 +84,7 @@ MagnetsFear.levelState.prototype = {
     },
 
     update: function() {
+        /*
     for(i=0; i<this.keysPressed.length; i++)
     {
         if(this.keysPressed[i].isDown  && this.next_key< this.keysOnUse.length)
@@ -110,12 +98,10 @@ MagnetsFear.levelState.prototype = {
     //clean
     this.keysOnUse= new Array(this.n_keysOnUse);
     this.next_key=0;
+    */
 
+this.sphere1.sprites[this.sphere1.currentSprite].x +=10;
 
-
-    ////////DRAW OBJECTS////////
-  
-    ////////DRAW OBJECTS////////
     }
 
 
