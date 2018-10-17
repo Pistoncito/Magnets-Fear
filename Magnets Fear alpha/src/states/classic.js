@@ -28,18 +28,7 @@ function collidesCircleCircle(body1, body2){
   }  
   return false;
 };
-//Distancia entre centros
-function getDistance(fromX, fromY, toX, toY){
-  var a = Math.abs(fromX - toX);
-  var b = Math.abs(fromY - toY);
-  return Math.sqrt((a * a) + (b * b));
-};
 
-function getPowDistance(fromX, fromY, toX, toY){
-  var a = Math.abs(fromX - toX);
-  var b = Math.abs(fromY - toY);
-  return Math.abs((a * a) + (b * b));
-};
 
 function proyectileHitsPlayer(player,proyectile){
   proyectile.sprite.animations.play('proyect2');
@@ -69,7 +58,7 @@ MagnetsFear.classicState.prototype = {
 
         
         // Activa eventos de impacto
-        //game.physics.p2.setImpactEvents(true);
+        game.physics.p2.setImpactEvents(true);
         game.physics.p2.restitution = 1.0;
         // Se crean los grupos de colisiones
         var playerCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -109,7 +98,7 @@ MagnetsFear.classicState.prototype = {
           // Se le asigna a las esferas su grupo de colisiones
           esfera.body.setCollisionGroup(playerCollisionGroup);
           // Si la esfera choca contra un proyectil llama a la función hitProyectil
-          esfera.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
+          esfera.body.collides([proyectilesCollisionGroup, playerCollisionGroup],proyectileHitsPlayer,true);
         }        
       },
 
