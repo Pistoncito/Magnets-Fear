@@ -15,6 +15,36 @@ var possible_keys = [
 
 
 
+//FUNCIONES
+
+//Detección de Colisiones entre círculos
+function collidesCircleCircle(body1, body2){
+  var radius1 = body1.width * 0.5;
+  var radius2 = body2.width * 0.5;
+  var distance = getPowDistance(body1.x, body1.y, body2.x, body2.y);
+  if (distance <= (radius1 + radius2)*(radius1 + radius2)){
+    return true;
+
+  }  
+  return false;
+};
+//Distancia entre centros
+function getDistance(fromX, fromY, toX, toY){
+  var a = Math.abs(fromX - toX);
+  var b = Math.abs(fromY - toY);
+  return Math.sqrt((a * a) + (b * b));
+};
+
+function getPowDistance(fromX, fromY, toX, toY){
+  var a = Math.abs(fromX - toX);
+  var b = Math.abs(fromY - toY);
+  return Math.abs((a * a) + (b * b));
+};
+
+function proyectileHitsPlayer(player,proyectile){
+  proyectile.sprite.animations.play('proyect2');
+} 
+
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
@@ -42,8 +72,8 @@ MagnetsFear.classicState.prototype = {
         //game.physics.p2.setImpactEvents(true);
         game.physics.p2.restitution = 1.0;
         // Se crean los grupos de colisiones
-        var playerCollisionGroup = game.add.physicsGroup(Phaser.Physics.P2JS);
-        var proyectilesCollisionGroup = game.add.physicsGroup(Phaser.Physics.P2JS);
+        var playerCollisionGroup = game.physics.p2.createCollisionGroup();
+        var proyectilesCollisionGroup = game.physics.p2.createCollisionGroup();
         // Necesario para que los objetos colisionen contra los bordes
         game.physics.p2.updateBoundsCollisionGroup();
 
@@ -64,7 +94,7 @@ MagnetsFear.classicState.prototype = {
           // Se le asigna a los proyectiles su grupo de Colisiones
           proyectil.body.setCollisionGroup(proyectilesCollisionGroup);
           // Proyectiles colisionan contra otros proyectiles y contra las esferas
-          //proyectil.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
+          proyectil.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
         }
         //Creación del grupo de esferas(jugadores)
         var esferas = game.add.group();
@@ -79,7 +109,7 @@ MagnetsFear.classicState.prototype = {
           // Se le asigna a las esferas su grupo de colisiones
           esfera.body.setCollisionGroup(playerCollisionGroup);
           // Si la esfera choca contra un proyectil llama a la función hitProyectil
-          //esfera.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
+          esfera.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
         }        
       },
 
