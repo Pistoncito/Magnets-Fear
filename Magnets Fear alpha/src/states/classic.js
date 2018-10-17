@@ -15,36 +15,6 @@ var possible_keys = [
 
 
 
-//FUNCIONES
-
-//Detección de Colisiones entre círculos
-function collidesCircleCircle(body1, body2){
-  var radius1 = body1.width * 0.5;
-  var radius2 = body2.width * 0.5;
-  var distance = getPowDistance(body1.x, body1.y, body2.x, body2.y);
-  if (distance <= (radius1 + radius2)*(radius1 + radius2)){
-    return true;
-
-  }  
-  return false;
-};
-//Distancia entre centros
-function getDistance(fromX, fromY, toX, toY){
-  var a = Math.abs(fromX - toX);
-  var b = Math.abs(fromY - toY);
-  return Math.sqrt((a * a) + (b * b));
-};
-
-function getPowDistance(fromX, fromY, toX, toY){
-  var a = Math.abs(fromX - toX);
-  var b = Math.abs(fromY - toY);
-  return Math.abs((a * a) + (b * b));
-};
-
-function proyectileHitsPlayer(player,proyectile){
-  proyectile.sprite.animations.play('proyect2');
-} 
-
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
