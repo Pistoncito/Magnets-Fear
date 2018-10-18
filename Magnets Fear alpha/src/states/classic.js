@@ -29,6 +29,10 @@ var possible_keys = [
   Phaser.Keyboard.S,
   Phaser.Keyboard.D]
 */
+function proyectileHitsPlayer(proyectile,player){
+  //proyectile.sprite.alpha -= 0.1;
+  proyectile.sprite.animations.play('positive');
+} 
 
 MagnetsFear.classicState.prototype = {
 
@@ -80,7 +84,6 @@ MagnetsFear.classicState.prototype = {
         esfera1.PhaserObject.body.damping=0.9;
         esfera1.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
         esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
-
         esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2p'));
         esfera2.PhaserObject.body.setCircle(50);
         esfera2.PhaserObject.body.fixedRotation=true;
@@ -115,14 +118,18 @@ MagnetsFear.classicState.prototype = {
 
       for(i=0; i< n_proyectiles; i++)
       {
-        proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectile1'));
-        proyectiles[i].PhaserObject.body.setCircle(30);
+        proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectileSpSheet'));
+        proyectiles[i].PhaserObject.frame = 5;
+        proyectiles[i].PhaserObject.animations.add('positive',[0,1,2,3,4,5],10,true);
+        proyectiles[i].PhaserObject.animations.add('negative',[6,7,8,9,10,11],10,true);
+        proyectiles[i].PhaserObject.animations.play('negative');
+        proyectiles[i].PhaserObject.body.setCircle(16);
         proyectiles[i].PhaserObject.body.fixedRotation=true;
         proyectiles[i].PhaserObject.body.velocity.x=300;
         proyectiles[i].PhaserObject.body.velocity.y=300;
         proyectiles[i].PhaserObject.body.damping=0;
         proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
-        proyectiles[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+        proyectiles[i].PhaserObject.body.collides([playerCollisionGroup],proyectileHitsPlayer,this);
       }
 
 
