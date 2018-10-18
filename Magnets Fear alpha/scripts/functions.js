@@ -1,100 +1,110 @@
 //Funciones
+//////////////////////
+function Magnetism(){
+this.attractForce=1;
+this.repulseForce=1;
+this.radius=500;
+this.PhaserObject;
+}
+function Polarity(){
+  this.positive=1;
 
-function collidesCircleCircle(body1, body2){
-  var radius1 = body1.width * 0.5;
-  var radius2 = body2.width * 0.5;
-  var distance = this.getDistance(body1.x, body1.y, body2.x, body2.y);
-  if (distance <= (radius1 + radius2)){
-    return true;
+}
 
+
+
+function Sphere(PhOb)
+{
+  this.PhaserObject= PhOb;
+  this.magnetism= new Magnetism();
+  this.polarity= new Polarity();
+  this.accel=40;
+  this.deaccel= 10* this.accel;
+  this.diff_accel=39;
+  this.maxSpeed=800;
+  this.limitSpeed= function()
+  {
+  var body_vel=this.PhaserObject.body.velocity;
+  if(body_vel.x> this.maxSpeed) body_vel.x = this.maxSpeed;
+  else if(body_vel.x < -this.maxSpeed)body_vel.x = -this.maxSpeed;
+
+  if(body_vel.y> this.maxSpeed) body_vel.y = this.maxSpeed;
+  else if(body_vel.y < -this.maxSpeed)body_vel.y = -this.maxSpeed;
+  }
+
+  this.Movement= function(arr)
+    {
+    
+      var body_obj= this.PhaserObject.body;
+   
+      var tooMuchSpeed= this.maxSpeed-(this.maxSpeed-10);
+  if(arr[0]==1){
+    //w
+    if(body_obj.velocity.y>= tooMuchSpeed){
+      body_obj.velocity.y -= this.deaccel;
+      this.magnetism.PhaserObject.body.velocity.y -= this.deaccel;
+    } 
+   else {
+    body_obj.velocity.y -= this.accel;
+    this.magnetism.PhaserObject.body.velocity.y -= this.accel;
+      }
   }  
-  return false;
-};
-//Distancia entre cordenadas
-function getDistance(fromX, fromY, toX, toY){
-  var a = Math.abs(fromX - toX);
-  var b = Math.abs(fromY - toY);
-  return Math.sqrt((a * a) + (b * b));
-};
+  if(arr[1]==1){
+   //a
+   if(body_obj.velocity.x >= tooMuchSpeed){
+    body_obj.velocity.x -= this.deaccel;
+    this.magnetism.PhaserObject.body.velocity.x -= this.deaccel;
+   } 
+   else
+    body_obj.velocity.x -= this.accel;
+    this.magnetism.PhaserObject.body.velocity.x -= this.accel;
+  }  
+  if(arr[2]==1){
+     //s
+     if(body_obj.velocity.y <= -tooMuchSpeed){
+      body_obj.velocity.y += this.deaccel;
+      this.magnetism.PhaserObject.body.velocity.y += this.deaccel;
+     } 
+     else
+    body_obj.velocity.y += this.accel;
+    this.magnetism.PhaserObject.body.velocity.y += this.accel;
+  }  
+  if(arr[3]==1){
+   //d
+   if(body_obj.velocity.x <= -tooMuchSpeed){
+    body_obj.velocity.x += this.deaccel;
+    this.magnetism.PhaserObject.body.velocity.x += this.deaccel;
+   } 
+   else
+   body_obj.velocity.x += this.accel;
+   this.magnetism.PhaserObject.body.velocity.x += this.accel;
+  } 
+      this.limitSpeed();  
+      
+     this.magnetism.PhaserObject.body.x= body_obj.x;
+     this.magnetism.PhaserObject.body.y= body_obj.y;
+      
 
-//Resolución de Solapado
-//Resolución de Colisiones
-
-
-function solveStaticColission(body1, body2){
-  var radius1 = body1.width * 0.5;
-  var radius2 = body2.width * 0.5;
-  var overlap = 0.5 * (distance - radius1 + radius2);
-  //Desplazar 1er objeto
-  body1.x += overlap * (body1.x - body2.x)/distance;
-  body1.y += overlap * (body1.y - body2.y)/distance;
-  //Desplazar 2º objeto
-  body2.x -= overlap * (body1.x - body2.x)/distance;
-  body2.y -= overlap * (body1.y - body2.y)/distance;
-}
-//Resolución Impacto en Movimiento
-function solveDynamicColission(body1, body2){
-  //Normal
-  var distance = this.getDistance(body1.x, body1.y, body2.x, body2.y);
-  var nx = (body2.x - body1.x)/distance;
-  var ny = (body2.y - body1.y)/distance;
-  //Tangente
-  var tx = -ny;
-  var ty = nx;
-  //Producto escalar
-  alert(body1.deltaX()); 
-}
-
-function colissionHandler(body1,body2){
-}
-
-function proyectileHitsPlayer(player,proyectile){
+    }
+  
 }
 
-function PolarityHandler(player,proyectile){  
-}
 
-function keyDownHandler(){
-  if(this.wKey.isDown){
-        wKeyDown = true;
-    }
-  if(this.sKey.isDown){
-        sKeyDown = true;
-    }
-  if(this.aKey.isDown){
-        aKeyDown = true;
-    }
-  if(this.dKey.isDown){
-        dKeyDown = true;
-    }
-}
-
-function keyUpHandler(){
-  if(this.wKey.isUp){
-      wKeyDown = false;
-    }
-  if(this.sKey.isUp){
-        sKeyDown = false;
-    }
-  if(this.aKey.isUp){
-        aKeyDown = false;
-    }
-  if(this.dKey.isUp){
-        dKeyDown = false;
-    }
-}
-
-function playerControl(player){
-  if(wKeyDown){
-    player.ay -= 0;
-  }
-  if(aKeyDown){
-    player.ax -= 0;
-  }
-  if(sKeyDown){
-    player.ay += 0;
-  }
-  if(dKeyDown){
-    player.ax += 0;
+function Proyectile(PhOb)
+{
+  this.PhaserObject= PhOb;
+  this.polarity= new Polarity();
+  this.maxSpeed= 700;
+  this.limitSpeed= function()
+  {
+    
+    var body_vel=this.PhaserObject.body.velocity;
+    if(body_vel.x> this.maxSpeed) body_vel.x = this.maxSpeed;
+    else if(body_vel.x < -this.maxSpeed)body_vel.x = -this.maxSpeed;
+  
+    if(body_vel.y> this.maxSpeed) body_vel.y = this.maxSpeed;
+    else if(body_vel.y < -this.maxSpeed)body_vel.y = -this.maxSpeed;
   }
 }
+
+//////////////////////

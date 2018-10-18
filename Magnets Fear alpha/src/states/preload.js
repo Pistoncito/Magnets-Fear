@@ -21,9 +21,6 @@ MagnetsFear.preloadState.prototype = {
         game.load.image('civilization2', 'assets/images/sprites/civilizations2.png');
         game.load.image('proyectile1', 'assets/images/sprites/proyectil_positivo.png');
         game.load.image('proyectile2', 'assets/images/sprites/proyectil_negativo.png');
-        game.load.spritesheet('proyect1','assets/images/sprites/proyectil_positivo.png',60,60);
-        game.load.spritesheet('proyect2','assets/images/sprites/proyectil_negativo.png',60,60);
-
         game.load.image('magnetRangeP', 'assets/images/sprites/magnetism-range-positive.png');
         game.load.image('magnetRangeN', 'assets/images/sprites/magnetism-range-negative.png');
     },

@@ -3,108 +3,161 @@ MagnetsFear.classicState = function(game) {
 
 //Variables
 var bg;
-var numPlayers = 1;
-var numProyectiles = 4;
-var numPlayerBases = 3;
+
+ var esfera1;
+ var esfera2;
+ var esferas;
+
+ var magnetismos;
+
+ var n_bases;
+ var bases1;
+ var bases2;
+
+var n_proyectiles;
+var proyectiles;
+
+var playerCollisionGroup;
+var proyectilesCollisionGroup;
+var magnetCollisionGroup
+
+var W, A, S, D, up, left, down, right; 
+/*
 var possible_keys = [
   Phaser.Keyboard.W,
   Phaser.Keyboard.A,
   Phaser.Keyboard.S,
-  Phaser.Keyboard.D];
-
-
-
-
-//FUNCIONES
-
-//Detección de Colisiones entre círculos
-function collidesCircleCircle(body1, body2){
-  var radius1 = body1.width * 0.5;
-  var radius2 = body2.width * 0.5;
-  var distance = getPowDistance(body1.x, body1.y, body2.x, body2.y);
-  if (distance <= (radius1 + radius2)*(radius1 + radius2)){
-    return true;
-
-  }  
-  return false;
-};
-
-
-function proyectileHitsPlayer(player,proyectile){
-  proyectile.sprite.animations.play('proyect2');
-} 
+  Phaser.Keyboard.D]
+*/
 
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
+      //player1
+    W= game.input.keyboard.addKey(Phaser.Keyboard.W);
+    A= game.input.keyboard.addKey(Phaser.Keyboard.A);
+    S= game.input.keyboard.addKey(Phaser.Keyboard.S);
+    D= game.input.keyboard.addKey(Phaser.Keyboard.D);
+      //player2
+    up= game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    left= game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    down= game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    right= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         //prevents possible keys from propagating to the browser
-        game.input.keyboard.addKeyCapture(this.possible_keys);
-        /*
-        this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
-        this.sKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
-        this.aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
-        this.dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-        
-        for(i=0; i< this.keysPressed.length;i++)
-            {
-                this.keysPressed[i]= game.input.keyboard.addKey(this.possible_keys[i]);
-            }
-        */
+       game.input.keyboard.addKeyCapture([W,A,S,D]);
+      
+       n_bases=3;
+       bases1=[n_bases];
+       bases2=[n_bases];
+      
+       n_proyectiles = 1;
+       proyectiles= [n_proyectiles];
     },
-
+    
     create: function() {
      
         bg = game.add.image(0,0,'background');
 
-        
-        // Activa eventos de impacto
         game.physics.p2.setImpactEvents(true);
-        game.physics.p2.restitution = 1.0;
-        // Se crean los grupos de colisiones
-        var playerCollisionGroup = game.physics.p2.createCollisionGroup();
-        var proyectilesCollisionGroup = game.physics.p2.createCollisionGroup();
-        // Necesario para que los objetos colisionen contra los bordes
         game.physics.p2.updateBoundsCollisionGroup();
+        game.physics.p2.restitution = 1.0;
 
-        //Creación del grupo de proyectiles
-        var proyectiles = game.add.group();
-        proyectiles.enableBody = true;
-        proyectiles.physicsBodyType = Phaser.Physics.P2JS;
-        for (var i = 0; i < numProyectiles; i++)
-        {
-          var proyectil = proyectiles.create(game.world.randomX, game.rnd.between(0, 100), 'proyectile1');
-          proyectil.body.setCircle(30);
-          proyectil.body.fixedRotation = true;          
-          proyectil.animations.add('proyect1',[0],60,true);
-          proyectil.animations.add('proyect2',[0],60,true);
-          proyectil.body.velocity.x = 200;
-          proyectil.body.velocity.y = -200;
-          proyectil.body.damping = 0;
-          // Se le asigna a los proyectiles su grupo de Colisiones
-          proyectil.body.setCollisionGroup(proyectilesCollisionGroup);
-          // Proyectiles colisionan contra otros proyectiles y contra las esferas
-          proyectil.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
-        }
-        //Creación del grupo de esferas(jugadores)
-        var esferas = game.add.group();
-        esferas.enableBody = true;
-        esferas.physicsBodyType = Phaser.Physics.P2JS;
-        for (var i = 0; i < numPlayers; i++)
-        {
-          var esfera = esferas.create(game.world.randomX, game.rnd.between(0, 100), 'sphere1p');
-          esfera.body.setCircle(45);
-          esfera.body.fixedRotation = true;
-          esfera.body.damping = 0;
-          // Se le asigna a las esferas su grupo de colisiones
-          esfera.body.setCollisionGroup(playerCollisionGroup);
-          // Si la esfera choca contra un proyectil llama a la función hitProyectil
-          esfera.body.collides([proyectilesCollisionGroup, playerCollisionGroup],proyectileHitsPlayer,true);
-        }        
+    
+        playerCollisionGroup=game.physics.p2.createCollisionGroup();
+        proyectilesCollisionGroup= game.physics.p2.createCollisionGroup();
+        magnetCollisionGroup= game.physics.p2.createCollisionGroup();
+  
+       esferas= game.add.group();
+       esferas.enableBody=true;
+       esferas.physicsBodyType= Phaser.Physics.P2JS;
+
+        
+  
+        esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1p'));
+        esfera1.PhaserObject.body.setCircle(50);
+        esfera1.PhaserObject.body.fixedRotation=true;
+        esfera1.PhaserObject.body.mass=100;
+        esfera1.PhaserObject.body.damping=0.9;
+        esfera1.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
+        esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+
+        esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2p'));
+        esfera2.PhaserObject.body.setCircle(50);
+        esfera2.PhaserObject.body.fixedRotation=true;
+        esfera2.PhaserObject.body.mass=100;
+        esfera2.PhaserObject.body.damping= 0.9;
+        esfera2.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
+        esfera2.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+///////////////MAGNETISMOS///////////////
+        magnetismos= game.add.group();
+        magnetismos.enableBody=true;
+        magnetismos.physicsBodyType= Phaser.Physics.P2JS;
+
+        esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
+        esfera1.PhaserObject.body.y - 500/2, 'magnetRangeP');
+        esfera1.magnetism.PhaserObject.body.setCircle(250);
+        esfera1.magnetism.PhaserObject.body.fixedRotation=true;
+        esfera1.magnetism.PhaserObject.body.damping= 0.9;
+        esfera1.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
+        esfera1.magnetism.PhaserObject.body.collides([]);
+
+        esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
+        esfera2.PhaserObject.body.y, 'magnetRangeP');
+        esfera2.magnetism.PhaserObject.body.setCircle(250);
+        esfera2.magnetism.PhaserObject.body.fixedRotation=true;
+        esfera2.magnetism.PhaserObject.body.damping= 0.9;
+        esfera2.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
+        esfera2.magnetism.PhaserObject.body.collides([]);
+///////////////MAGNETISMOS///////////////
+        proyectiles= game.add.group();
+        proyectiles.enableBody=true;
+        proyectiles.physicsBodyType= Phaser.Physics.P2JS;
+
+      for(i=0; i< n_proyectiles; i++)
+      {
+        proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectile1'));
+        proyectiles[i].PhaserObject.body.setCircle(30);
+        proyectiles[i].PhaserObject.body.fixedRotation=true;
+        proyectiles[i].PhaserObject.body.velocity.x=300;
+        proyectiles[i].PhaserObject.body.velocity.y=300;
+        proyectiles[i].PhaserObject.body.damping=0;
+        proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
+        proyectiles[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+      }
+
+
+         /*
+              for(i=0; i< n_bases; i++)
+              {
+
+              }
+          */
+        
+     
       },
 
-
-
     update: function() {
+
+      var keys_bools1=[0,0,0,0,0];
+      var keys_bools2=[0,0,0,0,0];
+      if(W.isDown) keys_bools1[0]=1;
+      if(A.isDown) keys_bools1[1]=1;
+      if(S.isDown) keys_bools1[2]=1;
+      if(D.isDown) keys_bools1[3]=1;
+
+      if(up.isDown) keys_bools2[0]=1;
+      if(left.isDown) keys_bools2[1]=1;
+      if(down.isDown) keys_bools2[2]=1;
+      if(right.isDown) keys_bools2[3]=1;
+      
+        esfera1.Movement(keys_bools1);
+        esfera2.Movement(keys_bools2);
+        keys_bools1=[0,0,0,0,0];
+
+        for(i=0; i< n_proyectiles; i++)
+        {
+          proyectiles[i].limitSpeed();
+        }
 
     },
     
