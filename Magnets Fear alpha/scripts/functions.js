@@ -18,10 +18,10 @@ function Sphere(PhOb)
   this.PhaserObject= PhOb;
   this.magnetism= new Magnetism();
   this.polarity= new Polarity();
-  this.accel=40;
-  this.deaccel= 10* this.accel;
+  this.accel=50;
+  this.deaccel= 2* this.accel;
   this.diff_accel=39;
-  this.maxSpeed=800;
+  this.maxSpeed=400;
   this.limitSpeed= function()
   {
   var body_vel=this.PhaserObject.body.velocity;
@@ -40,44 +40,59 @@ function Sphere(PhOb)
       var tooMuchSpeed= this.maxSpeed-(this.maxSpeed-10);
   if(arr[0]==1){
     //w
+    /*
     if(body_obj.velocity.y>= tooMuchSpeed){
       body_obj.velocity.y -= this.deaccel;
       this.magnetism.PhaserObject.body.velocity.y -= this.deaccel;
     } 
-   else {
+    else {
     body_obj.velocity.y -= this.accel;
     this.magnetism.PhaserObject.body.velocity.y -= this.accel;
-      }
+      }*/
+    body_obj.velocity.y -= this.accel;
+    this.magnetism.PhaserObject.body.velocity.y -= this.accel;
   }  
   if(arr[1]==1){
-   //a
-   if(body_obj.velocity.x >= tooMuchSpeed){
-    body_obj.velocity.x -= this.deaccel;
-    this.magnetism.PhaserObject.body.velocity.x -= this.deaccel;
-   } 
-   else
+    //a
+    /*
+    if(body_obj.velocity.x >= tooMuchSpeed){
+      body_obj.velocity.x -= this.deaccel;
+      this.magnetism.PhaserObject.body.velocity.x -= this.deaccel;
+    } 
+    else{
+      body_obj.velocity.x -= this.accel;
+      this.magnetism.PhaserObject.body.velocity.x -= this.accel;
+    }*/
     body_obj.velocity.x -= this.accel;
     this.magnetism.PhaserObject.body.velocity.x -= this.accel;
   }  
   if(arr[2]==1){
      //s
+     /*
      if(body_obj.velocity.y <= -tooMuchSpeed){
       body_obj.velocity.y += this.deaccel;
       this.magnetism.PhaserObject.body.velocity.y += this.deaccel;
      } 
-     else
-    body_obj.velocity.y += this.accel;
-    this.magnetism.PhaserObject.body.velocity.y += this.accel;
+     else{
+      body_obj.velocity.y += this.accel;
+      this.magnetism.PhaserObject.body.velocity.y += this.accel;
+      }*/
+      body_obj.velocity.y += this.accel;
+      this.magnetism.PhaserObject.body.velocity.y += this.accel;
   }  
   if(arr[3]==1){
-   //d
-   if(body_obj.velocity.x <= -tooMuchSpeed){
-    body_obj.velocity.x += this.deaccel;
-    this.magnetism.PhaserObject.body.velocity.x += this.deaccel;
-   } 
-   else
-   body_obj.velocity.x += this.accel;
-   this.magnetism.PhaserObject.body.velocity.x += this.accel;
+    //d
+    /*
+    if(body_obj.velocity.x <= -tooMuchSpeed){
+      body_obj.velocity.x += this.deaccel;
+      this.magnetism.PhaserObject.body.velocity.x += this.deaccel;
+    } 
+    else{
+    body_obj.velocity.x += this.accel;
+    this.magnetism.PhaserObject.body.velocity.x += this.accel;
+    }*/
+    body_obj.velocity.x += this.accel;
+    this.magnetism.PhaserObject.body.velocity.y += this.accel;
   } 
       this.limitSpeed();  
       
