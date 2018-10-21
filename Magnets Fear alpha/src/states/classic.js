@@ -2,6 +2,7 @@ MagnetsFear.classicState = function(game) {
 }
 
 //Variables
+var time;
 var bg;
 
  var esfera1;
@@ -72,7 +73,7 @@ MagnetsFear.classicState.prototype = {
     },
     
     create: function() {
-     
+      time = game.time;
       //bg = game.add.image(0,0,'background');
 
       game.physics.p2.setImpactEvents(true);
