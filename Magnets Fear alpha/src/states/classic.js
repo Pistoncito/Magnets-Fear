@@ -29,9 +29,9 @@ var possible_keys = [
   Phaser.Keyboard.S,
   Phaser.Keyboard.D]
 */
-function proyectileHitsPlayer(proyectile,player){
-  //proyectile.sprite.alpha -= 0.1;
-  proyectile.sprite.animations.play('positive');
+function collisionEvents(proyectile,player){
+
+  return true;
 } 
 
 MagnetsFear.classicState.prototype = {
@@ -54,84 +54,101 @@ MagnetsFear.classicState.prototype = {
        bases1=[n_bases];
        bases2=[n_bases];
       
-       n_proyectiles = 1;
+       n_proyectiles = 10;
        proyectiles= [n_proyectiles];
     },
     
     create: function() {
      
-        bg = game.add.image(0,0,'background');
+      //bg = game.add.image(0,0,'background');
 
-        game.physics.p2.setImpactEvents(true);
-        game.physics.p2.updateBoundsCollisionGroup();
-        game.physics.p2.restitution = 1.0;
+      game.physics.p2.setImpactEvents(true);
+      game.physics.p2.updateBoundsCollisionGroup();
+      game.physics.p2.restitution = 1.0;
 
     
-        playerCollisionGroup=game.physics.p2.createCollisionGroup();
-        proyectilesCollisionGroup= game.physics.p2.createCollisionGroup();
-        magnetCollisionGroup= game.physics.p2.createCollisionGroup();
+      playerCollisionGroup=game.physics.p2.createCollisionGroup();
+      proyectilesCollisionGroup= game.physics.p2.createCollisionGroup();
+      magnetCollisionGroup= game.physics.p2.createCollisionGroup();
   
-       esferas= game.add.group();
-       esferas.enableBody=true;
-       esferas.physicsBodyType= Phaser.Physics.P2JS;
+      esferas= game.add.group();
+      esferas.enableBody=true;
+      esferas.physicsBodyType= Phaser.Physics.P2JS;
 
         
-  
-        esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1p'));
-        esfera1.PhaserObject.body.setCircle(50);
-        esfera1.PhaserObject.body.fixedRotation=true;
-        esfera1.PhaserObject.body.mass=100;
-        esfera1.PhaserObject.body.damping=0.9;
-        esfera1.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
-        esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
-        esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2p'));
-        esfera2.PhaserObject.body.setCircle(50);
-        esfera2.PhaserObject.body.fixedRotation=true;
-        esfera2.PhaserObject.body.mass=100;
-        esfera2.PhaserObject.body.damping= 0.9;
-        esfera2.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
-        esfera2.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+///////////////ESFERA 1///////////////  
+      esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1'));
+      esfera1.PhaserObject.frame = 0;
+      esfera1.PhaserObject.animations.add('positive',[0,1,2,3,2,1],10,true);
+      esfera1.PhaserObject.animations.add('negative',[4,5,6,7,6,5],10,true);
+      esfera1.PhaserObject.animations.play('positive');
+      esfera1.PhaserObject.body.setCircle(32);
+      esfera1.PhaserObject.body.fixedRotation=true;
+      esfera1.PhaserObject.body.mass=8;
+      esfera1.PhaserObject.body.damping=0.9;
+      esfera1.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
+      esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+///////////////ESFERA 2///////////////     
+      esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2'));
+      esfera2.PhaserObject.frame = 0;
+      esfera2.PhaserObject.animations.add('positive',[0,1,2,3,2,1],10,true);
+      esfera2.PhaserObject.animations.add('negative',[4,5,6,7,6,5],10,true);
+      esfera2.PhaserObject.animations.play('negative');
+      esfera2.PhaserObject.body.setCircle(32);
+      esfera2.PhaserObject.body.fixedRotation=true;
+      esfera2.PhaserObject.body.mass=8;
+      esfera2.PhaserObject.body.damping= 0.9;
+      esfera2.PhaserObject.body.setCollisionGroup(playerCollisionGroup);
+      esfera2.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
 ///////////////MAGNETISMOS///////////////
-        magnetismos= game.add.group();
-        magnetismos.enableBody=true;
-        magnetismos.physicsBodyType= Phaser.Physics.P2JS;
+      magnetismos= game.add.group();
+      magnetismos.enableBody=true;
+      magnetismos.physicsBodyType= Phaser.Physics.P2JS;
 
-        esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
+      esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
         esfera1.PhaserObject.body.y - 500/2, 'magnetRangeP');
-        esfera1.magnetism.PhaserObject.body.setCircle(250);
-        esfera1.magnetism.PhaserObject.body.fixedRotation=true;
-        esfera1.magnetism.PhaserObject.body.damping= 0.9;
-        esfera1.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
-        esfera1.magnetism.PhaserObject.body.collides([]);
+      esfera1.magnetism.PhaserObject.body.setCircle(0);
+      esfera1.magnetism.PhaserObject.body.fixedRotation=true;
+      esfera1.magnetism.PhaserObject.body.damping= 0.9;
+      esfera1.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
+      esfera1.magnetism.PhaserObject.body.collides([]);
+      // Restricción de movimiento para que siga a la esfera
+      var constraint1 = game.physics.p2.createDistanceConstraint(
+        esfera1.PhaserObject.body.sprite, esfera1.magnetism.PhaserObject.body.sprite, 0);
 
-        esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
+      esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
         esfera2.PhaserObject.body.y, 'magnetRangeP');
-        esfera2.magnetism.PhaserObject.body.setCircle(250);
-        esfera2.magnetism.PhaserObject.body.fixedRotation=true;
-        esfera2.magnetism.PhaserObject.body.damping= 0.9;
-        esfera2.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
-        esfera2.magnetism.PhaserObject.body.collides([]);
-///////////////MAGNETISMOS///////////////
-        proyectiles= game.add.group();
-        proyectiles.enableBody=true;
-        proyectiles.physicsBodyType= Phaser.Physics.P2JS;
+      esfera2.magnetism.PhaserObject.body.setCircle(0);
+      esfera2.magnetism.PhaserObject.body.fixedRotation=true;
+      esfera2.magnetism.PhaserObject.body.damping= 0.9;
+      esfera2.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
+      esfera2.magnetism.PhaserObject.body.collides([]);
+      // Restricción de movimiento para que siga a la esfera
+      var constraint2 = game.physics.p2.createDistanceConstraint(
+        esfera2.PhaserObject.body.sprite, esfera2.magnetism.PhaserObject.body.sprite, 0);
+///////////////PROYECTILES///////////////
+      proyectiles= game.add.group();
+      proyectiles.enableBody=true;
+      proyectiles.physicsBodyType= Phaser.Physics.P2JS;
 
       for(i=0; i< n_proyectiles; i++)
       {
         proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectileSpSheet'));
-        proyectiles[i].PhaserObject.frame = 5;
+        proyectiles[i].PhaserObject.frame = 0;
         proyectiles[i].PhaserObject.animations.add('positive',[0,1,2,3,4,5],10,true);
         proyectiles[i].PhaserObject.animations.add('negative',[6,7,8,9,10,11],10,true);
-        proyectiles[i].PhaserObject.animations.play('negative');
+        proyectiles[i].PhaserObject.animations.play('positive');
         proyectiles[i].PhaserObject.body.setCircle(16);
         proyectiles[i].PhaserObject.body.fixedRotation=true;
         proyectiles[i].PhaserObject.body.velocity.x=300;
         proyectiles[i].PhaserObject.body.velocity.y=300;
         proyectiles[i].PhaserObject.body.damping=0;
         proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
-        proyectiles[i].PhaserObject.body.collides([playerCollisionGroup],proyectileHitsPlayer,this);
-      }
+        proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup]);
 
+      }
+///////////////EVENTOS DE COLISIÓN///////////////
+      //game.physics.p2.setPostBroadphaseCallback(collisionEvents, this);
 
          /*
               for(i=0; i< n_bases; i++)
@@ -141,7 +158,7 @@ MagnetsFear.classicState.prototype = {
           */
         
      
-      },
+    },
 
     update: function() {
 
@@ -163,7 +180,7 @@ MagnetsFear.classicState.prototype = {
 
         for(i=0; i< n_proyectiles; i++)
         {
-          proyectiles[i].limitSpeed();
+          limitSpeed(proyectiles[i]);
         }
 
     },
