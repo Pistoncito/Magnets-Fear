@@ -173,7 +173,7 @@ MagnetsFear.classicState.prototype = {
 
         for(i=0; i< n_proyectiles; i++)
         {
-          proyectiles[i].limitSpeed();
+          limitSpeed(proyectiles[i]);
         }
 
     },
