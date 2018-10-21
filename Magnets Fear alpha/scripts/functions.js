@@ -111,12 +111,7 @@ function Magnetism(){
           }
           this.nextUse = time.time + this.cooldown;
         }
-      limitSpeed(this);  
-      limitSpeed(this.magnetism); 
-      this.magnetism.PhaserObject.body.x= body_obj.x;
-      this.magnetism.PhaserObject.body.y= body_obj.y;
-      
-  
+      limitSpeed(this);    
     }
     
   }
