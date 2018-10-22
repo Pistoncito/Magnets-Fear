@@ -22,30 +22,58 @@ var playerCollisionGroup;
 var proyectilesCollisionGroup;
 var magnetCollisionGroup
 
-var W, A, S, D, SPACEBAR, up, left, down, right, ENTER; 
-/*
-var possible_keys = [
-  Phaser.Keyboard.W,
-  Phaser.Keyboard.A,
-  Phaser.Keyboard.S,
-  Phaser.Keyboard.D]
-*/
-function collisionEvents(body1,body2,shape1, shape2, contactEquations){
-alert("collision");
+var W, A, S, D, SPACEBAR, up, left, down, right, ENTER;
+
+//Funciones
+function proyCollideSpheres(body_1, body_2, shape_1, shape_2, equation) 
+{
+  var body1 = equation[0].bodyA.parent;
+  var body2 = equation[0].bodyB.parent;
+  for(i =0; i< n_proyectiles; i++)
+  {
+    if(body1!=null && body2 !=null)
+    {
+      if((proyectiles[i].PhaserObject.body.id== body1.id) &&
+       body2.collisionGroup==playerCollisionGroup)
+      {
+        // alert("body1 es proyectil");
+        proyectiles[i].PhaserObject.body.polarity.positive
+        *=-1;
+        //proyectiles[i].PhaserObject.body.polarity.Swicth();
+        if(proyectiles[i].PhaserObject.body.polarity.positive<0)
+          {
+            proyectiles[i].PhaserObject.animations.play('negative');
+          }
+        else 
+          {
+          proyectiles[i].PhaserObject.animations.play("positive");
+          }
+        break;
+      }
+    }
+    if(body2 !=null && body1 !=null)
+    {
+      if(proyectiles[i].PhaserObject.body.id == body2.id &&
+       body1.collisionGroup == playerCollisionGroup)
+      {
+        //alert("body2 es proyectil");
+        proyectiles[i].PhaserObject.body.polarity.positive
+         *=-1;
+        // proyectiles[i].PhaserObject.body.polarity.Swicth();
+        if(proyectiles[i].PhaserObject.body.polarity.positive<0)
+        {
+        proyectiles[i].PhaserObject.animations.play('negative');
+        }
+        else 
+        {
+        proyectiles[i].PhaserObject.animations.play("positive");
+        }
+        break;
+      }
+    }
+  }
 } 
 
-function proyCollideSpheres(body1, body2, shape1, shape2) 
-{
-
-if(body1 !=null && body1.collisionGroup== proyectilesCollisionGroup)
-{
-  body1.polarity.Switch();
-}
-if(body2 !=null && body2.collisionGroup== proyectilesCollisionGroup)
-{
-  body2.polarity.Switch();
-}
-}
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
@@ -90,7 +118,7 @@ MagnetsFear.classicState.prototype = {
       esferas.physicsBodyType= Phaser.Physics.P2JS;
 
         
-  
+///////////////ESFERAS///////////////  
       esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1'));
       esfera1.PhaserObject.frame = 0;
       esfera1.PhaserObject.animations.add('positive',[0,1,2,3,2,1],10,true);
@@ -104,7 +132,6 @@ MagnetsFear.classicState.prototype = {
       esfera1.PhaserObject.body.collisionGroup= playerCollisionGroup;
       esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
       esfera1.PhaserObject.body.polarity= new Polarity();
-
 
       esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2'));
       esfera2.PhaserObject.frame = 0;
@@ -134,16 +161,7 @@ MagnetsFear.classicState.prototype = {
       esfera1.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
       esfera1.magnetism.PhaserObject.body.collisionGroup=magnetCollisionGroup;
       esfera1.magnetism.PhaserObject.body.collides([proyectilesCollisionGroup]);
-     
 
-
-      /*
-      for(i=0; i< esfera1.magnetism.PhaserObject.body.data.shapes.length; i++)
-      {
-        esfera1.magnetism.PhaserObject.body.data.shapes[i].tensor=true;
-      }
-      esfera1.magnetism.PhaserObject.body.onEndContact.add(collisionEvents,this);
-  */
       esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
       esfera2.PhaserObject.body.y, 'magnetRangeP');
       esfera2.magnetism.PhaserObject.body.setCircle(0);
@@ -155,7 +173,7 @@ MagnetsFear.classicState.prototype = {
       esfera2.magnetism.PhaserObject.body.collisionGroup=magnetCollisionGroup;
       esfera2.magnetism.PhaserObject.body.collides([proyectilesCollisionGroup]);
 
-///////////////MAGNETISMOS///////////////
+///////////////PROYECTILES///////////////
       proyectiles= game.add.group();
       proyectiles.enableBody=true;
       proyectiles.physicsBodyType= Phaser.Physics.P2JS;
@@ -176,20 +194,8 @@ MagnetsFear.classicState.prototype = {
         proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
         proyectiles[i].PhaserObject.body.collisionGroup=proyectilesCollisionGroup;
         proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup]);
-        proyectiles[i].PhaserObject.body.onEndContact.add(proyCollideSpheres,this);
-        
+        proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
       }
-///////////////EVENTOS DE COLISIÓN///////////////
-     // game.physics.p2.setPostBroadphaseCallback(collisionEvents, this);
-     // game.physics.p2.onBeginContact.add(collisionEvents,this);
-
-         /*
-              for(i=0; i< n_bases; i++)
-              {
-              }
-          */
-        
-     
     },
 
     update: function() {
