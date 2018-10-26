@@ -21,6 +21,7 @@ var proyectiles;
 var playerCollisionGroup;
 var proyectilesCollisionGroup;
 var magnetCollisionGroup
+var basesCollisionGroup;
 
 var W, A, S, D, SPACEBAR, up, left, down, right, ENTER;
 
@@ -72,8 +73,63 @@ function proyCollideSpheres(body_1, body_2, shape_1, shape_2, equation)
       }
     }
   }
-} 
+}
+/*
+function hitBase(body1, body2, shape1, shape2, equation)
+  {
+    var obj1_body= equation[0].bodyA.parent;
+    var obj2_body = equation[0].bodyB.parent;
 
+    alert(bases1.children.length);
+    alert(bases2.children.length);
+
+    if(obj1_body !=undefined && obj2_body !=undefined)
+     {
+        if((obj1_body.collisionGroup== basesCollisionGroup) &&
+         (obj2_body.collisionGroup== proyectilesCollisionGroup))
+        {
+          //borro obj1 del grupo de fisicas
+          obj1_body.removeNextStep=true;
+          //borro objeto1 del grupo de bases
+          for(i=0; i< bases1.children.length; i++)
+            {
+              if(bases1.children[i].body.id== obj1_body)
+              {
+                bases1.remove(bases1.children[i]);
+              }
+            }
+          for(i=0; i< bases2.children.length; i++)
+            {
+              if(bases2.children[i].body.id== obj1_body)
+              {
+                bases2.remove(bases2.children[i]);
+              }
+            }
+        }
+        if((obj2_body.collisionGroup== basesCollisionGroup) &&
+         (obj1_body.collisionGroup== proyectilesCollisionGroup))
+        {
+            //borro obj1 del grupo de fisicas
+            obj2_body.removeNextStep=true;
+            //borro objeto1 del grupo de bases
+            for(i=0; i< bases1.children.length; i++)
+              {
+            if(bases1.children[i].body.id== obj2_body)
+              {
+                bases1.remove(bases1.children[i]);
+              }
+            }
+            for(i=0; i< bases2.children.length; i++)
+            {
+              if(bases2.children[i].body.id== obj2_body)
+              {
+                bases2.remove(bases2.children[i]);
+              }
+            }
+        }
+    }
+} 
+*/
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
@@ -112,7 +168,8 @@ MagnetsFear.classicState.prototype = {
       playerCollisionGroup=game.physics.p2.createCollisionGroup();
       proyectilesCollisionGroup= game.physics.p2.createCollisionGroup();
       magnetCollisionGroup= game.physics.p2.createCollisionGroup();
-  
+      basesCollisionGroup= game.physics.p2.createCollisionGroup();
+
       esferas= game.add.group();
       esferas.enableBody=true;
       esferas.physicsBodyType= Phaser.Physics.P2JS;
@@ -179,23 +236,62 @@ MagnetsFear.classicState.prototype = {
       proyectiles.physicsBodyType= Phaser.Physics.P2JS;
 
       for(i=0; i< n_proyectiles; i++)
-      {
-        proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectileSpSheet'));
-        proyectiles[i].PhaserObject.frame = 0;
-        proyectiles[i].PhaserObject.animations.add('positive',[0,1,2,3,4,5],10,true);
-        proyectiles[i].PhaserObject.animations.add('negative',[6,7,8,9,10,11],10,true);
-        proyectiles[i].PhaserObject.animations.play('positive');
-        proyectiles[i].PhaserObject.body.setCircle(16);
-        proyectiles[i].PhaserObject.body.fixedRotation=true;
-        proyectiles[i].PhaserObject.body.velocity.x=300;
-        proyectiles[i].PhaserObject.body.velocity.y=300;
-        proyectiles[i].PhaserObject.body.damping=0;
-        proyectiles[i].PhaserObject.body.polarity= new Polarity();
-        proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
-        proyectiles[i].PhaserObject.body.collisionGroup=proyectilesCollisionGroup;
-        proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup]);
-        proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
-      }
+        {
+          proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectileSpSheet'));
+          proyectiles[i].PhaserObject.frame = 0;
+          proyectiles[i].PhaserObject.animations.add('positive',[0,1,2,3,4,5],10,true);
+          proyectiles[i].PhaserObject.animations.add('negative',[6,7,8,9,10,11],10,true);
+          proyectiles[i].PhaserObject.animations.play('positive');
+          proyectiles[i].PhaserObject.body.setCircle(16);
+          proyectiles[i].PhaserObject.body.fixedRotation=true;
+          proyectiles[i].PhaserObject.body.velocity.x=300;
+          proyectiles[i].PhaserObject.body.velocity.y=300;
+          proyectiles[i].PhaserObject.body.damping=0;
+          proyectiles[i].PhaserObject.body.polarity= new Polarity();
+          proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
+          proyectiles[i].PhaserObject.body.collisionGroup=proyectilesCollisionGroup;
+          proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup]);
+          proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
+        }
+    
+
+      bases1= game.add.group();
+      bases2= game.add.group();
+      bases1.enableBody=true;
+      bases2.enableBody=true;
+      bases1.physicsBodyType= Phaser.Physics.P2JS;
+      bases2.physicsBodyType= Phaser.Physics.P2JS;
+      for(i=0; i< n_bases; i++)
+        {
+          bases1[i]= new Bases(bases1.create(game.world.randomX, game.world.randomY,'civilization1'));
+          bases1[i].PhaserObject.frame = 0;
+          bases1[i].PhaserObject.animations.add('idle',[0,1,2,3,3,2,1],10,true);
+          bases1[i].PhaserObject.animations.play('idle');
+          bases1[i].PhaserObject.body.setCircle(24);
+          bases1[i].PhaserObject.body.angularVelocity= bases1[i].rotSpeed;
+          bases1[i].PhaserObject.body.angularDamping=0;
+          bases1[i].PhaserObject.body.kinematic=true;
+          bases1[i].PhaserObject.body.rotation= bases1[i].rotSpeed;
+          bases1[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
+          bases1[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
+          bases1[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+
+          bases2[i]= new Bases(bases2.create(game.world.randomX, game.world.randomY,'civilization2'));
+          bases2[i].PhaserObject.frame = 0;
+          bases2[i].PhaserObject.animations.add('idle',[0,1,2,3,3,2,1],10,true);
+          bases2[i].PhaserObject.animations.play('idle');
+          bases2[i].PhaserObject.body.setCircle(24);
+          bases2[i].PhaserObject.body.angularVelocity= bases2[i].rotSpeed;
+          bases2[i].PhaserObject.body.angularDamping=0;
+          bases2[i].PhaserObject.body.kinematic=true;
+          bases2[i].PhaserObject.body.rotation= bases2[i].rotSpeed;
+          bases2[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
+          bases2[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
+          bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
+
+          //bases1[i].PhaserObject.body.onBeginContact.add(hitBase,this);
+          //bases2[i].PhaserObject.body.onBeginContact.add(hitBase,this);
+        }
     },
 
     update: function() {
