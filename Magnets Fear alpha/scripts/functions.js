@@ -38,6 +38,8 @@ function Magnetism(){
     this.magnetism.maxSpeed = this.maxSpeed;
     this.accel=50;
     this.maxSpeed=400;
+    this.nextUse = 0;
+    this.cooldown = 500;
   
     this.magnetCollision= function(proyBody,rad_p)
     {
@@ -49,15 +51,13 @@ function Magnetism(){
      if(distance <=rad_sum)
         {
           //collision
-          //HAY QUE VER SI HAY ATRACCION O REPULSION
 
-          var accelMagnitude= this.magnetism.attractForce/distance*distance;
+          //Cálculo de Atracción o repulsión
+          var accelMagnitude= this.magnetism.attractForce/distance*distance*(distance*0.01);
           var vector= [esf_body.x- proyBody.x, esf_body.y- proyBody.y];
           var mod_vector= Math.sqrt(vector[0]* vector[0] + vector[1]* vector[1]);
           var dir_vector= [vector[0]/mod_vector,vector[1]/mod_vector];
 
-        //  alert(esf_body.polarity.positive);
-          //alert(proyBody.polarity.positive);
           proyBody.velocity.x += dir_vector[0]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
           proyBody.velocity.y += dir_vector[1]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
 
@@ -99,23 +99,21 @@ function Magnetism(){
         if(arr[4]==1) 
         {
           //space
-          this.PhaserObject.body.polarity.Switch();
-          if(this.PhaserObject.body.polarity.positive < 0)
-          {
-            this.PhaserObject.animations.play('negative');
+          if(time.time > this.nextUse)
+          { 
+            this.PhaserObject.body.polarity.Switch();
+            if(this.PhaserObject.body.polarity.positive < 0)
+            {
+              this.PhaserObject.animations.play('negative');
+            }
+            else 
+            {
+              this.PhaserObject.animations.play("positive");
+            }
+            this.nextUse = time.time + this.cooldown;
           }
-          else 
-          {
-            this.PhaserObject.animations.play("positive");
-          }
-         
         }
-      limitSpeed(this);  
-      limitSpeed(this.magnetism); 
-      this.magnetism.PhaserObject.body.x= body_obj.x;
-      this.magnetism.PhaserObject.body.y= body_obj.y;
-      
-  
+      limitSpeed(this);    
     }
     
   }
@@ -124,9 +122,7 @@ function Magnetism(){
   function Proyectile(PhOb)
   {
     this.PhaserObject= PhOb;
-    this.maxSpeed= 700;
-
-   
+    this.maxSpeed= 600;
   }
 
   function Bases(PhOb)
