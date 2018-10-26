@@ -99,7 +99,7 @@ function Magnetism(){
         if(arr[4]==1) 
         {
           //space
-          if(time.time > this.nextUse)
+          if(gameTime.time > this.nextUse)
           { 
             this.PhaserObject.body.polarity.Switch();
             if(this.PhaserObject.body.polarity.positive < 0)
@@ -110,7 +110,7 @@ function Magnetism(){
             {
               this.PhaserObject.animations.play("positive");
             }
-            this.nextUse = time.time + this.cooldown;
+            this.nextUse = gameTime.time + this.cooldown;
           }
         }
       limitSpeed(this);    
