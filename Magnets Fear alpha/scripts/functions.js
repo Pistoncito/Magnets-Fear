@@ -11,13 +11,13 @@ function getDistance(fromX, fromY, toX, toY){
 function Magnetism(){
   this.attractForce=20;
   this.repulseForce=30;
-  this.radius=250;
+  this.radius=200;
   this.maxSpeed;
   this.PhaserObject;
   }
   
   function Polarity(){
-    this.positive=1;
+    this.positive=-1;
     this.Switch= function(){this.positive *=-1;}
   }
 
@@ -61,7 +61,6 @@ function Magnetism(){
           proyBody.velocity.x += dir_vector[0]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
           proyBody.velocity.y += dir_vector[1]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
 
-        
         }
         else{
         }
@@ -99,7 +98,7 @@ function Magnetism(){
         if(arr[4]==1) 
         {
           //space
-          if(gameTime.time > this.nextUse)
+          if(game.time.time > this.nextUse)
           { 
             this.PhaserObject.body.polarity.Switch();
             if(this.PhaserObject.body.polarity.positive < 0)
@@ -110,7 +109,7 @@ function Magnetism(){
             {
               this.PhaserObject.animations.play("positive");
             }
-            this.nextUse = gameTime.time + this.cooldown;
+            this.nextUse = game.time.time + this.cooldown;
           }
         }
       limitSpeed(this);    
