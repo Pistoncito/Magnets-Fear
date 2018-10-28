@@ -51,6 +51,27 @@ function printScore()
 
 function printGameTime()
   {
+    for(i=0; i< bases1.children.length; i++)
+    {
+      var aux=bases1[i];
+      if(aux.invincibleTime > 0)
+      {
+        aux.invincibleTime -=1;
+        if(aux.invincibleTime <= 0)bases1.children[i].alpha=1;
+      }
+
+
+    }
+    for(i=0; i< bases2.children.length; i++)
+    {
+      var aux=bases2[i];
+      if(aux.invincibleTime> 0)
+      {
+        aux.invincibleTime -=1;
+        if(aux.invincibleTime <= 0)bases2.children[i].alpha=1;
+      } 
+  
+    }
     totalSeconds--;
     if(totalSeconds <= 1){
         musicClassic.stop();
@@ -108,10 +129,12 @@ function spawnBases(){
           bases1[i].PhaserObject.body.angularDamping=0;
           bases1[i].PhaserObject.body.kinematic=true;
           bases1[i].PhaserObject.body.rotation= bases1[i].rotSpeed;
+          bases1[i].PhaserObject.alpha=0.5;
           bases1[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
           bases1[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
           bases1[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
           bases1[i].PhaserObject.body.onBeginContact.add(hitBase,this);
+          
 
           bases2[i]= new Bases(bases2.create((1280-posX), (720-posY),'civilization2'));
           bases2[i].PhaserObject.frame = 0;
@@ -122,6 +145,7 @@ function spawnBases(){
           bases2[i].PhaserObject.body.angularDamping=0;
           bases2[i].PhaserObject.body.kinematic=true;
           bases2[i].PhaserObject.body.rotation= bases2[i].rotSpeed;
+          bases2[i].PhaserObject.alpha=0.5;
           bases2[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
           bases2[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
           bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
@@ -152,17 +176,16 @@ function hitBase(body1, body2, shape1, shape2, equation)
   */
     if(obj1_body !=undefined && obj2_body !=undefined)
     {
-     // alert("EL numero de bases de bases1 es: " + bases1.children.length);
-      //alert("EL numero de bases de bases2 es: " + bases2.children.length);
+
       if((obj1_body.collisionGroup== basesCollisionGroup) &&
         (obj2_body.collisionGroup== proyectilesCollisionGroup))
      {
-      //borro objeto1 del grupo de bases
         crashSound.play();       
         for(i=0; i< bases1.children.length; i++)  //SI EL OBJETO 1 ESTA EN BASES 1
           {
-            if(bases1.children[i].body.id== obj1_body.id)  
+            if((bases1.children[i].body.id== obj1_body.id) && (bases1[i].invincibleTime<=0))  
             {
+              
               bases1.children[i].body.clearCollision(!true,true);
               bases1.remove(bases1.children[i]);
               esfera2.score += 10;
@@ -175,7 +198,7 @@ function hitBase(body1, body2, shape1, shape2, equation)
         for(i=0; i< bases2.children.length; i++)  //SI EL OBJETO 1 ESTA EN BASES 2
           {
             
-            if(bases2.children[i].body.id== obj1_body.id)
+            if((bases2.children[i].body.id== obj1_body.id) && (bases2[i].invincibleTime<=0))
             { 
               bases2.children[i].body.clearCollision(!true,true);
               bases2.remove(bases2.children[i]);
@@ -190,12 +213,12 @@ function hitBase(body1, body2, shape1, shape2, equation)
   if((obj2_body.collisionGroup== basesCollisionGroup) &&
      (obj1_body.collisionGroup== proyectilesCollisionGroup))
        {
-         //borro objeto2 del grupo de bases
+    
          crashSound.play();
          for(i=0; i< bases1.children.length; i++)  //SI EL OBJETO 2 ESTA EN BASES 1
          {
 
-           if(bases1.children[i].body.id== obj2_body.id)  
+           if((bases1.children[i].body.id== obj2_body.id)&& (bases1[i].invincibleTime<=0))  
            {
               bases1.children[i].body.clearCollision(!true,true);
               bases1.remove(bases1.children[i]);
@@ -209,7 +232,7 @@ function hitBase(body1, body2, shape1, shape2, equation)
        for(i=0; i< bases2.children.length; i++)  //SI EL OBJETO 2 ESTA EN BASES 2
          {
 
-           if(bases2.children[i].body.id== obj2_body.id)
+           if((bases2.children[i].body.id== obj2_body.id) && (bases2[i].invincibleTime<=0))
            { 
              bases2.children[i].body.clearCollision(!true,true);
              bases2.remove(bases2.children[i]);
@@ -352,7 +375,7 @@ MagnetsFear.classicState.prototype = {
 
         
 ///////////////ESFERAS///////////////  
-      esfera1= new Sphere(esferas.create(game.world.width/2-200, game.world.height/2, 'sphere1'));
+      esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1'));
       esfera1.PhaserObject.frame = 0;
       esfera1.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera1.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -366,7 +389,7 @@ MagnetsFear.classicState.prototype = {
       esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup,basesCollisionGroup]);
       esfera1.PhaserObject.body.polarity= new Polarity();
 
-      esfera2= new Sphere(esferas.create(game.world.width/2+200, game.world.height/2,'sphere2'));
+      esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2'));
       esfera2.PhaserObject.frame = 0;
       esfera2.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera2.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -380,17 +403,15 @@ MagnetsFear.classicState.prototype = {
       esfera2.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup,basesCollisionGroup]);
       esfera2.PhaserObject.body.polarity= new Polarity();
 ///////////////MAGNETISMOS///////////////
-      
-
       esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
-        esfera1.PhaserObject.body.y - 500/2, 'magnetRange');
+      esfera1.PhaserObject.body.y - 500/2, 'magnetRange');
       esfera1.magnetism.PhaserObject.frame = 0;
       esfera1.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera1.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera1.magnetism.PhaserObject.animations.play('negative');
       esfera1.magnetism.PhaserObject.body.setCircle(0);
       var constraint1 = game.physics.p2.createDistanceConstraint(
-        esfera1.PhaserObject.body.sprite, esfera1.magnetism.PhaserObject.body.sprite, 0);
+      esfera1.PhaserObject.body.sprite, esfera1.magnetism.PhaserObject.body.sprite, 0);
       esfera1.magnetism.PhaserObject.body.fixedRotation=true;
       esfera1.magnetism.PhaserObject.body.damping= 0.9;
       esfera1.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
@@ -398,14 +419,14 @@ MagnetsFear.classicState.prototype = {
       esfera1.magnetism.PhaserObject.body.collides([proyectilesCollisionGroup]);
 
       esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
-        esfera2.PhaserObject.body.y - 500/2, 'magnetRange');
+      esfera2.PhaserObject.body.y - 500/2, 'magnetRange');
       esfera2.magnetism.PhaserObject.frame = 0;
       esfera2.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera2.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera2.magnetism.PhaserObject.animations.play('negative');
       esfera2.magnetism.PhaserObject.body.setCircle(0);
       var constraint2 = game.physics.p2.createDistanceConstraint(
-        esfera2.PhaserObject.body.sprite, esfera2.magnetism.PhaserObject.body.sprite, 0);
+      esfera2.PhaserObject.body.sprite, esfera2.magnetism.PhaserObject.body.sprite, 0);
       esfera2.magnetism.PhaserObject.body.fixedRotation=true;
       esfera2.magnetism.PhaserObject.body.damping= 0.9;
       esfera2.magnetism.PhaserObject.body.setCollisionGroup(magnetCollisionGroup);
@@ -435,7 +456,6 @@ MagnetsFear.classicState.prototype = {
         }
     
   ///////////////BASES///////////////
-      
       spawnBases();
   ///////////////MÚSICA///////////////
       musicClassic = game.add.audio('classicMusic');

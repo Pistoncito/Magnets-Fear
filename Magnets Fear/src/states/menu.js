@@ -23,7 +23,7 @@ function over(text) {
 
 }
 
-function play() {
+function startPlay() {
     optionSelect.play();
     musicMenu.stop();
     game.state.start('classicState');
@@ -51,6 +51,8 @@ MagnetsFear.menuState.prototype = {
 
         mouseOver = game.add.audio('over');
         optionSelect = game.add.audio('select');
+        
+        if(musicMenu ==null)
         musicMenu = game.add.audio('menuMusic',1,true);
         if(!musicMenu.isPlaying){musicMenu.play();}
 
@@ -74,7 +76,7 @@ MagnetsFear.menuState.prototype = {
 
                 switch(i){
                     case 0:
-                        menuText[i].events.onInputDown.add(play,this);
+                        menuText[i].events.onInputDown.add(startPlay,this);
                         break;
                     case 1:
                         menuText[i].events.onInputDown.add(goToOptions,this);
