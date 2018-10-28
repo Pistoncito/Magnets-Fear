@@ -54,7 +54,7 @@ function Magnetism(){
           //collision
 
           //Cálculo de Atracción o repulsión
-          var accelMagnitude= this.magnetism.attractForce/distance*distance*distance*0.01;
+          var accelMagnitude= this.magnetism.attractForce/distance*distance*distance*0.02;
           var vector= [esf_body.x- proyBody.x, esf_body.y- proyBody.y];
           var mod_vector= Math.sqrt(vector[0]* vector[0] + vector[1]* vector[1]);
           var dir_vector= [vector[0]/mod_vector,vector[1]/mod_vector];
@@ -125,7 +125,7 @@ function Magnetism(){
   function Proyectile(PhOb)
   {
     this.PhaserObject= PhOb;
-    this.maxSpeed= 600;
+    this.maxSpeed= 500;
   }
 
   function Bases(PhOb)
