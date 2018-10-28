@@ -30,14 +30,14 @@ function loadResources() {
     game.load.spritesheet('civilization1','assets/images/sprites/Base1SpSheet.png',60,60,4);
     game.load.spritesheet('civilization2','assets/images/sprites/Base2SpSheet.png',60,60,4);
     game.load.spritesheet('proyectileSpSheet','assets/images/sprites/proyectileSpSheet.png',60,60,12);
-     game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetisms.png',400,400,8);
+    game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetisms.png',400,400,8);
     
-    game.load.audio('crash','assets/sounds/soundEffects/crash.wav');
-    game.load.audio('impact','assets/sounds/soundEffects/Impact.wav');
-    game.load.audio('over','assets/sounds/soundEffects/over.wav');
-    game.load.audio('select','assets/sounds/soundEffects/select.wav');
-    game.load.audio('menuMusic','assets/sounds/music/Menu_Music_1.0.wav');
-    game.load.audio('classicMusic','assets/sounds/music/Space music beta.wav');
+    game.load.audio('crash','assets/sounds/soundEffects/crash.ogg');
+    game.load.audio('impact','assets/sounds/soundEffects/Impact.ogg');
+    game.load.audio('over','assets/sounds/soundEffects/over.ogg');
+    game.load.audio('select','assets/sounds/soundEffects/select.ogg');
+    game.load.audio('menuMusic','assets/sounds/music/Menu_Music_1.0_0.ogg');
+    game.load.audio('classicMusic','assets/sounds/music/Space music beta.ogg');
     
 };
 

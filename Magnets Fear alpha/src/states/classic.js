@@ -352,7 +352,7 @@ MagnetsFear.classicState.prototype = {
 
         
 ///////////////ESFERAS///////////////  
-      esfera1= new Sphere(esferas.create(game.world.height/2-90, 90, 'sphere1'));
+      esfera1= new Sphere(esferas.create(game.world.width/2-200, game.world.height/2, 'sphere1'));
       esfera1.PhaserObject.frame = 0;
       esfera1.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera1.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -366,7 +366,7 @@ MagnetsFear.classicState.prototype = {
       esfera1.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup,basesCollisionGroup]);
       esfera1.PhaserObject.body.polarity= new Polarity();
 
-      esfera2= new Sphere(esferas.create(game.world.width-90, game.world.height/2-90,'sphere2'));
+      esfera2= new Sphere(esferas.create(game.world.width/2+200, game.world.height/2,'sphere2'));
       esfera2.PhaserObject.frame = 0;
       esfera2.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera2.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -384,7 +384,7 @@ MagnetsFear.classicState.prototype = {
 
       esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
         esfera1.PhaserObject.body.y - 500/2, 'magnetRange');
-      esfera1.magnetism.PhaserObject.frame = 4;
+      esfera1.magnetism.PhaserObject.frame = 0;
       esfera1.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera1.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera1.magnetism.PhaserObject.animations.play('negative');
@@ -399,7 +399,7 @@ MagnetsFear.classicState.prototype = {
 
       esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
         esfera2.PhaserObject.body.y - 500/2, 'magnetRange');
-      esfera2.magnetism.PhaserObject.frame = 4;
+      esfera2.magnetism.PhaserObject.frame = 0;
       esfera2.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
       esfera2.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera2.magnetism.PhaserObject.animations.play('negative');
