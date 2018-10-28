@@ -5,6 +5,7 @@ MagnetsFear.bootState = function(game) {
 
 }
 
+
 MagnetsFear.bootState.prototype = {
 
     preload: function() {
@@ -13,10 +14,12 @@ MagnetsFear.bootState.prototype = {
     },
 
     create: function() {
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.startSystem(Phaser.Physics.P2JS);
     },
 
     update: function() {
     game.state.start('preloadState');
     }
 }
+
+
