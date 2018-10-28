@@ -385,8 +385,8 @@ MagnetsFear.classicState.prototype = {
       esfera1.magnetism.PhaserObject=magnetismos.create(esfera1.PhaserObject.body.x-500/2,
         esfera1.PhaserObject.body.y - 500/2, 'magnetRange');
       esfera1.magnetism.PhaserObject.frame = 4;
-      esfera1.magnetism.PhaserObject.animations.add('negative',[4,4,3,2,2,3],10,true);
-      esfera1.magnetism.PhaserObject.animations.add('positive',[9,9,8,7,7,8],10,true);
+      esfera1.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
+      esfera1.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera1.magnetism.PhaserObject.animations.play('negative');
       esfera1.magnetism.PhaserObject.body.setCircle(0);
       var constraint1 = game.physics.p2.createDistanceConstraint(
@@ -400,8 +400,8 @@ MagnetsFear.classicState.prototype = {
       esfera2.magnetism.PhaserObject=magnetismos.create(esfera2.PhaserObject.body.x,
         esfera2.PhaserObject.body.y - 500/2, 'magnetRange');
       esfera2.magnetism.PhaserObject.frame = 4;
-      esfera2.magnetism.PhaserObject.animations.add('negative',[4,3,2,1,2,3],10,true);
-      esfera2.magnetism.PhaserObject.animations.add('positive',[9,8,7,6,7,8],10,true);
+      esfera2.magnetism.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
+      esfera2.magnetism.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
       esfera2.magnetism.PhaserObject.animations.play('negative');
       esfera2.magnetism.PhaserObject.body.setCircle(0);
       var constraint2 = game.physics.p2.createDistanceConstraint(
