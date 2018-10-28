@@ -30,7 +30,7 @@ function loadResources() {
     game.load.spritesheet('civilization1','assets/images/sprites/Base1SpSheet.png',60,60,4);
     game.load.spritesheet('civilization2','assets/images/sprites/Base2SpSheet.png',60,60,4);
     game.load.spritesheet('proyectileSpSheet','assets/images/sprites/proyectileSpSheet.png',60,60,12);
-    game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetismos neg-pos.png',400,400,10);
+     game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetisms.png',400,400,8);
     
     game.load.audio('crash','assets/sounds/soundEffects/crash.wav');
     game.load.audio('impact','assets/sounds/soundEffects/Impact.wav');
