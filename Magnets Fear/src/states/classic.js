@@ -321,7 +321,7 @@ MagnetsFear.classicState.prototype = {
       bases1=[n_bases];
       bases2=[n_bases];
       
-      n_proyectiles = 1;
+      n_proyectiles =  2;
       proyectiles= [n_proyectiles];
 
       totalSeconds = 120;
