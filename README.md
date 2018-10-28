@@ -28,11 +28,11 @@ El jugador puede cambiar su polaridad cada 0.5 segundos, creando un campo magné
 * Tiempo bala: Proyectiles y esfera enemiga se mueven más lento durante 5 segundos, lo que permite al jugador posicionarse para realizar una estrategia. Si toca a un proyectil, se desactiva el tiempo bala. Esta habilidad se recarga cada 15 segundos y si colisiona la esfera con un proyectil, a este tiempo se le añaden 5 segundos.
 
 ### Reglas Básicas
-* Hay 4 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
+* Hay 2 proyectiles en el escenario que son atraídos por las esferas de polaridad opuesta y repelidos en caso contrario, teniendo en cuenta su posición respecto a la esfera.
 * Los proyectiles que toquen una esfera cambian de polaridad.
 * Tanto las esferas como los proyectiles rebotan contra los limites del escenario.
-* Hay 3 bases por cada jugador que desaparecen cada 30 segundos generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
-* Si un proyectil choca contra una base, la destruye.
+* Hay 3 bases por cada jugador, que son invulnerables durante 3 segundos al aparecer. Si no han sido destruídas, desaparecen 30 segundos después generando otras 3 en distintas posiciones, indiferentemente de cuántas quedasen anteriormente.
+* Si un proyectil choca contra una base, la destruye. Una vez se destruyen todas las bases de un jugador, desaparecen todas las bases restantes en el escenario generando otras 3 para ambos jugadores en posiciones distintas.
 
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20classic%20design.png)
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/magnets%20fear%20efecto%20de%20colision.png)
