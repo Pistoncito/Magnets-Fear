@@ -33,6 +33,7 @@ function Magnetism(){
   
   function Sphere(PhOb)
   {
+    this.puntu=0;
     this.PhaserObject= PhOb;
     this.magnetism= new Magnetism();
     this.magnetism.maxSpeed = this.maxSpeed;
@@ -104,10 +105,12 @@ function Magnetism(){
             if(this.PhaserObject.body.polarity.positive < 0)
             {
               this.PhaserObject.animations.play('negative');
+              this.magnetism.PhaserObject.animations.play('negative');
             }
             else 
             {
               this.PhaserObject.animations.play("positive");
+              this.magnetism.PhaserObject.play('positive');
             }
             this.nextUse = game.time.time + this.cooldown;
           }

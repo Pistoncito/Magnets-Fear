@@ -2,6 +2,7 @@ MagnetsFear.classicState = function(game) {
 }
 
 //Variables
+//variables de tiempo
 var needToSpawnBases= false;
 var maxTimeToSpawnBases; //30s
 var basesSpawnTimer;
@@ -10,6 +11,13 @@ var gameSeconds = 60;
 var gameMinutes = 1;
 var timerText;
 var timerStyle;
+var timeSinceLastBasesSpawn=0;
+
+//variables de puntuacion
+var puntusStyle;
+var textPuntu1;
+var textPuntu2;
+
 
 var bg;
 
@@ -37,13 +45,22 @@ var W, A, S, D, SPACEBAR, up, left, down, right, ENTER;
 
 
 //Funciones
+function printPuntus()
+{
+  textPuntu1.setText("J1: " + esfera1.puntu);
+  textPuntu2.setText("J2: " + esfera2.puntu);
+}
+
 function printGameTime()
   {
-
+    timeSinceLastBasesSpawn++;
       gameSeconds--;
       
-      if((gameSeconds%maxTimeToSpawnBases) == 0){
+
+      if((timeSinceLastBasesSpawn-maxTimeToSpawnBases)== 0){
         spawnBases();
+      }
+        if((gameSeconds%maxTimeToSpawnBases) == 0){
         if((gameSeconds%60) == 0){
           gameMinutes--;
           gameSeconds = 59;
@@ -63,10 +80,6 @@ function spawnBases()
       var pointY = game.rnd.integerInRange(290,430);
       var R = 250;
 
-      /*
-      alert("Antes de borrar, children1.length vale: " +bases1.children.length);
-      alert("Antes de borrar, children2.length vale: " +bases2.children.length);
-*/
      
       var aux1= bases1.children.length-1;
       var aux2= bases2.children.length-1;
@@ -121,6 +134,7 @@ function spawnBases()
               bases2[i].PhaserObject.body.onBeginContact.add(hitBase,this);
     
             }
+            timeSinceLastBasesSpawn=0;
     }
     
 function checkSpawnBases()
@@ -149,6 +163,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
               bases1.children[i].body.clearCollision(true,true);
               bases1.remove(bases1.children[i]); 
           //alert("numero de bases1: " + bases1.children.length);
+          esfera2.puntu += 10;
+          printPuntus();
               checkSpawnBases();
               return;
             }
@@ -161,6 +177,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
               bases2.children[i].body.clearCollision(true,true);
               bases2.remove(bases2.children[i]); 
             //  alert("numero de bases2: " + bases2.children.length);
+            esfera1.puntu += 10;
+            printPuntus();
               checkSpawnBases();
               return;
             }
@@ -178,6 +196,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
                bases1.children[i].body.clearCollision(true,true);
                bases1.remove(bases1.children[i]); 
              //  alert("numero de bases1: " + bases1.children.length);
+             esfera2.puntu += 10;
+             printPuntus();
                checkSpawnBases();
                return;
            }
@@ -191,6 +211,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
              bases2.children[i].body.clearCollision(true,true);
              bases2.remove(bases2.children[i]); 
            //  alert("numero de bases2: " + bases2.children.length);
+           esfera1.puntu += 10;
+           printPuntus();
              checkSpawnBases();
              return;
            }
@@ -266,7 +288,7 @@ MagnetsFear.classicState.prototype = {
        n_bases=3;
        bases1=[n_bases];
        bases2=[n_bases];
-       n_proyectiles = 3;
+       n_proyectiles = 1;
        proyectiles= [n_proyectiles];
     },
     
@@ -277,6 +299,7 @@ MagnetsFear.classicState.prototype = {
      timerStyle = {fill: "rgb(150,150,200)", font:"100px Chakra Petch", boundsAlignH: "center"};
      timerText = game.add.text(0,0,"2:00",timerStyle);
      timerText.setTextBounds(0,0,game.world.width,game.world.height);
+
 
       game.physics.p2.setImpactEvents(true);
       game.physics.p2.updateBoundsCollisionGroup();
@@ -310,18 +333,26 @@ MagnetsFear.classicState.prototype = {
 ///////////////MAGNETISMOS///////////////
   
 
-      magnetismo1=magnetismos.create(0, 0, 'magnetRangeN');
+      magnetismo1=magnetismos.create(0, 0, 'magnetismNegPos');
+      magnetismo1.frame=0;
+      magnetismo1.animations.add('negative',[0,1,2,3,4,5,4,3,2,1],5, true);
+      magnetismo1.animations.add('positive',[7,8,9,10,11,12,11,10,9,8],5, true);
+      magnetismo1.animations.play('negative');
       magnetismo1.body.setCircle(0);
       magnetismo1.body.fixedRotation=true;
-      magnetismo1.body.damping= 1;
+      magnetismo1.body.damping= 0.9;
       magnetismo1.body.setCollisionGroup(magnetCollisionGroup);
       magnetismo1.body.collisionGroup=magnetCollisionGroup;
       magnetismo1.body.collides([proyectilesCollisionGroup]);
 
-      magnetismo2=magnetismos.create(0,0, 'magnetRangeN');
+      magnetismo2=magnetismos.create(0, 0, 'magnetismNegPos');
+      magnetismo2.frame=0;
+      magnetismo2.animations.add('negative',[0,1,2,3,4,5,4,3,2,1],5, true);
+      magnetismo2.animations.add('positive',[6,7,8,9,10,11,10,9,8,7],5, true);
+      magnetismo2.animations.play('negative');
       magnetismo2.body.setCircle(0);
       magnetismo2.body.fixedRotation=true;
-      magnetismo2.body.damping= 1;
+      magnetismo2.body.damping= 0.9;
       magnetismo2.body.setCollisionGroup(magnetCollisionGroup);
       magnetismo2.body.collisionGroup=magnetCollisionGroup;
       magnetismo2.body.collides([proyectilesCollisionGroup]);
@@ -402,6 +433,12 @@ MagnetsFear.classicState.prototype = {
       wallClock.start();
         
 
+     //Texto de puntus
+     puntusStyle= {fill: "rgb(150,150,200)", font: "30px Chakra Petch", boundsAlignH:"center"};
+     textPuntu1= game.add.text(0,0, "J1: " + esfera1.puntu,puntusStyle);
+     textPuntu2= game.add.text(0,0, "J2: " + esfera2.puntu, puntusStyle);
+     textPuntu1.setTextBounds(0,0,game.world.width/2, game.world.height);
+     textPuntu2.setTextBounds(game.world.width/2,0,game.world.width/2,game.world.height);
     },
 
     update: function() {

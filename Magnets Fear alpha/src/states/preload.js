@@ -31,8 +31,11 @@ function loadResources() {
     game.load.spritesheet('civilization1','assets/images/sprites/Base1SpSheet.png',60,60,4);
     game.load.spritesheet('civilization2','assets/images/sprites/Base2SpSheet.png',60,60,4);
     game.load.spritesheet('proyectileSpSheet','assets/images/sprites/proyectileSpSheet.png',60,60,12);
-    game.load.image('magnetRangeP', 'assets/images/sprites/magnetism-range-positive.png');
-    game.load.image('magnetRangeN', 'assets/images/sprites/magnetism-range-negative.png');
+    //game.load.image('magnetRangeP', 'assets/images/sprites/magnetism-range-positive.png');
+    //game.load.image('magnetRangeN', 'assets/images/sprites/magnetism-range-negative.png');
+    //game.load.image('magnetRangeP', 'assets/images/sprites/magnetism-rangePos.png');
+    //game.load.image('magnetRangeN', 'assets/images/sprites/magnetism-rangeNeg.png');
+    game.load.spritesheet('magnetismNegPos', 'assets/images/sprites/magnetismNegPos.png',400,400,12);
 };
 
 function onLoadComplete() {
