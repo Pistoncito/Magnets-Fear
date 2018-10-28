@@ -11,6 +11,7 @@ function music() {
 
 function returnOptions() {
     game.state.start('optionsState');
+    optionSelect.play();
 }
 
 MagnetsFear.soundState.prototype = {
@@ -29,7 +30,7 @@ MagnetsFear.soundState.prototype = {
         //jugar, opciones, salir
         soundOptions=["Música", "Sonidos", "Volver"];
    
-        var soundText = game.add.text(0,0,"Sonido",titleStyle);
+        var soundText = game.add.text(0,0,"Audio",titleStyle);
         soundText.setTextBounds(0,0,game.world.width,game.world.height);
 
         

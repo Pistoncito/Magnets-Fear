@@ -16,10 +16,8 @@ MagnetsFear.endingState.prototype = {
         this.textStyleEndGame= {fill: gradient, font:"100px Orbitron", boundsAlignH: "center"};
         this.textStyleScores={fill: gradient, font:"60px Orbitron", boundsAlignH: "center"};
         this.backToMenuStyle={fill:"rgb(0,90,120)", font:"60px Orbitron", boundsAlignH: "center"};
-        this.player1_score= esfera1.puntu;
-        this.player2_score= esfera2.puntu;
-        //this.player1_score= esfera1.score;
-        //this.player2_score= esfera2.score;
+        this.player1_score= esfera1.score;
+        this.player2_score= esfera2.score;
     
 
         if(this.player1_score > this.player2_score)

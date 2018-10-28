@@ -7,6 +7,7 @@ var titleStyle;
 var style;
 var options;
 var gradient;
+var musicMenu;
 //Funciones
 function out(text) {
 
@@ -17,14 +18,20 @@ function out(text) {
 function over(text) {
 
     text.fill = "rgb(255,150,0)";
+    mouseOver.play();
+
 
 }
 
 function play() {
+    optionSelect.play();
+    musicMenu.stop();
     game.state.start('classicState');
+    
 }
 
 function goToOptions() {
+    optionSelect.play();
     game.state.start('optionsState');
 }
 
@@ -41,6 +48,12 @@ MagnetsFear.menuState.prototype = {
     },
     
     create: function() {
+
+        mouseOver = game.add.audio('over');
+        optionSelect = game.add.audio('select');
+        musicMenu = game.add.audio('menuMusic',1,true);
+        if(!musicMenu.isPlaying){musicMenu.play();}
+
         //jugar, opciones, salir
         menuOptions=["Jugar", "Opciones", "Salir"];
    
