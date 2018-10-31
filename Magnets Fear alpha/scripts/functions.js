@@ -11,7 +11,7 @@ function getDistance(fromX, fromY, toX, toY){
 
 
 function Magnetism(){
-  this.attractForce=20;
+  this.force=20;
   this.radius=200;
   this.maxSpeed;
   this.PhaserObject;
@@ -61,7 +61,7 @@ distancia al centro del magnetismo.
      if(distance <=rad_sum)
         {
 
-          var accelMagnitude= this.magnetism.attractForce/distance*distance*distance*0.02;
+          var accelMagnitude= this.magnetism.force/distance*distance*distance*0.02;
           var vector= [esf_body.x- proyBody.x, esf_body.y- proyBody.y];
           var mod_vector= Math.sqrt(vector[0]* vector[0] + vector[1]* vector[1]);
           var dir_vector= [vector[0]/mod_vector,vector[1]/mod_vector];
