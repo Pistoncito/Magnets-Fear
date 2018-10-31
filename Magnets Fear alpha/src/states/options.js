@@ -2,19 +2,6 @@ MagnetsFear.optionsState = function(game) {
 
 }
 
-//Funciones
-
-function sound() {
-    game.state.start('soundState');
-    optionSelect.play();
-}
-
-function returnMenu() {
-    game.state.start('menuState');
-    optionSelect.play();
-}
-
-
 MagnetsFear.optionsState.prototype = {
 
     preload: function() {
@@ -48,21 +35,27 @@ MagnetsFear.optionsState.prototype = {
 
                 switch(i){
                     case 0:
-                        optionsMenuText[i].events.onInputDown.add(sound,this);
+                        optionsMenuText[i].events.onInputDown.add(this.sound,this);
                         break;
                     case 1:
-                        //optionsMenuText[i].events.onInputDown.add(options,this);
+                        //optionsMenuText[i].events.onInputDown.add(this.controls,this);
                         break;
                     case 2:
-                        optionsMenuText[i].events.onInputDown.add(returnMenu,this);
+                        optionsMenuText[i].events.onInputDown.add(this.returnMenu,this);
                         break;
                 }
 
                 y+= yOffset;
             }
     },
-
-    update: function() {
-    	
+    //Pasa al menú de sonido
+    sound: function () {
+        game.state.start('soundState');
+        optionSelect.play();
+    }
+    //Pasa al menú principal
+    returnMenu: function () {
+        game.state.start('menuState');
+        optionSelect.play();
     }
 }
