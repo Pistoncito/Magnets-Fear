@@ -11,7 +11,12 @@ MagnetsFear.endingState.prototype = {
 
     preload: function() {
     },
-
+ /*
+ Definimos los textos y sus estilos.
+ Se muestra arriba en el centro el ganador, a la izquierda en el centro y a la derecha
+ la puntuacion del jugador 1 y el jugador 2 respectivamente.
+ Abajo centrado el boton de volver al menu.
+ */
     create: function() {
         this.textStyleEndGame= {fill: gradient, font:"100px Orbitron", boundsAlignH: "center"};
         this.textStyleScores={fill: gradient, font:"60px Orbitron", boundsAlignH: "center"};
