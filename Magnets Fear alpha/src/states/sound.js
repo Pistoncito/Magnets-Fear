@@ -2,18 +2,6 @@ MagnetsFear.soundState = function(game) {
 
 }
 
-
-//Funciones
-
-function music() {
-    //game.state.start('classicState');
-}
-
-function returnOptions() {
-    game.state.start('optionsState');
-    optionSelect.play();
-}
-
 MagnetsFear.soundState.prototype = {
 
     preload: function() {
@@ -23,11 +11,10 @@ MagnetsFear.soundState.prototype = {
         titleStyle = {fill: gradient, font:"100px Orbitron", boundsAlignH: "center"};
         style = {fill:"rgb(0,90,120)", font:"60px Orbitron", boundsAlignH: "center"};
         
-
     },
     
     create: function() {
-        //jugar, opciones, salir
+
         soundOptions=["Música", "Sonidos", "Volver"];
    
         var soundText = game.add.text(0,0,"Audio",titleStyle);
@@ -47,13 +34,13 @@ MagnetsFear.soundState.prototype = {
 
                 switch(i){
                     case 0:
-                        //soundMenuText[i].events.onInputDown.add(music,this);
+                        //soundMenuText[i].events.onInputDown.add(this.music,this);
                         break;
                     case 1:
-                        //soundMenuText[i].events.onInputDown.add(sounds,this);
+                        //soundMenuText[i].events.onInputDown.add(this.sounds,this);
                         break;
                     case 2:
-                        soundMenuText[i].events.onInputDown.add(returnOptions,this);
+                        soundMenuText[i].events.onInputDown.add(this.returnOptions,this);
                         break;
                 }
 
@@ -61,8 +48,14 @@ MagnetsFear.soundState.prototype = {
             }
     },
 
-    update: function() {
-        //game.state.start('classicState');
-    	
+    returnOptions: function () {
+        game.state.start('optionsState');
+        optionSelect.play();
+    },
+
+    /*
+    music: function () {   
     }
+    */
+    
 }
