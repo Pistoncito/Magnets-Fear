@@ -9,31 +9,7 @@ var options;
 var gradient;
 var musicMenu;
 //Funciones
-function out(text) {
 
-    text.fill = "rgb(0,90,120)";
-
-}
-
-function over(text) {
-
-    text.fill = "rgb(255,150,0)";
-    mouseOver.play();
-
-
-}
-
-function startPlay() {
-    optionSelect.play();
-    musicMenu.stop();
-    game.state.start('classicState');
-    
-}
-
-function goToOptions() {
-    optionSelect.play();
-    game.state.start('optionsState');
-}
 
 MagnetsFear.menuState.prototype = {
 
@@ -76,22 +52,29 @@ MagnetsFear.menuState.prototype = {
 
                 switch(i){
                     case 0:
-                        menuText[i].events.onInputDown.add(startPlay,this);
+                        menuText[i].events.onInputDown.add(this.startPlay,this);
                         break;
                     case 1:
-                        menuText[i].events.onInputDown.add(goToOptions,this);
+                        menuText[i].events.onInputDown.add(this.goToOptions,this);
                         break;
                     case 2:
-                        //menuText[i].events.onInputDown.add(exit,this);
+                        //menuText[i].events.onInputDown.add(this.exit,this);
                         break;
                 }
 
                 y+= yOffset;
             }
     },
-
-    update: function() {
-        //game.state.start('classicState');
-    	
+    //Comienza la partida deteniendo la música del menú
+    startPlay: function() {
+        optionSelect.play();
+        musicMenu.stop();
+        game.state.start('classicState');
+        
+    },
+    //Pasa al menú opciones
+    goToOptions:function() {
+        optionSelect.play();
+        game.state.start('optionsState');
     }
 }
