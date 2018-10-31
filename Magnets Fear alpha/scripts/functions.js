@@ -1,27 +1,31 @@
 //Funciones
 //////////////////////
 
-//Distancia entre cordenadas
+//Recibe como parámetros las coordenadas del primer punto y del segundo
+//Devuelve la distancia euclídea entre ambos
 function getDistance(fromX, fromY, toX, toY){
   var a = Math.abs(fromX - toX);
   var b = Math.abs(fromY - toY);
   return Math.sqrt((a * a) + (b * b));
 };
 
+
 function Magnetism(){
   this.attractForce=20;
-  this.repulseForce=30;
   this.radius=200;
   this.maxSpeed;
   this.PhaserObject;
   }
-  
-  function Polarity(){
+
+
+function Polarity(){
     this.positive=-1;
     this.Switch= function(){this.positive *=-1;}
   }
 
-  function limitSpeed(obj)
+//Recibe un objeto
+//Iguala su velocidad a su velocidad máxima en caso de que la sobrepase
+function limitSpeed(obj)
     {
     var body_vel=obj.PhaserObject.body.velocity;
     if(body_vel.x> obj.maxSpeed) body_vel.x = obj.maxSpeed;
@@ -30,7 +34,8 @@ function Magnetism(){
     if(body_vel.y> obj.maxSpeed) body_vel.y = obj.maxSpeed;
     else if(body_vel.y < -obj.maxSpeed)body_vel.y = -obj.maxSpeed;
     }
-  
+
+//Constructor del objeto esfera
   function Sphere(PhOb)
   {
     this.score=0;
@@ -41,7 +46,11 @@ function Magnetism(){
     this.maxSpeed=400;
     this.nextUse = 0;
     this.cooldown = 500;
-  
+/*
+Recibe como parámetros recibe el body del proyectil y su radio.
+Detecta colisiones entre el proyectil y el magnetismo y modifica la velocidad del proyectil dependiendo de su polaridad y su
+distancia al centro del magnetismo.
+*/ 
     this.magnetCollision= function(proyBody,rad_p)
     {
       var esf_body= this.PhaserObject.body;
@@ -51,55 +60,55 @@ function Magnetism(){
       var rad_sum= this.magnetism.radius + rad_p;
      if(distance <=rad_sum)
         {
-          //collision
 
-          //Cálculo de Atracción o repulsión
-          var accelMagnitude= this.magnetism.attractForce/distance*distance*distance*0.01;
+          var accelMagnitude= this.magnetism.attractForce/distance*distance*distance*0.02;
           var vector= [esf_body.x- proyBody.x, esf_body.y- proyBody.y];
           var mod_vector= Math.sqrt(vector[0]* vector[0] + vector[1]* vector[1]);
           var dir_vector= [vector[0]/mod_vector,vector[1]/mod_vector];
 
           proyBody.velocity.x += dir_vector[0]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
-          proyBody.velocity.y += dir_vector[1]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));
-
-        
+          proyBody.velocity.y += dir_vector[1]*accelMagnitude *(-1*(esf_body.polarity.positive * proyBody.polarity.positive));        
         }
         else{
         }
     }
+/*
+Recibe como parámetros un array con la teclas teclas pulsadas
+Realiza acciones dependiendo de las teclas que estén pulsadas
+*/
     this.Movement= function(arr)
       {
       
         var body_obj= this.PhaserObject.body;
      
         var tooMuchSpeed= this.maxSpeed-(this.maxSpeed-10);
+        //Arriba
         if(arr[0]==1){
-          //w
-      
+
           body_obj.velocity.y -= this.accel;
           this.magnetism.PhaserObject.body.velocity.y -= this.accel;
-        }  
+        }
+        //Izquierda 
         if(arr[1]==1){
-          //a
-    
+
           body_obj.velocity.x -= this.accel;
           this.magnetism.PhaserObject.body.velocity.x -= this.accel;
-        }  
+        }
+        //Abajo  
         if(arr[2]==1){
-           //s
-     
+
             body_obj.velocity.y += this.accel;
             this.magnetism.PhaserObject.body.velocity.y += this.accel;
-        }  
+        }
+        //Derecha  
         if(arr[3]==1){
-          //d
-  
+
           body_obj.velocity.x += this.accel;
           this.magnetism.PhaserObject.body.velocity.y += this.accel;
-        } 
+        }
+        //Cambiar polaridad 
         if(arr[4]==1) 
         {
-          //space
           if(game.time.time > this.nextUse)
           { 
             this.PhaserObject.body.polarity.Switch();
@@ -121,13 +130,14 @@ function Magnetism(){
     
   }
   
-  
+  //Constructor del objeto proyectil
   function Proyectile(PhOb)
   {
     this.PhaserObject= PhOb;
-    this.maxSpeed= 600;
+    this.maxSpeed= 500;
   }
 
+  //Constructor del objeto base
   function Bases(PhOb)
   {
     this.invincibleTime=3;
