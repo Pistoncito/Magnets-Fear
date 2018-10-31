@@ -3,25 +3,28 @@
 
 //Recibe como parámetros las coordenadas del primer punto y del segundo
 //Devuelve la distancia euclídea entre ambos
-function getDistance(fromX, fromY, toX, toY){
+function getDistance(fromX, fromY, toX, toY)
+{
   var a = Math.abs(fromX - toX);
   var b = Math.abs(fromY - toY);
   return Math.sqrt((a * a) + (b * b));
 };
 
-
-function Magnetism(){
+//Otorga atributos de magnetismo a un objeto
+function Magnetism()
+{
   this.force=20;
   this.radius=200;
   this.maxSpeed;
   this.PhaserObject;
-  }
+}
 
-
-function Polarity(){
+//Otorga polaridad a un objeto
+function Polarity()
+{
     this.positive=-1;
     this.Switch= function(){this.positive *=-1;}
-  }
+}
 
 //Recibe un objeto
 //Iguala su velocidad a su velocidad máxima en caso de que la sobrepase
@@ -131,14 +134,14 @@ Realiza acciones dependiendo de las teclas que estén pulsadas
   }
   
   //Constructor del objeto proyectil
-  function Proyectile(PhOb)
+function Proyectile(PhOb)
   {
     this.PhaserObject= PhOb;
     this.maxSpeed= 500;
   }
 
   //Constructor del objeto base
-  function Bases(PhOb)
+function Bases(PhOb)
   {
     this.invincibleTime=3;
     this.hittable=false;
@@ -147,4 +150,16 @@ Realiza acciones dependiendo de las teclas que estén pulsadas
     this.puntuation=10;
   }
   
+  //Modifican el color del texto al pasar el ratón por encima
+function over(text) {
+
+    text.fill = "rgb(255,150,0)";
+    mouseOver.play();
+}
+
+function out(text) {
+
+    text.fill = "rgb(0,90,120)";
+}
+
   //////////////////////
