@@ -2,6 +2,7 @@ MagnetsFear.classicState = function(game) {
 }
 
 //Variables
+////VARIABLES DE CONTROL DE TIEMPO PARA EVENTOS
 var needToSpawnBases;
 var maxTimeToSpawnBases;
 var wallClock;
@@ -9,35 +10,46 @@ var totalSeconds;
 var gameSeconds;
 var gameMinutes;
 var timeSinceLastBasesSpawn;
+////
 
+//// VARIABLES DE TEXTO POR PANTALLA
 var points1Text;
 var points2Text;
 var timerText;
 var timerStyle;
+////
 
 var PI = Math.PI;
 
 var bg;
+//// OBJETOS PARA ESFERAS Y SU GRUPO
 var esfera1;
 var esfera2;
 var esferas;
 
+////GRUPO DE MAGNETISMO
 var magnetismos;
 
+//// OBJETOS PARA BASE Y SU GRUPO
 var n_bases;
 var n_current_bases1;
 var n_current_bases1;
 var bases1;
 var bases2;
+////
 
+//// VARIABLE PARA NUMERO DE PROYECTILES INICIAL Y SU GRUPO
 var n_proyectiles;
 var proyectiles;
+////
 
+//// CONJUNTO DE TODOS LOS COLLISION GROUP
 var playerCollisionGroup;
 var proyectilesCollisionGroup;
 var magnetCollisionGroup;
 var basesCollisionGroup;
 
+//// TODOS LOS POSIBLES INPUTS DEL JUEGO
 var W, A, S, D, SPACEBAR, up, left, down, right, ENTER;
 
 var musicClassic;
@@ -49,6 +61,11 @@ function printScore()
   points2Text.setText("P2: " + esfera2.score);
 }
 
+/*Callback que es llamada cada segundo del mundo real.
+Actualiza el estado de invencibilidad de las bases.
+Actualiza el tiempo de juego restante y lo muestra por pantalla.
+Comprueba que el tiempo de juego es menor a 2 minutos, sino lo termina.
+*/
 function printGameTime()
   {
     for(i=0; i< bases1.children.length; i++)
@@ -93,6 +110,11 @@ function printGameTime()
     timerText.setText(result);    
   }
 
+/*
+Borra todas las bases restantes de un jugador y
+Spawnea 3 nuevas para cada uno equidistantes a un punto
+Updatea el tiempo para el nuevo spawn de las bases a 0
+*/
 function spawnBases(){
   var dist = 2/3 * PI;
   var pointX = game.rnd.integerInRange(290,350);
@@ -155,6 +177,7 @@ function spawnBases(){
   timeSinceLastBasesSpawn=0;
 }
 
+//Mira si player 1 o player 2 no tienen bases. si es asi spawnea nuevas.
 function checkSpawnBases()
 { 
   if((bases1.children.length == 0) || (bases2.children.length == 0))
@@ -163,17 +186,16 @@ function checkSpawnBases()
   }
 }
 
+/*
+Callback para cada vez que se golpea una base.
+Recibe los bodys y las shapes del objeto que colisiona con la base, asi como la ecuacion que calcula la colision
+Comprueba si lo que golpea a la base es un proyectil, si es asi lo destruye.
+*/
 function hitBase(body1, body2, shape1, shape2, equation)
 {
   var obj1_body= equation[0].bodyA.parent;
   var obj2_body = equation[0].bodyB.parent;
 
-  
-  //HAY QUE BORRAR DE 
-  /*
-  grupo de colisiones
-   grupo
-  */
     if(obj1_body !=undefined && obj2_body !=undefined)
     {
 
@@ -246,6 +268,11 @@ function hitBase(body1, body2, shape1, shape2, equation)
   } //Fin de if undefined
 }//Fin del metodo
 
+/*
+Comprueba colisiones con una esfera.
+Recibe los mismos parametros que el metodo anterior.
+Si lo que colisiona con la esfera es un proyectil, cambia la polaridad del proyectil
+*/
 function proyCollideSpheres(body_1, body_2, shape_1, shape_2, equation) 
 {
   var body1 = equation[0].bodyA.parent;
@@ -298,7 +325,11 @@ function proyCollideSpheres(body_1, body_2, shape_1, shape_2, equation)
 }
 
 MagnetsFear.classicState.prototype = {
-
+  
+/*
+En preload Inicializamos todas las variables que se van a usar en classic.
+Setteamos todas las teclas como teclas de phaser y las capturamos para que no intervengan en el navegador.
+*/
     preload: function() {
 
       //player1
@@ -331,10 +362,13 @@ MagnetsFear.classicState.prototype = {
       needToSpawnBases= false;
     },
     
+  /*
+  En create se define el estilo de texto, el tipo de fisicas, los grupos y grupos de colision
+  y se añaden todos los objetos a cada grupo y se les asigna su grupo de colision.
+  Se crean los sonidos y la musica.
+  Tambien se definen las variables de tiempo y los timers.
+  */
     create: function() {
-
-      
-
       //bg = game.add.image(0,0,'background');
 
       // Texto del tiempo
@@ -476,6 +510,11 @@ MagnetsFear.classicState.prototype = {
       wallClock.start();
     },
 
+  /*
+  En update se crean vectores booleanos para saber que teclas se han pulsado y cuales no.
+  Estos vectores se pasan como parametro a funciones que controlan el movimiento de las esferas.
+  Se limita la velocidad de los proyectiles y se calcula la colision de estos con los magnetismos de esfera.
+  */
     update: function() {
 
       var keys_bools1=[0,0,0,0,0];
