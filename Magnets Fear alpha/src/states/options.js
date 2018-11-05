@@ -2,6 +2,12 @@ MagnetsFear.optionsState = function(game) {
 
 }
 
+//Pasa al menú principal
+ function returnMenu () {
+        game.state.start('menuState');
+        optionSelect.play();
+};
+
 MagnetsFear.optionsState.prototype = {
 
     preload: function() {
@@ -15,7 +21,7 @@ MagnetsFear.optionsState.prototype = {
     },
     
     create: function() {
-        //jugar, opciones, salir
+
         options=["Audio", "Controles", "Volver"];
    
         var optionsText = game.add.text(0,0,"Opciones",titleStyle);
@@ -53,9 +59,5 @@ MagnetsFear.optionsState.prototype = {
         game.state.start('soundState');
         optionSelect.play();
     }
-    //Pasa al menú principal
-    returnMenu: function () {
-        game.state.start('menuState');
-        optionSelect.play();
-    }
+        
 }
