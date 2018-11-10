@@ -47,7 +47,7 @@ MagnetsFear.optionsState.prototype = {
                         //optionsMenuText[i].events.onInputDown.add(this.controls,this);
                         break;
                     case 2:
-                        optionsMenuText[i].events.onInputDown.add(this.returnMenu,this);
+                        optionsMenuText[i].events.onInputDown.add(returnMenu,this);
                         break;
                 }
 
