@@ -122,6 +122,8 @@ MagnetsFear.classicState.prototype = {
       timerText = game.add.text(0,0,"2:00",timerStyle);
       timerText.setTextBounds(0,0,game.world.width,game.world.height);
       
+      //Crea el background
+      initBackground('StarfieldBg');
 
       //Ajuste de físicas
       //Activa eventos de Impacto, actualiza las colisiones con los bordes y ajusta restitution
@@ -135,6 +137,7 @@ MagnetsFear.classicState.prototype = {
       initGroup(proyectiles);
       initGroup(bases1);
       initGroup(bases2);
+
       //Crea esferas de jugadores
       initSphere1(game.world.width/2-90, game.world.height/2-90, 'sphere1');
       initSphere2(game.world.width+90, game.world.height/2-90, 'sphere2');
