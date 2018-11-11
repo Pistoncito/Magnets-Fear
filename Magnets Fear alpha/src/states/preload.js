@@ -43,7 +43,7 @@ MagnetsFear.preloadState.prototype = {
         "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
         () => WebFont.load(WebFontConfig));
 
-        game.load.image('background', 'assets/images/backgrounds/classic_bg.png');
+        game.load.spritesheet('StarfieldBg','assets/images/backgrounds/StarfieldSpSheet.png',1280,720,10);
         game.load.spritesheet('sphere1','assets/images/sprites/player1SpSheet.png',80,80,8);
         game.load.spritesheet('sphere2','assets/images/sprites/player2SpSheet.png',80,80,8);
         game.load.spritesheet('civilization1','assets/images/sprites/Base1SpSheet.png',60,60,4);
