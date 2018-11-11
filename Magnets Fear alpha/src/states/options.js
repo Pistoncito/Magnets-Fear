@@ -2,32 +2,20 @@ MagnetsFear.optionsState = function(game) {
 
 }
 
-//Pasa al menú principal
- function returnMenu () {
-        game.state.start('menuState');
-        optionSelect.play();
-};
 
 MagnetsFear.optionsState.prototype = {
 
     preload: function() {
-        gradient = text.context.createLinearGradient(0, 0, 0, 150);
-        gradient.addColorStop(0, "rgb(255,150,0)");   
-        gradient.addColorStop(1, "rgb(0,150,255)");
-        optionsStyle = {fill: gradient, font:"100px Orbitron", boundsAlignH: "center"};
-        style = {fill:"rgb(0,90,120)", font:"60px Orbitron", boundsAlignH: "center"};
-        
-
     },
     
     create: function() {
-
+        //Array con las opciones de "Opciones"
         options=["Audio", "Controles", "Volver"];
-   
+        //Texto de "Opciones"
         var optionsText = game.add.text(0,0,"Opciones",titleStyle);
         optionsText.setTextBounds(0,0,game.world.width,game.world.height);
 
-        
+        //Texto de las opciones de "Opciones"
         var y=game.canvas.height/3;
         var yOffset= 60 +20;
         var optionsMenuText=[];
@@ -35,13 +23,14 @@ MagnetsFear.optionsState.prototype = {
             {
                 optionsMenuText[i] = game.add.text(0, y, options[i], style);
                 optionsMenuText[i].setTextBounds(0,0,game.world.width,game.world.height);
+                //Añade detección de eventos en cada texto
                 optionsMenuText[i].inputEnabled = true;
                 optionsMenuText[i].events.onInputOver.add(over,this);
                 optionsMenuText[i].events.onInputOut.add(out,this);
-
+                //Indica a qué función llamar dependiendo de qué texto se trate
                 switch(i){
                     case 0:
-                        optionsMenuText[i].events.onInputDown.add(this.sound,this);
+                        optionsMenuText[i].events.onInputDown.add(this.audio,this);
                         break;
                     case 1:
                         //optionsMenuText[i].events.onInputDown.add(this.controls,this);
@@ -55,9 +44,14 @@ MagnetsFear.optionsState.prototype = {
             }
     },
     //Pasa al menú de sonido
-    sound: function () {
-        game.state.start('soundState');
-        optionSelect.play();
+    audio: function() {
+        game.state.start('audioState');
+        if(soundOn==1)optionSelect.play();
+    },
+    /*
+    controls: function(){
+    
     }
-        
+    */
+    
 }
