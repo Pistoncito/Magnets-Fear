@@ -46,6 +46,13 @@ function initGroup(groupName){
   groupName.enableBody=true;
   groupName.physicsBodyType= Phaser.Physics.P2JS;
 };
+//Crea la animación del fondo
+function initBackground(sprite){
+  bg = game.add.sprite(0,0,sprite);
+  bg.frame = 0;
+  bg.animations.add('bgAnimation',[0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1],15,true);
+  bg.animations.play('bgAnimation');
+};
 //Recibe una esfera con una posición y un sprite
 //Crea una esfera con su animación y la asigna su grupo de colisiones
 function initSphere(obj,pX,pY,sprite){
