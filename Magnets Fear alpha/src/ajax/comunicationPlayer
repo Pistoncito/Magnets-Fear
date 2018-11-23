@@ -40,3 +40,26 @@ function getPlayer(callback, id){
         callback(player);
     })
 }
+
+function updatePlayer(player) {
+    $.ajax({
+        method: 'PUT',
+        url: 'http://localhost:8080/players/' + player.playerId,
+        data: JSON.stringify(player),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (player) {
+        console.log("Updated player: " + JSON.stringify(player))
+    })
+}
+
+function deletePlayer(playerId) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://localhost:8080/players/' + playerId
+    }).done(function (player) {
+        console.log("Deleted player " + playerId)
+    })
+}
