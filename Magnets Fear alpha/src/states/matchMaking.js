@@ -1,9 +1,10 @@
 MagnetsFear.matchMakingState = function(game){
     
 }
+//Inicialización de jugadores
+var player = new Player();
+var opponent = new Player();
 
-esfera1 = new Sphere();
-esfera2 = new Sphere();
 
 MagnetsFear.matchMakingState.prototype = {
 
@@ -13,12 +14,15 @@ MagnetsFear.matchMakingState.prototype = {
     create: function() {
         MatchText = "Esperando contrincante..."
         spr_text = game.add.text(0,0, MatchText, style);
-        
-        if (esfera1 != undefined) {
+        //Se asigna el identificador(Id) del jugador
+        if (player != undefined) {
             createPlayer( function(Id){
-            	esfera1.playerId = Id;
-            }, esfera1);
-        } 
+            	player.playerId = Id;
+            }, player);
+        }
+        //Se deduce el id del contrincante a partir del jugador uno
+        if (player.playerId===1){opponent.playerId===2;}
+        else {opponent.playerId===1;} 
     },
 
     update: function() {

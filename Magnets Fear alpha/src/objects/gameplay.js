@@ -1,6 +1,6 @@
 //// OBJETOS PARA ESFERAS Y SU GRUPO
-var esfera1;
-var esfera2;
+var esfera1 
+var esfera2
 var esferas;
 ////GRUPO DE MAGNETISMO
 var magnetismos;
@@ -55,8 +55,8 @@ function initBackground(sprite){
 };
 //Recibe una esfera con una posición y un sprite
 //Crea una esfera con su animación y la asigna su grupo de colisiones
+/*
 function initSphere(obj,pX,pY,sprite){
-  obj = new Sphere(esferas.create(pX, pY, sprite));
   obj.PhaserObject.frame = 0;
   obj.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
   obj.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -69,10 +69,11 @@ function initSphere(obj,pX,pY,sprite){
   obj.PhaserObject.body.collisionGroup = playerCollisionGroup;
   obj.PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup,basesCollisionGroup]);
   obj.PhaserObject.body.polarity = new Polarity();
-};
+};*/
 //Crea esfera del jugador 1 con su animación y la asigna su grupo de colisiones
 function initSphere1(pX,pY,sprite){
-  esfera1 = new Sphere(esferas.create(pX, pY, sprite));
+  //esfera1 = new Sphere();
+  esfera1.PhaserObject = esferas.create(pX, pY, sprite);
   esfera1.PhaserObject.frame = 0;
   esfera1.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
   esfera1.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -88,7 +89,8 @@ function initSphere1(pX,pY,sprite){
 };
 //Igual que en la función anterior pero con jugador 2
 function initSphere2(pX,pY,sprite){
-  esfera2 = new Sphere(esferas.create(pX, pY, sprite));
+  //esfera2 = new Sphere();
+  esfera2.PhaserObject = esferas.create(pX, pY, sprite);
   esfera2.PhaserObject.frame = 0;
   esfera2.PhaserObject.animations.add('negative',[0,1,2,3,2,1],10,true);
   esfera2.PhaserObject.animations.add('positive',[4,5,6,7,6,5],10,true);
@@ -203,7 +205,7 @@ function proyCollideSpheres(body_1, body_2, shape_1, shape_2, equation)
       }
     }
   }
-}
+};
 
 //Activa eventos de Impacto, actualiza las colisiones con los bordes y ajusta restitution
 function initPhysics()
@@ -211,7 +213,7 @@ function initPhysics()
   game.physics.p2.setImpactEvents(true);
   game.physics.p2.updateBoundsCollisionGroup();
   game.physics.p2.restitution = 1.0;
-}
+};
 //Inicia todos los grupos de colisiones
 function initCollisionGroups()
 {
@@ -219,7 +221,7 @@ function initCollisionGroups()
   proyectilesCollisionGroup= game.physics.p2.createCollisionGroup();
   magnetCollisionGroup= game.physics.p2.createCollisionGroup();
   basesCollisionGroup= game.physics.p2.createCollisionGroup();
-}
+};
 
 //Inicia tiempo de juego
 function initGameTime()
@@ -260,15 +262,17 @@ function updateKeys()
     if(s.isDown) keys_bools1[2]=1;
     if(d.isDown) keys_bools1[3]=1;
     if(spacebar.isDown) keys_bools1[4]=1;
-
+    /*
     if(up.isDown) keys_bools2[0]=1;
     if(left.isDown) keys_bools2[1]=1;
     if(down.isDown) keys_bools2[2]=1;
     if(right.isDown) keys_bools2[3]=1;
     if(enter.isDown) keys_bools2[4]=1;
-
-    esfera1.Movement(keys_bools1);
-    esfera2.Movement(keys_bools2);
+    */
+    //Control de cada esfera dependiendo del id del jugador
+    if (player.playerId === 1) { esfera1.Movement(keys_bools1); }
+    else { esfera2.Movement(keys_bools1); }
+    //esfera2.Movement(keys_bools2);
   };
 //Limita la velocidad de los proyectiles y 
 //llama a la función que comprueba si están en contacto con el magnetismo de una esfera
@@ -281,3 +285,36 @@ function updateMagnetCollision()
         esfera2.magnetCollision(proyectiles[i].PhaserObject.body,16);
       }
   };
+
+function updateStatePlayers(){
+  if (player.playerId === 1) {
+      player.x = esfera1.PhaserObject.x;
+      player.y = esfera1.PhaserObject.y;
+      player.score = esfera1.score;
+      player.polarity = esfera1.PhaserObject.body.positive;
+    } else {
+      player.x = esfera2.PhaserObject.x;
+      player.y = esfera2.PhaserObject.y;
+      player.score = esfera2.score;
+      player.polarity = esfera2.PhaserObject.body.positive;
+    }
+    updatePlayer(player);
+    getPlayer(function(oPlayer){
+      opponent.x = oPlayer.x;
+      opponent.x = oPlayer.y;
+      opponent.x = oPlayer.score;
+      opponent.x = oPlayer.polarity;
+      if(opponent.playerId === 1){
+        esfera1.PhaserObject.x = opponent.x;
+        esfera1.PhaserObject.x = opponent.y;
+        esfera1.score = opponent.score;
+        esfera1.PhaserObject.body.positive = opponent.polarity;
+      } else {
+        esfera2.PhaserObject.x = opponent.x;
+        esfera2.PhaserObject.x = opponent.y;
+        esfera2.score = opponent.score;
+        esfera2.PhaserObject.body.positive = opponent.polarity;
+      }
+    },opponent.playerId)
+  };
+

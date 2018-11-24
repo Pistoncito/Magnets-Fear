@@ -1,8 +1,18 @@
+function Player() {
+  this.playerId = 0;
+  this.x;
+  this.y;
+  this.score = 0;
+  this.polarity = -1;
+}
+
+
 //Constructor del objeto esfera
-function Sphere(PhOb)
+function Sphere()
   {
+    this.playerId = 0;
     this.score=0;
-    this.PhaserObject= PhOb;
+    this.PhaserObject;
     this.magnetism= new Magnetism();
     this.magnetism.maxSpeed = this.maxSpeed;
     this.accel=50;
@@ -10,7 +20,7 @@ function Sphere(PhOb)
     this.nextUse = 0;
     this.cooldown = 500;
 /*
-Recibe como parámetros recibe el body del proyectil y su radio.
+Recibe como parámetros el body del proyectil y su radio.
 Detecta colisiones entre el proyectil y el magnetismo y modifica la velocidad del proyectil dependiendo de su polaridad y su
 distancia al centro del magnetismo.
 */ 

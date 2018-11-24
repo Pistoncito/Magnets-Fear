@@ -139,6 +139,8 @@ MagnetsFear.classicState.prototype = {
       initGroup(bases2);
 
       //Crea esferas de jugadores
+      esfera1 = new Sphere();
+      esfera2 = new Sphere();
       initSphere1(game.world.width/2-90, game.world.height/2-90, 'sphere1');
       initSphere2(game.world.width+90, game.world.height/2-90, 'sphere2');
       //Crea magnetismos de las esferas
@@ -164,6 +166,8 @@ MagnetsFear.classicState.prototype = {
     update: function() {
       updateKeys();
       updateMagnetCollision();
+      updateStatePlayers();
+      
     },
 
     //Inicia el audio del juego

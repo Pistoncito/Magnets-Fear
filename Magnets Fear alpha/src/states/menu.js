@@ -67,7 +67,7 @@ MagnetsFear.menuState.prototype = {
     startPlay: function() {
         if(soundOn==1){optionSelect.play()};
         musicMenu.stop();
-        game.state.start('classicState');
+        game.state.start('matchMakingState');
         
     },
     //Pasa al menú opciones

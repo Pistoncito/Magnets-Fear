@@ -31,4 +31,5 @@ function out(text) {
     if(soundOn==1)optionSelect.play();
 };
 
+
   //////////////////////
