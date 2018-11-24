@@ -1,5 +1,5 @@
 function Player() {
-  this.playerId = 0;
+  this.id = 0;
   this.x;
   this.y;
   this.score = 0;

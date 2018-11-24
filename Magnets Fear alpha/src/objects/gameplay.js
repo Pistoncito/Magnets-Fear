@@ -270,7 +270,7 @@ function updateKeys()
     if(enter.isDown) keys_bools2[4]=1;
     */
     //Control de cada esfera dependiendo del id del jugador
-    if (player.playerId === 1) { esfera1.Movement(keys_bools1); }
+    if (player.id === 1) { esfera1.Movement(keys_bools1); }
     else { esfera2.Movement(keys_bools1); }
     //esfera2.Movement(keys_bools2);
   };
@@ -287,7 +287,7 @@ function updateMagnetCollision()
   };
 
 function updateStatePlayers(){
-  if (player.playerId === 1) {
+  if (player.id === 1) {
       player.x = esfera1.PhaserObject.x;
       player.y = esfera1.PhaserObject.y;
       player.score = esfera1.score;
@@ -301,10 +301,10 @@ function updateStatePlayers(){
     updatePlayer(player);
     getPlayer(function(oPlayer){
       opponent.x = oPlayer.x;
-      opponent.x = oPlayer.y;
-      opponent.x = oPlayer.score;
-      opponent.x = oPlayer.polarity;
-      if(opponent.playerId === 1){
+      opponent.y = oPlayer.y;
+      opponent.score = oPlayer.score;
+      opponent.polarity = oPlayer.polarity;
+      if(opponent.id === 1){
         esfera1.PhaserObject.x = opponent.x;
         esfera1.PhaserObject.x = opponent.y;
         esfera1.score = opponent.score;
@@ -315,6 +315,6 @@ function updateStatePlayers(){
         esfera2.score = opponent.score;
         esfera2.PhaserObject.body.positive = opponent.polarity;
       }
-    },opponent.playerId)
+    },opponent.id)
   };
 

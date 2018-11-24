@@ -117,6 +117,9 @@ MagnetsFear.classicState.prototype = {
     
     create: function() {
 
+      //Se deduce el id del contrincante a partir del jugador uno
+      if (player.id===1){opponent.id = 2;}
+      else {opponent.id = 1;} 
       // Texto del tiempo
       timerStyle = {fill: "rgb(150,150,200)", font:"60px Chakra Petch", boundsAlignH: "center"};
       timerText = game.add.text(0,0,"2:00",timerStyle);

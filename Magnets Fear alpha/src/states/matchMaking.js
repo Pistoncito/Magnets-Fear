@@ -17,20 +17,18 @@ MagnetsFear.matchMakingState.prototype = {
         //Se asigna el identificador(Id) del jugador
         if (player != undefined) {
             createPlayer( function(Id){
-            	player.playerId = Id;
+            	player.id = Id;
             }, player);
         }
-        //Se deduce el id del contrincante a partir del jugador uno
-        if (player.playerId===1){opponent.playerId===2;}
-        else {opponent.playerId===1;} 
+        
     },
 
     update: function() {
-        game.state.start('classicState');
-        /*
+        //game.state.start('classicState');
+        
         numberPlayers(function(numero_usuarios){
         	if(numero_usuarios === 2){ game.state.start('classicState'); }
-        });*/
+        });
         
     }
 }
