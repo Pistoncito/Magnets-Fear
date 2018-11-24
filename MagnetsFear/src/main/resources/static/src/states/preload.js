@@ -11,6 +11,10 @@ MagnetsFear.preloadState.prototype = {
         var loadingStyle= {font:"50px", fill:"rgb(0,80,120)",boundsAlignH: "center",boundsAlignV: "middle"};
         text = game.add.text(0,0, loadingText, loadingStyle);
         text.setTextBounds(0,0,game.world.width,game.world.height);
+
+        //Ejecutar en 2º plano
+        game.stage.disableVisibilityChange=true;
+        //Carga de los assets
         game.load.onLoadComplete.addOnce(this.onLoadComplete,this);
         this.loadResources();   
     },

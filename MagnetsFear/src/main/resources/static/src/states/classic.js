@@ -159,6 +159,7 @@ MagnetsFear.classicState.prototype = {
       this.initScore();
       //Inicia tiempo en el juego
       this.initGameTime();
+      initStatePlayers();
     },
     
     /*

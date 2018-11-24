@@ -262,17 +262,10 @@ function updateKeys()
     if(s.isDown) keys_bools1[2]=1;
     if(d.isDown) keys_bools1[3]=1;
     if(spacebar.isDown) keys_bools1[4]=1;
-    /*
-    if(up.isDown) keys_bools2[0]=1;
-    if(left.isDown) keys_bools2[1]=1;
-    if(down.isDown) keys_bools2[2]=1;
-    if(right.isDown) keys_bools2[3]=1;
-    if(enter.isDown) keys_bools2[4]=1;
-    */
+
     //Control de cada esfera dependiendo del id del jugador
     if (player.id === 1) { esfera1.Movement(keys_bools1); }
     else { esfera2.Movement(keys_bools1); }
-    //esfera2.Movement(keys_bools2);
   };
 //Limita la velocidad de los proyectiles y 
 //llama a la función que comprueba si están en contacto con el magnetismo de una esfera
@@ -286,17 +279,41 @@ function updateMagnetCollision()
       }
   };
 
+function initStatePlayers(){
+if (player.id === 1) {
+      player.x = esfera1.PhaserObject.body.x;
+      player.y = esfera1.PhaserObject.body.y;
+      player.score = esfera1.score;
+      player.polarity = esfera1.PhaserObject.body.polarity.positive;
+      opponent.x = esfera2.PhaserObject.x;
+      opponent.y = esfera2.PhaserObject.y;
+      opponent.score = esfera2.score;
+      opponent.polarity = esfera2.PhaserObject.body.polarity.positive;
+    } else {
+      player.x = esfera2.PhaserObject.body.x;
+      player.y = esfera2.PhaserObject.body.y;
+      player.score = esfera2.score;
+      player.polarity = esfera2.PhaserObject.body.polarity.positive;
+      opponent.x = esfera1.PhaserObject.body.x;
+      opponent.y = esfera1.PhaserObject.body.y;
+      opponent.score = esfera1.score;
+      opponent.polarity = esfera1.PhaserObject.body.polarity.positive;
+    }
+    updatePlayer(player);
+    updatePlayer(opponent);
+}
+
 function updateStatePlayers(){
   if (player.id === 1) {
-      player.x = esfera1.PhaserObject.x;
-      player.y = esfera1.PhaserObject.y;
+      player.x = esfera1.PhaserObject.body.x;
+      player.y = esfera1.PhaserObject.body.y;
       player.score = esfera1.score;
-      player.polarity = esfera1.PhaserObject.body.positive;
+      player.polarity = esfera1.PhaserObject.body.polarity.positive;
     } else {
-      player.x = esfera2.PhaserObject.x;
-      player.y = esfera2.PhaserObject.y;
+      player.x = esfera2.PhaserObject.body.x;
+      player.y = esfera2.PhaserObject.body.y;
       player.score = esfera2.score;
-      player.polarity = esfera2.PhaserObject.body.positive;
+      player.polarity = esfera2.PhaserObject.body.polarity.positive;
     }
     updatePlayer(player);
     getPlayer(function(oPlayer){
@@ -305,15 +322,15 @@ function updateStatePlayers(){
       opponent.score = oPlayer.score;
       opponent.polarity = oPlayer.polarity;
       if(opponent.id === 1){
-        esfera1.PhaserObject.x = opponent.x;
-        esfera1.PhaserObject.x = opponent.y;
+        esfera1.PhaserObject.body.x = opponent.x;
+        esfera1.PhaserObject.body.y = opponent.y;
         esfera1.score = opponent.score;
-        esfera1.PhaserObject.body.positive = opponent.polarity;
+        esfera1.PhaserObject.body.polarity.positive = opponent.polarity;
       } else {
-        esfera2.PhaserObject.x = opponent.x;
-        esfera2.PhaserObject.x = opponent.y;
+        esfera2.PhaserObject.body.x = opponent.x;
+        esfera2.PhaserObject.body.y = opponent.y;
         esfera2.score = opponent.score;
-        esfera2.PhaserObject.body.positive = opponent.polarity;
+        esfera2.PhaserObject.body.polarity.positive = opponent.polarity;
       }
     },opponent.id)
   };
