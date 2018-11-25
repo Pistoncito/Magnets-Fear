@@ -1,29 +1,23 @@
 package CreativeCondors.MagnetsFear;
-public class Player {
+
+import java.util.Random;
+
+public class Proyectile {
 	private long id;
 	private float x;
 	private float y;
-	private int score;
-	private int polarity;
+	Random rnd = new Random();
+	
+	Proyectile(){
+		this.x = rnd.nextInt(1280)+1;
+		this.y = rnd.nextInt(720)+1;
+	}
 
-	Player(){}
-		public int getScore() {
-			return score;
-		}
-		public void setScore(int puntuacion) {
-			this.score = puntuacion;
-		}
 		public long getId() {
 			return id;
 		}
 		public void setId(long id) {
 			this.id = id;
-		}
-		public int getPolarity() {
-			return polarity;
-		}
-		public void setPolarity(int polaridad) {
-			this.polarity = polaridad;
 		}
 		public float getX() {
 			return x;
