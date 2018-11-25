@@ -1,19 +1,20 @@
 MagnetsFear.classicState = function(game) {
 }
 
-//Variables Globales
-//Cantidad de bases de cada jugador
+// Variables Globales
+// Cantidad de bases de cada jugador
 var n_current_bases1;
-var n_current_bases1;
-//Música
+var n_current_bases2;
+// Música
 var musicClassic;
 
-//Funciones Globales
+// Funciones Globales
 /*
-Llamada cada vez que se golpea una base.
-Recibe los bodys y las shapes del objeto que colisiona con la base, asi como la ecuacion que calcula la colision
-Comprueba si lo que golpea a la base es un proyectil, si es asi lo destruye.
-*/
+ * Llamada cada vez que se golpea una base. Recibe los bodys y las shapes del
+ * objeto que colisiona con la base, asi como la ecuación que calcula la
+ * colisión Comprueba si lo que golpea a la base es un proyectil, si es así lo
+ * destruye.
+ */
 function hitBase(body1, body2, shape1, shape2, equation)
 {
   var obj1_body= equation[0].bodyA.parent;
@@ -25,71 +26,73 @@ function hitBase(body1, body2, shape1, shape2, equation)
       if((obj1_body.collisionGroup== basesCollisionGroup) &&
         (obj2_body.collisionGroup== proyectilesCollisionGroup))
      {
-        if(soundOn==1)crashSound.play();       
-        for(i=0; i< bases1.children.length; i++)  //SI EL OBJETO 1 ESTA EN BASES 1
-          {
-            if((bases1.children[i].body.id== obj1_body.id) && (bases1[i].invincibleTime<=0))  
-            {
-              
-              bases1.children[i].body.clearCollision(!true,true);
-              bases1.remove(bases1.children[i]);
-              esfera2.score += 10;
-              this.printScore();
-              this.checkSpawnBases(); 
-              return;
-            }
-          }
-
-        for(i=0; i< bases2.children.length; i++)  //SI EL OBJETO 1 ESTA EN BASES 2
-          {
-            
-            if((bases2.children[i].body.id== obj1_body.id) && (bases2[i].invincibleTime<=0))
-            { 
-              bases2.children[i].body.clearCollision(!true,true);
-              bases2.remove(bases2.children[i]);
-              esfera1.score += 10;             
-              this.printScore();
-              this.checkSpawnBases(); 
-              return;
-            }
-          }
-              
+        if(soundOn==1)crashSound.play();
+        	for(i=0; i< bases1.children.length; i++)  // SI EL OBJETO 1 ESTA
+														// EN BASES 1
+			{
+				if((bases1.children[i].body.id== obj1_body.id) && (bases1[i].invincibleTime<=0))  
+				{
+					bases1.children[i].body.clearCollision(!true,true);
+					bases1.remove(bases1.children[i]);
+					esfera2.score += 10;
+					this.printScore();
+					this.checkSpawnBases(); 
+					return;
+				}
+			}      
+            for(i=0; i< bases2.children.length; i++)  // SI EL OBJETO 1 ESTA
+														// EN BASES 2
+			{
+			
+				if((bases2.children[i].body.id== obj1_body.id) && (bases2[i].invincibleTime<=0))
+				{ 
+					bases2.children[i].body.clearCollision(!true,true);
+					bases2.remove(bases2.children[i]);
+					esfera1.score += 10;             
+					this.printScore();
+					this.checkSpawnBases(); 
+					return;
+				}
+			}        	              
      }
   if((obj2_body.collisionGroup== basesCollisionGroup) &&
      (obj1_body.collisionGroup== proyectilesCollisionGroup))
        {
-    
+	  	
          if(soundOn==1)crashSound.play();
-         for(i=0; i< bases1.children.length; i++)  //SI EL OBJETO 2 ESTA EN BASES 1
-         {
+             for(i=0; i< bases1.children.length; i++)  // SI EL OBJETO 2 ESTA
+														// EN BASES 1
+			{
+			
+				if((bases1.children[i].body.id== obj2_body.id)&& (bases1[i].invincibleTime<=0))  
+				{
+					bases1.children[i].body.clearCollision(!true,true);
+					bases1.remove(bases1.children[i]);
+					esfera2.score += 10;
+					this.printScore();
+					this.checkSpawnBases(); 
+					return;
+				}
+			}
 
-           if((bases1.children[i].body.id== obj2_body.id)&& (bases1[i].invincibleTime<=0))  
-           {
-              bases1.children[i].body.clearCollision(!true,true);
-              bases1.remove(bases1.children[i]);
-              esfera2.score += 10;
-              this.printScore();
-              this.checkSpawnBases(); 
-              return;
-           }
-         }
-
-       for(i=0; i< bases2.children.length; i++)  //SI EL OBJETO 2 ESTA EN BASES 2
-         {
-
-           if((bases2.children[i].body.id== obj2_body.id) && (bases2[i].invincibleTime<=0))
-           { 
-             bases2.children[i].body.clearCollision(!true,true);
-             bases2.remove(bases2.children[i]);
-             esfera1.score += 10;
-             this.printScore(); 
-             this.checkSpawnBases(); 
-             return;
-           }
-         }
+        	for(i=0; i< bases2.children.length; i++)  // SI EL OBJETO 2 ESTA
+														// EN BASES 2
+			{
+			
+				if((bases2.children[i].body.id== obj2_body.id) && (bases2[i].invincibleTime<=0))
+					{ 
+					bases2.children[i].body.clearCollision(!true,true);
+					bases2.remove(bases2.children[i]);
+					esfera1.score += 10;
+					this.printScore(); 
+					this.checkSpawnBases(); 
+					return;
+				}
+			}
+       
        }
-  } //Fin de if undefined
-}//Fin del metodo
+  } // Fin de if undefined
+}// Fin del metodo
 
 
 
@@ -98,9 +101,10 @@ function hitBase(body1, body2, shape1, shape2, equation)
 MagnetsFear.classicState.prototype = {
 
     preload: function() {
-      //Asigna a las variables de control por teclado con su tecla correspondiente
+      // Asigna a las variables de control por teclado con su tecla
+		// correspondiente
       setKeys();      
-      //Inicialización de variables
+      // Inicialización de variables
       n_bases=3;
       bases1=[n_bases];
       bases2=[n_bases];
@@ -117,7 +121,7 @@ MagnetsFear.classicState.prototype = {
     
     create: function() {
 
-      //Se deduce el id del contrincante a partir del jugador uno
+      // Se deduce el id del contrincante a partir del jugador uno
       if (player.id===1){opponent.id = 2;}
       else {opponent.id = 1;} 
       // Texto del tiempo
@@ -125,15 +129,16 @@ MagnetsFear.classicState.prototype = {
       timerText = game.add.text(0,0,"2:00",timerStyle);
       timerText.setTextBounds(0,0,game.world.width,game.world.height);
       
-      //Crea el background
+      // Crea el background
       initBackground('StarfieldBg');
 
-      //Ajuste de físicas
-      //Activa eventos de Impacto, actualiza las colisiones con los bordes y ajusta restitution
+      // Ajuste de físicas
+      // Activa eventos de Impacto, actualiza las colisiones con los bordes y
+		// ajusta restitution
       initPhysics();
-      //Inicia Grupos de Colisiones
+      // Inicia Grupos de Colisiones
       initCollisionGroups();
-      //Inicia los grupos de objetos y asigna sus físicas
+      // Inicia los grupos de objetos y asigna sus físicas
       addGroups();
       initGroup(esferas);
       initGroup(magnetismos);
@@ -141,32 +146,35 @@ MagnetsFear.classicState.prototype = {
       initGroup(bases1);
       initGroup(bases2);
 
-      //Crea esferas de jugadores
+      // Crea esferas de jugadores
       esfera1 = new Sphere();
       esfera2 = new Sphere();
       initSphere1(game.world.width/2-90, game.world.height/2-90, 'sphere1');
       initSphere2(game.world.width+90, game.world.height/2-90, 'sphere2');
-      //Crea magnetismos de las esferas
+      // Crea magnetismos de las esferas
       initMagnetism(esfera1);
       initMagnetism(esfera2);
-      //Crea Proyectiles
-      this.spawnRandProyectiles(n_proyectiles);
-      //Crea Bases
+      // Crea Proyectiles
+      
+      this.initProyectiles(n_proyectiles);
+      // Crea Bases
       this.spawnBases();
-      //Inicia el audio
+      // Inicia el audio
       this.initAudio();
       // Inicia texto de puntuacion
       this.initScore();
-      //Inicia tiempo en el juego
+      // Inicia tiempo en el juego
       this.initGameTime();
       initStatePlayers();
     },
     
     /*
-    En update se crean vectores booleanos para saber que teclas se han pulsado y cuales no.
-    Estos vectores se pasan como parametro a funciones que controlan el movimiento de las esferas.
-    Se limita la velocidad de los proyectiles y se calcula la colision de estos con los magnetismos de esfera.
-    */
+	 * En update se crean vectores booleanos para saber que teclas se han
+	 * pulsado y cuales no. Estos vectores se pasan como parametro a funciones
+	 * que controlan el movimiento de las esferas. Se limita la velocidad de los
+	 * proyectiles y se calcula la colision de estos con los magnetismos de
+	 * esfera.
+	 */
     update: function() {
       updateKeys();
       updateMagnetCollision();
@@ -174,16 +182,16 @@ MagnetsFear.classicState.prototype = {
       
     },
 
-    //Inicia el audio del juego
+    // Inicia el audio del juego
     initAudio: function() {
       musicClassic = game.add.audio('classicMusic');
       crashSound = game.add.audio("crash");
       impactSound = game.add.audio("impact");  
-      //La música empieza a sonar sólo si no sonaba antes
+      // La música empieza a sonar sólo si no sonaba antes
       if((!musicClassic.isPlaying)&&(musicOn==1)){musicClassic.play();}          
     },
 
-    //Inicia el Texto de puntuación
+    // Inicia el Texto de puntuación
     initScore: function() 
     {
       points1Text = game.add.text(0,0,"P1: " + esfera1.score,timerStyle);
@@ -192,7 +200,7 @@ MagnetsFear.classicState.prototype = {
       points2Text.setTextBounds(game.world.width/2,0,game.world.width/2,game.world.height);
     },
 
-    //Muestra la puntuación de cada jugador por pantalla
+    // Muestra la puntuación de cada jugador por pantalla
     printScore: function()
     {
       points1Text.setText("P1: " + esfera1.score);
@@ -208,7 +216,7 @@ MagnetsFear.classicState.prototype = {
       wallClock.start();  
     },
 
-    //Calcula el tiempo restante y lo muestra por pantalla
+    // Calcula el tiempo restante y lo muestra por pantalla
     printGameTime: function()
       {
         for(i=0; i< bases1.children.length; i++)
@@ -248,40 +256,40 @@ MagnetsFear.classicState.prototype = {
         }
         
         var result = gameMinutes;
-        //Añade un 0 a los segundos si es menor que 10
+        // Añade un 0 a los segundos si es menor que 10
         result += (gameSeconds < 10) ? ":0" + gameSeconds : ":" + gameSeconds;
         timerText.setText(result);    
       },
 
 
-    //Recibe el número de proyectiles a crear
-    //Crea los proyectiles en posiciones aleatorias, les asigna su animación y los añade al grupo de colisiones
-    spawnRandProyectiles: function(num)
-    {
-      for(i=0; i< num; i++)
-        {
-          proyectiles[i]= new Proyectile(proyectiles.create(game.world.randomX, game.world.randomY,'proyectileSpSheet'));
-          proyectiles[i].PhaserObject.frame = 0;
-          proyectiles[i].PhaserObject.animations.add('negative',[0,1,2,3,4,5],10,true);
-          proyectiles[i].PhaserObject.animations.add('positive',[6,7,8,9,10,11],10,true);
-          proyectiles[i].PhaserObject.animations.play('negative');
-          proyectiles[i].PhaserObject.body.setCircle(16);
-          proyectiles[i].PhaserObject.body.fixedRotation=true;
-          proyectiles[i].PhaserObject.body.velocity.x=300;
-          proyectiles[i].PhaserObject.body.velocity.y=300;
-          proyectiles[i].PhaserObject.body.damping=0;
-          proyectiles[i].PhaserObject.body.polarity= new Polarity();
-          proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
-          proyectiles[i].PhaserObject.body.collisionGroup=proyectilesCollisionGroup;
-          proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup,basesCollisionGroup]);
-          proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
-        }
+    
+    // Asigna animación a proyectiles y
+	// los añade al grupo de colisiones
+    initProyectiles: function(num){
+    	for(i=0; i< num; i++)
+	    {	
+    			proyectiles[i]= new Proyectile(proyectiles.create(arrayProyectiles[i].x, arrayProyectiles[i].y,'proyectileSpSheet'));
+    			proyectiles[i].PhaserObject.frame = 0;
+    			proyectiles[i].PhaserObject.animations.add('negative',[0,1,2,3,4,5],10,true);
+    			proyectiles[i].PhaserObject.animations.add('positive',[6,7,8,9,10,11],10,true);
+    			proyectiles[i].PhaserObject.animations.play('negative');
+    			proyectiles[i].PhaserObject.body.setCircle(16);
+    			proyectiles[i].PhaserObject.body.fixedRotation=true;
+    			proyectiles[i].PhaserObject.body.velocity.x=0;
+    			proyectiles[i].PhaserObject.body.velocity.y=300;
+    			proyectiles[i].PhaserObject.body.damping=0;
+    			proyectiles[i].PhaserObject.body.polarity= new Polarity();
+    			proyectiles[i].PhaserObject.body.setCollisionGroup(proyectilesCollisionGroup);
+    			proyectiles[i].PhaserObject.body.collisionGroup=proyectilesCollisionGroup;
+    			proyectiles[i].PhaserObject.body.collides([playerCollisionGroup,proyectilesCollisionGroup,basesCollisionGroup]);
+    			proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
+		}
     },
     /*
-    Borra todas las bases restantes de un jugador y
-    Aparecen 3 nuevas para cada uno, equidistantes a un punto aleatorio
-    Actualiza el tiempo para el nuevo "spawn" de las bases a 0
-    */
+	 * Borra todas las bases restantes de un jugador y Aparecen 3 nuevas para
+	 * cada uno, equidistantes a un punto aleatorio Actualiza el tiempo para el
+	 * nuevo "spawn" de las bases a 0
+	 */
     spawnBases: function (){
       var dist = 2/3 * PI;
       var pointX = game.rnd.integerInRange(290,350);
@@ -291,7 +299,7 @@ MagnetsFear.classicState.prototype = {
 
       var aux1= bases1.children.length-1;
       var aux2= bases2.children.length-1;
-      //borrar bases antiguas
+      // borrar bases antiguas
       while(bases1.children.length >0)
         {
           bases1.children[aux1].body.clearCollision(true,true);
@@ -304,7 +312,7 @@ MagnetsFear.classicState.prototype = {
           bases2.remove(bases2.children[aux2]);
           aux2--;
         }
-      //Crear nuevas
+      // Crear nuevas
       for(i=0; i< n_bases; i++)
             {
               var posX = Math.round(pointX + R * Math.cos(dist * (angle+i)));
@@ -341,10 +349,11 @@ MagnetsFear.classicState.prototype = {
               bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
               bases2[i].PhaserObject.body.onBeginContact.add(hitBase,this);
             }
-      //Actualiza el tiempo en el que aparecieron las últimas bases
+      // Actualiza el tiempo en el que aparecieron las últimas bases
       timeSinceLastBasesSpawn=0;
     },
-    //Comprueba si player 1 o player 2 no tienen bases. Si es así, crea otras nuevas.
+    // Comprueba si player 1 o player 2 no tienen bases. Si es así, crea otras
+	// nuevas.
     checkSpawnBases: function ()
     { 
       if((bases1.children.length == 0) || (bases2.children.length == 0))

@@ -4,7 +4,29 @@ MagnetsFear.matchMakingState = function(game){
 //Inicialización de jugadores
 var player = new Player();
 var opponent = new Player();
+var arrayProyectiles = new Array();
 
+// Recibe el número de proyectiles a crear
+// Crea los proyectiles en posiciones aleatorias
+function spawnRandProyectiles(num)
+{
+	for(i=0;i<num;i++){
+		createProyectile();
+	}  		
+}
+function saveProyectiles(num,i){
+	if(i < num){
+		getProyectile(function(pr){
+			aux = new ProyectileAux();
+			aux.x = pr.x
+			aux.y = pr.y
+			arrayProyectiles[i] = aux;
+			console.log("El valor de x es " + arrayProyectiles[i].x);
+			i++;
+			saveProyectiles(num,i);
+		},i)
+	}
+}
 
 MagnetsFear.matchMakingState.prototype = {
 
@@ -20,7 +42,10 @@ MagnetsFear.matchMakingState.prototype = {
             	player.id = Id;
             }, player);
         }
-        
+        spawnRandProyectiles(2);
+        saveProyectiles(2,0);
+
+		
     },
 
     update: function() {
@@ -30,6 +55,8 @@ MagnetsFear.matchMakingState.prototype = {
         	if(numero_usuarios === 2){ game.state.start('classicState'); }
         });
         
-    }
+    },
+
+    
 }
 

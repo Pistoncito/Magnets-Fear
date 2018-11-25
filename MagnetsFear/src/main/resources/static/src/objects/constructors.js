@@ -6,6 +6,11 @@ function Player() {
   this.polarity = -1;
 }
 
+function ProyectileAux() {
+	this.id;
+	this.x;
+	this.y;
+}
 
 //Constructor del objeto esfera
 function Sphere()
