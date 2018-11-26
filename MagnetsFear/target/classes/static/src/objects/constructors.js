@@ -5,13 +5,6 @@ function Player() {
   this.score = 0;
   this.polarity = -1;
 }
-function Base()
-{
-  this.id=0;
-  this.x=0;
-  this.y=0;
-}
-
 //Constructor del objeto esfera
 function Sphere()
   {
