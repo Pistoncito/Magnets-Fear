@@ -36,41 +36,11 @@ MagnetsFear.matchMakingState.prototype = {
         	if(numero_usuarios === 2){ game.state.start('classicState'); }
         });
         
-        
-              //creo 6 bases
-    createBases(function(nBases)
-    {
-        recurrentGetBases(3,0, bases1);
-        recurrentGetBases(3,3, bases2);
-    });
 
     }
 }
 
 
-recurrentGetBases= function(nIterLeft,startPos, basesArr)
-{
 
-	var currentIter= 4-nIterLeft;
-	var svPos= startPos;
-	 if(currentIter <= 3)
-	    {
-
-        getBase(function(base)
-        {
-        	var pos= currentIter-1;
-            basesArr[pos].id = base.id;
-            basesArr[pos].x = base.x;
-            basesArr[pos].y = base.y;
-
-      var text= basesArr[pos].id;
-      game.add.text((svPos)*100, 100,text, style);
-
-             nIterLeft--;
-             startPos++;
-            recurrentGetBases(nIterLeft,startPos,basesArr);
-        }, svPos)
-       
-    }
   
 }
