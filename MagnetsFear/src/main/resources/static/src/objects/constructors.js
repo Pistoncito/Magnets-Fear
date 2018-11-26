@@ -5,7 +5,12 @@ function Player() {
   this.score = 0;
   this.polarity = -1;
 }
-
+function Base()
+{
+  this.id=0;
+  this.x=0;
+  this.y=0;
+}
 function ProyectileAux() {
 	this.id;
 	this.x;
