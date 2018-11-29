@@ -6,12 +6,9 @@ public class Base {
 	private long id;
 	private float x;
 	private float y;
-	Random rnd = new Random();
-
-
 	Base(){
-		this.x = rnd.nextInt(1180)+100;
-		this.y = rnd.nextInt(620)+100;
+		this.x = new Random().nextInt(1180)+100;
+		this.y = new Random().nextInt(620)+100;
 	}
 		public long getId() {
 			return id;
