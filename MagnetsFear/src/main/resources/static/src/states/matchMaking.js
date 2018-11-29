@@ -78,6 +78,30 @@ MagnetsFear.matchMakingState.prototype = {
     
 }
 
+//Recibe como entrada el número de bases que debe crear
+//Genera bases en posiciones aleatorias en una circunferencia
+function randomBases(nBases){
+	//Distancia entre bases
+    var dist = 2/3 * PI;
+    //Centro de la circunferencia
+    var pointX = game.rnd.integerInRange(290,350); 
+    var pointY = game.rnd.integerInRange(290,430);
+    //ángulo aleatorio en la circunferencia
+    var angle = game.rnd.frac() * 0.67 * PI;
+    //Radio de la circunferencia
+    var R = 250;
+    //Dependiendo de si se trata del jugador 1 o 2 guardará las bases en un array u otro
+    for(i=0; i< nBases; i++)
+	{	
+    	if(player.id === 1){
+    		bases1[i].x = Math.round(pointX + R * Math.cos(dist * (angle+i)));
+    		bases1[i].y = Math.round(pointY + R * Math.sin(dist * (angle+i)));
+    	} else {
+    		bases2[i].x = 1280 - Math.round(pointX + R * Math.cos(dist * (angle+i)));
+    		bases2[i].y = Math.round(pointY + R * Math.sin(dist * (angle+i)));
+    	}
+	}	
+}
 
 recurrentGetBases= function(nIterLeft,startPos, basesArr)
 {
