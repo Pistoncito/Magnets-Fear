@@ -1,17 +1,20 @@
+
 function Player() {
   this.id = 0;
   this.x;
   this.y;
   this.score = 0;
   this.polarity = -1;
+  this.ready = false;
 }
-function Base()
-{
-  this.id=0;
-  this.x=0;
-  this.y=0;
+
+function clientProyectile() {
+	this.id;
+	this.x;
+	this.y;
 }
-function ProyectileAux() {
+
+function Base() {
 	this.id;
 	this.x;
 	this.y;

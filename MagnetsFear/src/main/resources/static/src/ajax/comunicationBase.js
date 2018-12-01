@@ -1,4 +1,3 @@
-
 function getNumberBases(callback)
 {
     $.ajax(
@@ -6,7 +5,7 @@ function getNumberBases(callback)
             method:"GET",
             url: "http://localhost:8080/bases",
             processData: false,
-            header:{
+            headers:{
                 "Content-Type": "application/json"
             }
             
@@ -17,19 +16,20 @@ function getNumberBases(callback)
 
 }
 
-function createBases(callback)
+function createBase(callback, base)
 {
     $.ajax({
         method:"POST",
         url:"http://localhost:8080/bases",
+        data: JSON.stringify(base),
         processData: false,
-        header:
+        headers:
         {
             "Content-Type": "application/json"
         }
-    }).done(function(nBases){
-        console.log(JSON.stringify(nBases) +" bases created");
-        callback(nBases);
+    }).done(function(base){
+        console.log("Id Base: " + JSON.stringify(base));
+        callback(base);
     });
 }
 
@@ -39,7 +39,7 @@ function getBase(callback,id)
         method:"GET",
         url: "http://localhost:8080/bases/" + id,
         processData:false,
-        header: 
+        headers: 
         {
             "Content-Type": "application/json"
         }

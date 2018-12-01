@@ -268,7 +268,7 @@ MagnetsFear.classicState.prototype = {
     initProyectiles: function(num){
     	for(i=0; i< num; i++)
 	    {	
-    			proyectiles[i]= new Proyectile(proyectiles.create(arrayProyectiles[i].x, arrayProyectiles[i].y,'proyectileSpSheet'));
+    			proyectiles[i]= new Proyectile(proyectiles.create(posProyectiles[i].x, posProyectiles[i].y,'proyectileSpSheet'));
     			proyectiles[i].PhaserObject.frame = 0;
     			proyectiles[i].PhaserObject.animations.add('negative',[0,1,2,3,4,5],10,true);
     			proyectiles[i].PhaserObject.animations.add('positive',[6,7,8,9,10,11],10,true);
@@ -285,18 +285,27 @@ MagnetsFear.classicState.prototype = {
     			proyectiles[i].PhaserObject.body.onBeginContact.add(proyCollideSpheres,this);
 		}
     },
+    initBases: function (){
+    	// borrar bases antiguas
+        while(bases1.children.length >0)
+          {
+            bases1.children[aux1].body.clearCollision(true,true);
+            bases1.remove(bases1.children[aux1]);
+            aux1--;
+          }
+        while(bases2.children.length >0)
+          {
+            bases2.children[aux2].body.clearCollision(true,true);
+            bases2.remove(bases2.children[aux2]);
+            aux2--;
+          }
+    },
     /*
 	 * Borra todas las bases restantes de un jugador y Aparecen 3 nuevas para
 	 * cada uno, equidistantes a un punto aleatorio Actualiza el tiempo para el
 	 * nuevo "spawn" de las bases a 0
 	 */
     spawnBases: function (){
-      var dist = 2/3 * PI;
-      var pointX = game.rnd.integerInRange(290,350);
-      var pointY = game.rnd.integerInRange(290,430);
-      var angle = game.rnd.frac() * 0.67 * PI;
-      var R = 250;
-
       var aux1= bases1.children.length-1;
       var aux2= bases2.children.length-1;
       // borrar bases antiguas
@@ -315,8 +324,8 @@ MagnetsFear.classicState.prototype = {
       // Crear nuevas
       for(i=0; i< n_bases; i++)
             {
-              var posX = Math.round(pointX + R * Math.cos(dist * (angle+i)));
-              var posY = Math.round(pointY + R * Math.sin(dist * (angle+i)));
+              var posX = posBases1[i].x;
+              var posY = posBases1[i].y;
 
               bases1[i]= new Bases(bases1.create(posX, posY, 'civilization1'));
               bases1[i].PhaserObject.frame = 0;

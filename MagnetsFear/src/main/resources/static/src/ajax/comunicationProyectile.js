@@ -1,4 +1,4 @@
-function createProyectile() {
+function createProyectile(callback) {
     $.ajax({
         method: "POST",
         url: 'http://localhost:8080/proyectiles',
@@ -8,6 +8,7 @@ function createProyectile() {
         }
     }).done(function (data) {
         console.log("Proyectile created: " + JSON.stringify(data));
+        callback(data);
     })
 }
 

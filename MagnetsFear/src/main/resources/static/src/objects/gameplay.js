@@ -312,6 +312,7 @@ function updateStatePlayers() {
 		player.y = esfera1.PhaserObject.body.y;
 		player.score = esfera1.score;
 		player.polarity = esfera1.PhaserObject.body.polarity.positive;
+		
 	} else {
 		player.x = esfera2.PhaserObject.body.x;
 		player.y = esfera2.PhaserObject.body.y;
@@ -351,6 +352,45 @@ function updateStatePlayers() {
 		}
 
 	}, opponent.id)
-	//this.printScore();
 };
 
+function updateStateProyectiles(){
+	if(player.id === 1){
+		arrayProyectiles[0].x = proyectiles[0].x;
+		arrayProyectiles[0].y = proyectiles[0].y;
+		updateProyectile(arrayProyectiles[0]);
+		getProyectile(function(proyec){
+			proyectiles[1].x = proyec.x;
+			proyectiles[1].y = proyec.y;
+		},arrayProyectile[1].id);
+	}
+	else {
+		arrayProyectiles[1].x = proyectiles[1].x;
+		arrayProyectiles[1].y = proyectiles[1].y;
+		updateProyectile(arrayProyectiles[1]);
+		getProyectile(function(proyec){
+			proyectiles[0].x = proyec.x;
+			proyectiles[0].y = proyec.y;
+		},arrayProyectile[0].id);
+	}
+}
+/*
+function updateStateBases(){
+	if(player.id === 1){
+		for(i = 0; i < bases1.length; i++){
+			updateBase(bases1[i]);
+			getBase(function(bs){
+				bases2[i].x = bs.x;
+				bases2[i].y = bs.y
+			},bases2[i].id)
+		}
+	} else {
+		for(i = 0; i < bases2.length; i++){
+			updateBase(bases2[i]);
+			getBase(function(bs){
+				bases1[i].x = bs.x;
+				bases1[i].y = bs.y
+			},bases1[i].id)
+		}
+	}
+}*/
