@@ -5,6 +5,7 @@ public class Player {
 	private float y;
 	private int score;
 	private int polarity;
+	private boolean ready = false;
 
 	Player(){}
 		public int getScore() {
@@ -36,5 +37,11 @@ public class Player {
 		}
 		public void setY(float posicionY) {
 			this.y = posicionY;
+		}
+		public boolean isReady() {
+			return ready;
+		}
+		public void setReady(boolean ready) {
+			this.ready = ready;
 		}
 }

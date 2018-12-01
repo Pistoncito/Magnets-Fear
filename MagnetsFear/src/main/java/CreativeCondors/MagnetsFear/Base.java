@@ -1,14 +1,15 @@
 package CreativeCondors.MagnetsFear;
 
-import java.util.Random;
+
 
 public class Base {
 	private long id;
 	private float x;
 	private float y;
+	
+
 	Base(){
-		this.x = new Random().nextInt(1180)+100;
-		this.y = new Random().nextInt(620)+100;
+		
 	}
 		public long getId() {
 			return id;

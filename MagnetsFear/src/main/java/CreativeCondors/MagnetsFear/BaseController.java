@@ -28,16 +28,14 @@ public class BaseController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public int createBases() {
-		if (bases.size() <= 0) {
-			for (int i = 0; i < 6; i++) {
-				Base base = new Base();
-				long id = nextId.incrementAndGet();
-				base.setId(id);
-				bases.put(base.getId(), base);				
-			}
-		}		
-		return bases.size();
+	public long createBases(@RequestBody Base clientBase) {
+		Base base = new Base();
+		long id = nextId.incrementAndGet();
+		base.setId(id);
+		base.setX(clientBase.getX());
+		base.setY(clientBase.getY());
+		bases.put(base.getId(), base);
+		return id;
 	}
 
 	@GetMapping("/{id}")
