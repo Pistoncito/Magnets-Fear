@@ -1,10 +1,25 @@
+
 function Player() {
   this.id = 0;
   this.x;
   this.y;
   this.score = 0;
   this.polarity = -1;
+  this.ready = false;
 }
+
+function clientProyectile() {
+	this.id;
+	this.x;
+	this.y;
+}
+
+function Base() {
+	this.id;
+	this.x;
+	this.y;
+}
+
 //Constructor del objeto esfera
 function Sphere()
   {
