@@ -1,65 +1,95 @@
-MagnetsFear.preloadState = function(game) {
+CimmerianDepths.preloadState = function (game) {
+
 }
 
-MagnetsFear.preloadState.prototype = {
-    //Variables que indican si se han cargado los assets y la fuente
+CimmerianDepths.preloadState.prototype = {
+
     ready: false,
     fontsReady: false,
-    //Crea un texto de carga y empieza a cargar los assets
-    preload: function() {
-        var loadingText="loading...";
-        var loadingStyle= {font:"50px", fill:"rgb(0,80,120)",boundsAlignH: "center",boundsAlignV: "middle"};
-        text = game.add.text(0,0, loadingText, loadingStyle);
-        text.setTextBounds(0,0,game.world.width,game.world.height);
 
-        //Ejecutar en 2º plano
-        game.stage.disableVisibilityChange=true;
-        //Carga de los assets
-        game.load.onLoadComplete.addOnce(this.onLoadComplete,this);
-        this.loadResources();   
+    preload: function () {
+        var loadingText = "Loading...";
+        var loadingStyle = { font: "50px Courier New", fill: "rgb(120,120,120)", boundsAlignH: "center", boundsAlignV: "middle" };
+        var text = game.add.text(0, 0, loadingText, loadingStyle);
+        text.setTextBounds(0, 0, game.world.width, game.world.height);
+        this.loadFonts();
+        this.loadAssets();
+        game.load.onLoadComplete.addOnce(this.loadComplete, this);
     },
-    //Pasa al menú una vez cargados los assets
-    update: function() {
+
+    create: function () {
+
+
+    },
+
+    update: function () {
         if (this.ready && this.fontsReady)
-            game.state.start('menuState');
+            game.state.start('initialScreenState');
+
     },
     //Comunica que se han cargado las fuentes
-    fontIsReady: function() {
+    fontIsReady: function () {
         console.log('Fonts Loaded');
         this.fontsReady = true;
     },
     //Comunica que se han cargado los assets
-    onLoadComplete: function() {
+    loadComplete: function () {
         console.log('Assets Ready');
         this.ready = true;
     },
-    //Carga el script necesario para cargar las fuentes de google, las imágenes y el audio
-    loadResources: function() {
+    //Carga las fuentes de google
+    loadFonts: function () {
         const WebFontConfig = {
             active: this.fontIsReady.bind(this),
 
             google: {
-                families:['Chakra Petch','Orbitron']
+                families: ['Averia Sans Libre']
             }
         };
-
+        //Script necesario para cargar las fuentes
         game.load.script('webfont',
-        "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
-        () => WebFont.load(WebFontConfig));
+            "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
+            () => WebFont.load(WebFontConfig));
+    },
+    loadAssets: function () {
+        game.load.image('bs', "/assets/button-sprite.png"); //Boton blanco de prueba
 
-        game.load.spritesheet('StarfieldBg','assets/images/backgrounds/StarfieldSpSheet.png',1280,720,10);
-        game.load.spritesheet('sphere1','assets/images/sprites/player1SpSheet.png',80,80,8);
-        game.load.spritesheet('sphere2','assets/images/sprites/player2SpSheet.png',80,80,8);
-        game.load.spritesheet('civilization1','assets/images/sprites/Base1SpSheet.png',60,60,4);
-        game.load.spritesheet('civilization2','assets/images/sprites/Base2SpSheet.png',60,60,4);
-        game.load.spritesheet('proyectileSpSheet','assets/images/sprites/proyectileSpSheet.png',60,60,12);
-        game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetisms.png',400,400,8);
-        
-        game.load.audio('crash','assets/sounds/soundEffects/crash.ogg');
-        game.load.audio('impact','assets/sounds/soundEffects/Impact.ogg');
-        game.load.audio('over','assets/sounds/soundEffects/over.ogg');
-        game.load.audio('select','assets/sounds/soundEffects/select.ogg');
-        game.load.audio('menuMusic','assets/sounds/music/Menu_Music_1.0_0.ogg');
-        game.load.audio('classicMusic','assets/sounds/music/Space music beta.ogg');    
+        game.load.tilemap('mapa', 'assets/map.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.image('map_tiles', 'assets/DungeonSpSheet.png');
+
+        //loads para equipmentState
+        game.load.image('iconBg', "assets/Interfaz/icon-background.png");
+        game.load.image('BaulBg', 'assets/Interfaz/Baul.png');
+        game.load.image('pjBg', 'assets/Interfaz/menuPersonaje.png');
+        game.load.image('titleScreenBG', "assets/Interfaz/titleScreenBG.png");
+        game.load.image('antorcha', "assets/antorcha.png");
+        game.load.image('botonJugar', "assets/Interfaz/botonJugar.png");
+        game.load.image('botonCancelar', "assets/Interfaz/botonCancelar.png");
+        game.load.image('botonAceptar', "assets/Interfaz/botonAceptar.png");
+        game.load.image('botonEquipar', "assets/Interfaz/botonEquipar.png");
+        game.load.image('inventarioBg', "assets/Interfaz/menuInventario.png");
+        game.load.image('statsBg', "assets/Interfaz/menuEstadisticas.png");
+        game.load.image('infoBg', "assets/Interfaz/info.png");
+        game.load.image('recipe-icon', "assets/receta.png");
+        game.load.image('torch-recipe', "assets/receta antorcha.png");
+        game.load.image('forged-icon', "assets/forjado.png");
+        game.load.image('equipment-icon', "assets/equipamiento.png");
+        game.load.image('ajustes', "assets/Interfaz/ajustes.png");
+        game.load.image('ayuda', "assets/Interfaz/Ayuda.png");
+        game.load.image('WASD', "assets/Interfaz/WASD.png");
+        // Assets Dungeon
+        game.load.spritesheet('player', "/assets/personajeSpSheet.png", 64, 96, 28); //Personaje
+        game.load.spritesheet('enemy', "/assets/ghostSpSheet.png", 64, 96, 20); //Enemigo
+        game.load.image('exp', "/assets/barraExp.png"); //Barra de experiencia y maná
+        game.load.image('bufo', "/assets/bufo.png"); //Bufos
+        //Bufo es un género de anfibios anuros de la familia Bufonidae que incluye, entre otros, al sapo europeo común.
+        game.load.image('mochila', "/assets/mochila.png"); //Icono mochila interfaz
+        game.load.image('receta_antorcha', "/assets/receta antorcha.png"); //Icono antorcha
+        game.load.image('salida', "/assets/Salida.png");//Salida
+        game.load.image('mat_palos', "/assets/palos.png"); //Icono mochila interfaz
+        game.load.image('oscuridad', "/assets/oscuridad.png"); //Oscuridad circundante al personaje sin antorcha
+        game.load.spritesheet('oscuridad_antorcha', "/assets/oscuridad_antorcha_anim.png", 2048, 1536, 4); //Oscuridad circundante al personaje con antorcha
+
     }
 }
+

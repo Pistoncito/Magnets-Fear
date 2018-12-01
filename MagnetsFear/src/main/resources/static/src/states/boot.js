@@ -1,25 +1,20 @@
-var MagnetsFear = {}
+var CimmerianDepths = {}
 
-MagnetsFear.bootState = function(game) {
-    
+CimmerianDepths.bootState = function(game) {
 
 }
 
-
-MagnetsFear.bootState.prototype = {
+CimmerianDepths.bootState.prototype = {
 
     preload: function() {
-        
-        
+        game.physics.startSystem("Phaser.Physics.ARCADE");
     },
 
     create: function() {
-    game.physics.startSystem(Phaser.Physics.P2JS);
+		game.state.start('preloadState');
     },
 
     update: function() {
-    game.state.start('preloadState');
+
     }
 }
-
-
