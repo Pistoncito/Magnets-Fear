@@ -306,60 +306,42 @@ MagnetsFear.classicState.prototype = {
 	 * nuevo "spawn" de las bases a 0
 	 */
     spawnBases: function (){
-      var aux1= bases1.children.length-1;
-      var aux2= bases2.children.length-1;
-      // borrar bases antiguas
-      while(bases1.children.length >0)
-        {
-          bases1.children[aux1].body.clearCollision(true,true);
-          bases1.remove(bases1.children[aux1]);
-          aux1--;
-        }
-      while(bases2.children.length >0)
-        {
-          bases2.children[aux2].body.clearCollision(true,true);
-          bases2.remove(bases2.children[aux2]);
-          aux2--;
-        }
-      // Crear nuevas
-      for(i=0; i< n_bases; i++)
-            {
-              var posX = posBases1[i].x;
-              var posY = posBases1[i].y;
+      
+       var aux1 = bases1.children.length - 1;
+    var aux2 = bases2.children.length - 1;
+    // borrar bases antiguas
+    while (bases1.children.length > 0) {
+      bases1.children[aux1].body.clearCollision(true, true);
+      bases1.remove(bases1.children[aux1]);
+      aux1--;
+    }
+    while (bases2.children.length > 0) {
+      bases2.children[aux2].body.clearCollision(true, true);
+      bases2.remove(bases2.children[aux2]);
+      aux2--;
+    }
 
-              bases1[i]= new Bases(bases1.create(posX, posY, 'civilization1'));
-              bases1[i].PhaserObject.frame = 0;
-              bases1[i].PhaserObject.animations.add('idle',[0,1,2,3,3,2,1],10,true);
-              bases1[i].PhaserObject.animations.play('idle');
-              bases1[i].PhaserObject.body.setCircle(24);
-              bases1[i].PhaserObject.body.anchor = 0.5;
-              bases1[i].PhaserObject.body.angularVelocity= bases1[i].rotSpeed;
-              bases1[i].PhaserObject.body.angularDamping=0;
-              bases1[i].PhaserObject.body.kinematic=true;
-              bases1[i].PhaserObject.body.rotation= bases1[i].rotSpeed;
-              bases1[i].PhaserObject.alpha=0.5;
-              bases1[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
-              bases1[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
-              bases1[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
-              bases1[i].PhaserObject.body.onBeginContact.add(hitBase,this);
-              
-              bases2[i]= new Bases(bases2.create((1280-posX), (720-posY),'civilization2'));
-              bases2[i].PhaserObject.frame = 0;
-              bases2[i].PhaserObject.animations.add('idle',[0,1,2,3,3,2,1],10,true);
-              bases2[i].PhaserObject.animations.play('idle');
-              bases2[i].PhaserObject.body.setCircle(24);
-              bases2[i].PhaserObject.body.angularVelocity= bases2[i].rotSpeed;
-              bases2[i].PhaserObject.body.angularDamping=0;
-              bases2[i].PhaserObject.body.kinematic=true;
-              bases2[i].PhaserObject.body.rotation= bases2[i].rotSpeed;
-              bases2[i].PhaserObject.alpha=0.5;
-              bases2[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
-              bases2[i].PhaserObject.body.collisionGroup= basesCollisionGroup;
-              bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup,playerCollisionGroup]);
-              bases2[i].PhaserObject.body.onBeginContact.add(hitBase,this);
-            }
-      // Actualiza el tiempo en el que aparecieron las últimas bases
-      timeSinceLastBasesSpawn=0;
+    basesLoaded = 0;
+    if (player === 1) {
+      //Creo nuevas posiciones para las bases del servidor y las subo
+      var n_bases_creadas=createBases(6, 0);
+
+    } else {
+      //Coje las bases del servidor 
+      saveBasesClassic(6, 0);
+    }
+
+    	game.add.text(100,100, n_bases_creadas, style);
+        initClientBases();
+
+    /*
+      bases1[i] = new Bases(bases1.create(posX, posY, 'civilization1'));
+      bases2[i] = new Bases(bases2.create((1280 - posX), (720 - posY), 'civilization2'));
+    */
+
+
+    // Actualiza el tiempo en el que aparecieron las últimas bases
+    timeSinceLastBasesSpawn = 0;
     },
     // Comprueba si player 1 o player 2 no tienen bases. Si es así, crea otras
 	// nuevas.
