@@ -108,20 +108,18 @@ Se reflejarán las opciones:
    
    Antes de comenzar la partida el jugador tiene 10 segundos para escoger al personaje que quiere utilizar
 2. Opciones: Se abre una nueva interfaz donde se podrá configurar:
-   * Controles: Se permiten cambiar los botones con los que se controla el movimiento y el cambio de polaridad al gusto del jugador.
    * Audio: Se puede modificar el volumen del sonido y la música.
-   * Resolución: Se permite alterar la resolución.
+   * Controles: Se permiten cambiar los botones con los que se controla el movimiento y el cambio de polaridad al gusto del jugador.
    * Volver: vuelve al menú de inicio.
 3. Salir: Aparecerá un mensaje de confirmación y, en caso de que se acepte se saldrá del juego. 
 
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Magnets%20fear%20pantalla%20de%20inicio.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Interfaz%20MensajeAviso%20Salir.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Configuraci%C3%B3n.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Modos%20de%20juego.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Emparejamiento.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Magnets%20fear%20Buscar-A%C3%B1adir%20amigo.png)
-![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Fin%20de%20Partida.png)
-*El color violeta indica opciones no interactuables y el color azul representa las que sí.*
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Men%C3%BAInicio.PNG)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Opciones.PNG)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Audio.PNG)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/Classic.PNG)
+![Error](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Interfaces/FinPartida.PNG)
+
+
 ## Arte
 ### Lore
 Un grupo de civilizaciones bautizado con el nombre de X decidieron crear un sistema de recolección de energía para solventar sus problemas y avanzar más rápido tecnológicamente. A este proyecto lo llamaron RIPPED (Recursive Intergalactic and Procedural Project of Energy Development).
