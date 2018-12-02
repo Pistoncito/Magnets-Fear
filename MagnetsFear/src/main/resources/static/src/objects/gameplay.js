@@ -298,7 +298,7 @@ function initStatePlayers() {
 	updatePlayer(player);
 	updatePlayer(opponent);
 }
-
+//Actualiza la posición, la puntuación y la polaridad de ambos jugadores
 function updateStatePlayers() {
 	if (player.id === 1) {
 		player.x = esfera1.PhaserObject.body.x;
@@ -312,7 +312,9 @@ function updateStatePlayers() {
 		player.score = esfera2.score;
 		player.polarity = esfera2.PhaserObject.body.polarity.positive;
 	}
+	//Sube la información del jugador al servidor
 	updatePlayer(player);
+	//Recoge la información del oponente del servidor
 	getPlayer(function(otherPlayer) {
 		opponent.x = otherPlayer.x;
 		opponent.y = otherPlayer.y;
@@ -391,7 +393,7 @@ function updatePosProyectiles(num,i)
 		}
 	}
 }
-
+//Genera nuevas posiciones para las bases y las actualiza en el servidor
 function generatePosBases(num,i){
 	player.ready = false;
 	if(basesLoaded < num)
@@ -435,7 +437,7 @@ function generatePosBases(num,i){
 		
 	}else if (basesLoaded === num){ player.ready = true; }
 }
-
+//Baja las nuevas posiciones de las bases del servidor y las guarda en el cliente
 function getPosBases(num,i){
 	player.ready = false;
 	if(basesLoaded < num && opponent.ready)
