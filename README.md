@@ -91,7 +91,7 @@ Los jugadores pueden jugar con un amigo añadiendolo a su lista de amigos usando
 
 ## Interfaces
 ### Diagrama de Flujo
-![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/diagrama%20de%20flujo%201.1.PNG)
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/DiagramaFlujo1.3.PNG)
 
 ### Pantalla de Inicio
 Se reflejarán las opciones:
