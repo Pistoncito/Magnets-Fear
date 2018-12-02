@@ -36,7 +36,7 @@ function getPlayer(callback, id){
             "Content-Type": "application/json"
         }
     }).done(function (player) {
-        console.log("Info Received" + JSON.stringify(player));
+        console.log("Info Player" + JSON.stringify(player));
         callback(player);
     })
 }

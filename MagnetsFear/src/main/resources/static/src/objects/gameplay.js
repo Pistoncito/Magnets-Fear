@@ -222,14 +222,7 @@ function initCollisionGroups() {
 	basesCollisionGroup = game.physics.p2.createCollisionGroup();
 };
 
-// Inicia tiempo de juego
-function initGameTime() {
-	wallClock = game.time.create(false);
-	wallClock.loop(1000, printGameTime, this);
-	needToSpawnBases = false;
-	maxTimeToSpawnBases = 30;
-	wallClock.start();
-};
+
 
 // Asigna a las variables su tecla correspondiente
 function setKeys() {
@@ -320,16 +313,21 @@ function updateStatePlayers() {
 		player.polarity = esfera2.PhaserObject.body.polarity.positive;
 	}
 	updatePlayer(player);
-	getPlayer(function(oPlayer) {
-		opponent.x = oPlayer.x;
-		opponent.y = oPlayer.y;
-		opponent.score = oPlayer.score;
-		opponent.polarity = oPlayer.polarity;
+	getPlayer(function(otherPlayer) {
+		opponent.x = otherPlayer.x;
+		opponent.y = otherPlayer.y;
+		opponent.score = otherPlayer.score;
+		opponent.polarity = otherPlayer.polarity;
+		opponent.ready = otherPlayer.ready;
 		if (opponent.id === 1) {
 			esfera1.PhaserObject.body.x = opponent.x;
 			esfera1.PhaserObject.body.y = opponent.y;
 			esfera1.score = opponent.score;
 			esfera1.PhaserObject.body.polarity.positive = opponent.polarity;
+			//Actualización de la posición del magnetismo
+			esfera1.magnetism.PhaserObject.body.x = esfera1.PhaserObject.body.x;
+			esfera1.magnetism.PhaserObject.body.y = esfera1.PhaserObject.body.y;
+			//Actualización de la animación dependiendo de la polaridad
 			if (esfera1.PhaserObject.body.polarity.positive < 0) {
 				esfera1.PhaserObject.animations.play('negative');
 				esfera1.magnetism.PhaserObject.animations.play('negative');
@@ -342,6 +340,10 @@ function updateStatePlayers() {
 			esfera2.PhaserObject.body.y = opponent.y;
 			esfera2.score = opponent.score;
 			esfera2.PhaserObject.body.polarity.positive = opponent.polarity;
+			//Actualización de la posición del magnetismo
+			esfera2.magnetism.PhaserObject.body.x = esfera2.PhaserObject.body.x;
+			esfera2.magnetism.PhaserObject.body.y = esfera2.PhaserObject.body.y;
+			//Actualización de la animación dependiendo de la polaridad
 			if (esfera2.PhaserObject.body.polarity.positive < 0) {
 				esfera2.PhaserObject.animations.play('negative');
 				esfera2.magnetism.PhaserObject.animations.play('negative');
@@ -354,97 +356,89 @@ function updateStatePlayers() {
 	}, opponent.id)
 };
 
-function updateStateProyectiles(){
-	if(player.id === 1){
-		arrayProyectiles[0].x = proyectiles[0].x;
-		arrayProyectiles[0].y = proyectiles[0].y;
-		updateProyectile(arrayProyectiles[0]);
-		getProyectile(function(proyec){
-			proyectiles[1].x = proyec.x;
-			proyectiles[1].y = proyec.y;
-		},arrayProyectile[1].id);
+//Recibe el número de proyectiles que debe actualizar y la iteración en la que se encuentra
+//Actualiza el estado actual de los proyectiles
+function updatePosProyectiles(num,i)
+{
+	if (player.id === 1){
+		if (i < num)
+		{
+			posProyectiles[i].x = proyectiles[i].PhaserObject.body.x;
+			posProyectiles[i].y = proyectiles[i].PhaserObject.body.y;
+			posProyectiles[i].vx = proyectiles[i].PhaserObject.body.velocity.x;
+			posProyectiles[i].vy = proyectiles[i].PhaserObject.body.velocity.y;
+			posProyectiles[i].polarity = proyectiles[i].PhaserObject.body.polarity.positive;
+			updateProyectile(posProyectiles[i]);
+			i++;
+			updatePosProyectiles(num,i);
+		}		
 	}
 	else {
-		arrayProyectiles[1].x = proyectiles[1].x;
-		arrayProyectiles[1].y = proyectiles[1].y;
-		updateProyectile(arrayProyectiles[1]);
-		getProyectile(function(proyec){
-			proyectiles[0].x = proyec.x;
-			proyectiles[0].y = proyec.y;
-		},arrayProyectile[0].id);
-	}
-}
-/*
-function updateStateBases(){
-	if(player.id === 1){
-		for(i = 0; i < bases1.length; i++){
-			updateBase(bases1[i]);
-			getBase(function(bs){
-				bases2[i].x = bs.x;
-				bases2[i].y = bs.y
-			},bases2[i].id)
-		}
-	} else {
-		for(i = 0; i < bases2.length; i++){
-			updateBase(bases2[i]);
-			getBase(function(bs){
-				bases1[i].x = bs.x;
-				bases1[i].y = bs.y
-			},bases1[i].id)
+		if (i < num)
+		{
+			getProyectile(function(serverProyectile){
+				aux = new clientProyectile();
+				aux = serverProyectile;
+				posProyectiles[i] = aux;
+				proyectiles[i].PhaserObject.body.x = posProyectiles[i].x;
+				proyectiles[i].PhaserObject.body.y = posProyectiles[i].y;
+				proyectiles[i].PhaserObject.body.velocity.x = posProyectiles[i].vx;
+				proyectiles[i].PhaserObject.body.velocity.y = posProyectiles[i].vy;
+				proyectiles[i].PhaserObject.body.polarity.positive = posProyectiles[i].polarity;
+				i++;
+				updatePosProyectiles(num,i);
+			},i);
 		}
 	}
-}*/
-function initClientBases()
-{
-
-	    // Crear nuevas bases y asigno los valores del servidor a ellas.
-		for (i = 0; i < 3; i++) {
-			var xpos1 = posBases1[i].x;
-			var ypos1 = posBases1[i].y;
-	  
-			var xpos2 = posBases2[i].x;
-			var ypos2 = posBases2[i].y;
-	  
-			bases1[i] = new Bases(bases1.create(xpos1, ypos1, 'civilization1'));
-			bases1[i].id= posBases1[i].id;
-			bases1[i].PhaserObject.frame = 0;
-			bases1[i].PhaserObject.animations.add('idle', [0, 1, 2, 3, 3, 2, 1], 10, true);
-			bases1[i].PhaserObject.animations.play('idle');
-			bases1[i].PhaserObject.body.setCircle(24);
-			bases1[i].PhaserObject.body.anchor = 0.5;
-			bases1[i].PhaserObject.body.angularVelocity = bases1[i].rotSpeed;
-			bases1[i].PhaserObject.body.angularDamping = 0;
-			bases1[i].PhaserObject.body.kinematic = true;
-			bases1[i].PhaserObject.body.rotation = bases1[i].rotSpeed;
-			bases1[i].PhaserObject.alpha = 0.5;
-			bases1[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
-			bases1[i].PhaserObject.body.collisionGroup = basesCollisionGroup;
-			bases1[i].PhaserObject.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
-			bases1[i].PhaserObject.body.onBeginContact.add(hitBase, this);
-
-
-
-			bases2[i] = new Bases(bases2.create(xpos2, ypos2, 'civilization2'));
-			bases2[i].id= posBases2[i].id;
-			bases2[i].PhaserObject.frame = 0;
-			bases2[i].PhaserObject.animations.add('idle', [0, 1, 2, 3, 3, 2, 1], 10, true);
-			bases2[i].PhaserObject.animations.play('idle');
-			bases2[i].PhaserObject.body.setCircle(24);
-			bases2[i].PhaserObject.body.angularVelocity = bases2[i].rotSpeed;
-			bases2[i].PhaserObject.body.angularDamping = 0;
-			bases2[i].PhaserObject.body.kinematic = true;
-			bases2[i].PhaserObject.body.rotation = bases2[i].rotSpeed;
-			bases2[i].PhaserObject.alpha = 0.5;
-			bases2[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
-			bases2[i].PhaserObject.body.collisionGroup = basesCollisionGroup;
-			bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
-			bases2[i].PhaserObject.body.onBeginContact.add(hitBase, this);
-		  }
 }
 
-function saveBasesClassic(num, i)
-{
-	if(i< num)
+function generatePosBases(num,i){
+	player.ready = false;
+	if(basesLoaded < num)
+	{
+		if(i === 0)
+		{
+			//Distancia entre bases
+		    var dist = 2/3 * PI;
+		    //Centro de la circunferencia
+		    var pointX = game.rnd.integerInRange(290,350); 
+		    var pointY = game.rnd.integerInRange(290,430);
+		    //ángulo aleatorio en la circunferencia
+		    var angle = game.rnd.frac() * 0.67 * PI;
+		    //Radio de la circunferencia
+		    var R = 250;
+		    for(j = 0; j < num/2; j++)
+		    {
+		    	base1 = new Base();
+		    	posBases1[j] = base1;
+		    	posBases1[j].x = Math.round(pointX + R * Math.cos(dist * (angle+j)));
+				posBases1[j].y = Math.round(pointY + R * Math.sin(dist * (angle+j)));
+				base2 = new Base();
+				posBases2[j] = base2;
+				posBases2[j].x = 1280 - Math.round(pointX + R * Math.cos(dist * (angle+j)));
+				posBases2[j].y = Math.round(pointY + R * Math.sin(dist * (angle+j)));
+		    }
+		}
+		if(i < num/2) {
+			updateBase(function(){
+				i++;
+				basesLoaded++;
+				generatePosBases(num,i);
+			},posBases1[i]);
+		} else {
+			updateBase(function(){
+				i++;
+				basesLoaded++;
+				generatePosBases(num,i);
+			},posBases2[i-3]);
+		}
+		
+	}else if (basesLoaded === num){ player.ready = true; }
+}
+
+function getPosBases(num,i){
+	player.ready = false;
+	if(basesLoaded < num && opponent.ready)
 	{
 		getBase(function(serverBase){
 			aux = new Base();
@@ -456,9 +450,7 @@ function saveBasesClassic(num, i)
 			}
 			i++;
 			basesLoaded++;
-		saveBasesClassic(num,i);
+			getPosBases(num,i);
 		},i)
-
-	}
-
+	} else if (basesLoaded === num){ player.ready = true; }
 }

@@ -12,6 +12,9 @@ function clientProyectile() {
 	this.id;
 	this.x;
 	this.y;
+	this.vx;
+	this.vy;
+	this.polarity = -1;
 }
 
 function Base() {
@@ -126,7 +129,6 @@ function Proyectile(PhOb)
   //Constructor del objeto base
 function Bases(PhOb)
   {
-    this.id;
     this.invincibleTime=3;
     this.hittable=false;
     this.PhaserObject=PhOb;
