@@ -394,3 +394,71 @@ function updateStateBases(){
 		}
 	}
 }*/
+function initClientBases()
+{
+
+	    // Crear nuevas bases y asigno los valores del servidor a ellas.
+		for (i = 0; i < 3; i++) {
+			var xpos1 = posBases1[i].x;
+			var ypos1 = posBases1[i].y;
+	  
+			var xpos2 = posBases2[i].x;
+			var ypos2 = posBases2[i].y;
+	  
+			bases1[i] = new Bases(bases1.create(xpos1, ypos1, 'civilization1'));
+			bases1[i].id= posBases1[i].id;
+			bases1[i].PhaserObject.frame = 0;
+			bases1[i].PhaserObject.animations.add('idle', [0, 1, 2, 3, 3, 2, 1], 10, true);
+			bases1[i].PhaserObject.animations.play('idle');
+			bases1[i].PhaserObject.body.setCircle(24);
+			bases1[i].PhaserObject.body.anchor = 0.5;
+			bases1[i].PhaserObject.body.angularVelocity = bases1[i].rotSpeed;
+			bases1[i].PhaserObject.body.angularDamping = 0;
+			bases1[i].PhaserObject.body.kinematic = true;
+			bases1[i].PhaserObject.body.rotation = bases1[i].rotSpeed;
+			bases1[i].PhaserObject.alpha = 0.5;
+			bases1[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
+			bases1[i].PhaserObject.body.collisionGroup = basesCollisionGroup;
+			bases1[i].PhaserObject.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
+			bases1[i].PhaserObject.body.onBeginContact.add(hitBase, this);
+
+
+
+			bases2[i] = new Bases(bases2.create(xpos2, ypos2, 'civilization2'));
+			bases2[i].id= posBases2[i].id;
+			bases2[i].PhaserObject.frame = 0;
+			bases2[i].PhaserObject.animations.add('idle', [0, 1, 2, 3, 3, 2, 1], 10, true);
+			bases2[i].PhaserObject.animations.play('idle');
+			bases2[i].PhaserObject.body.setCircle(24);
+			bases2[i].PhaserObject.body.angularVelocity = bases2[i].rotSpeed;
+			bases2[i].PhaserObject.body.angularDamping = 0;
+			bases2[i].PhaserObject.body.kinematic = true;
+			bases2[i].PhaserObject.body.rotation = bases2[i].rotSpeed;
+			bases2[i].PhaserObject.alpha = 0.5;
+			bases2[i].PhaserObject.body.setCollisionGroup(basesCollisionGroup);
+			bases2[i].PhaserObject.body.collisionGroup = basesCollisionGroup;
+			bases2[i].PhaserObject.body.collides([proyectilesCollisionGroup, playerCollisionGroup]);
+			bases2[i].PhaserObject.body.onBeginContact.add(hitBase, this);
+		  }
+}
+
+function saveBasesClassic(num, i)
+{
+	if(i< num)
+	{
+		getBase(function(serverBase){
+			aux = new Base();
+			aux = serverBase;
+			if(i<num/2){
+				posBases1[i] = aux;
+			} else {
+				posBases2[i-3] = aux;
+			}
+			i++;
+			basesLoaded++;
+		saveBasesClassic(num,i);
+		},i)
+
+	}
+
+}
