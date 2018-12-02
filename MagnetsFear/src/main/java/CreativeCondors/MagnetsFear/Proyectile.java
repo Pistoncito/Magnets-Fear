@@ -6,6 +6,9 @@ public class Proyectile {
 	private long id;
 	private float x;
 	private float y;
+	private float vx;
+	private float vy;
+	private int polarity;
 	Random rnd = new Random();
 	
 	Proyectile(){
@@ -30,5 +33,29 @@ public class Proyectile {
 		}
 		public void setY(float posicionY) {
 			this.y = posicionY;
+		}
+
+		public float getVx() {
+			return vx;
+		}
+
+		public void setVx(float vx) {
+			this.vx = vx;
+		}
+
+		public float getVy() {
+			return vy;
+		}
+
+		public void setVy(float vy) {
+			this.vy = vy;
+		}
+
+		public int getPolarity() {
+			return polarity;
+		}
+
+		public void setPolarity(int polarity) {
+			this.polarity = polarity;
 		}
 }

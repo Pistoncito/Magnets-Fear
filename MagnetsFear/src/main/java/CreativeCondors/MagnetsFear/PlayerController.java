@@ -68,6 +68,7 @@ public class PlayerController {
 
 		if (savedPlayer != null) {
 			players.remove(savedPlayer.getId());
+			nextId.decrementAndGet();
 
 			return new ResponseEntity<>(savedPlayer, HttpStatus.OK);
 		} else {

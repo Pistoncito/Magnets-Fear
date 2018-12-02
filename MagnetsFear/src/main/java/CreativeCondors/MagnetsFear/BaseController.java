@@ -70,6 +70,7 @@ public class BaseController {
 
 		if (savedBase != null) {
 			bases.remove(savedBase.getId());
+			nextId.decrementAndGet();
 
 			return new ResponseEntity<>(savedBase, HttpStatus.OK);
 		} else {

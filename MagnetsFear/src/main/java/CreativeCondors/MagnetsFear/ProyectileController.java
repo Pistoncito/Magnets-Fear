@@ -68,7 +68,8 @@ public class ProyectileController {
 
 		if (savedProyectile != null) {
 			proyectiles.remove(savedProyectile.getId());
-
+			nextId.decrementAndGet();
+			
 			return new ResponseEntity<>(savedProyectile, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
