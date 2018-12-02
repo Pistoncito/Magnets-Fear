@@ -21,7 +21,7 @@ function numberProyectiles(callback){
             "Content-Type": "application/json"
         }
     }).done(function (numProyectiles) {
-        console.log("Info Received" + JSON.stringify(numProyectiles));
+        console.log("Number Proyectiles" + JSON.stringify(numProyectiles));
         callback(numProyectiles);
     })
 }
@@ -35,7 +35,7 @@ function getProyectile(callback, id){
             "Content-Type": "application/json"
         }
     }).done(function (proyectile) {
-        console.log("Info Received" + JSON.stringify(proyectile));
+        console.log("Info Proyectile" + JSON.stringify(proyectile));
         callback(proyectile);
     })
 }

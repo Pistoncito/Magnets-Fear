@@ -7,6 +7,10 @@ MagnetsFear.endingState = function(game) {
  this.player2_score;
 }
 
+var numPlayers;
+var numBases;
+var numProyectiles;
+
 MagnetsFear.endingState.prototype = {
 
     preload: function() {
@@ -19,7 +23,7 @@ MagnetsFear.endingState.prototype = {
         this.player1_score= esfera1.score;
         this.player2_score= esfera2.score;
     
-
+        //Se comunica quién ha ganado dependiendo de su cantidad de puntos
         if(this.player1_score > this.player2_score)
         {
             this.endGameText= "PLAYER 1 WINS";
@@ -45,10 +49,47 @@ MagnetsFear.endingState.prototype = {
         backToMenuButton.events.onInputOver.add(over,this);
         backToMenuButton.events.onInputOut.add(out,this);
         backToMenuButton.events.onInputDown.add(returnMenu,this);
-       
+        
+        //Borra los datos del servidor para poder comenzar una nueva partida
+        deletePlayers();
+        deleteProyectiles();
+        deleteBases();
     },
 
     update: function() {
 
     }
+     
+}
+//Borra todos los jugadores del servidor
+function deletePlayers(){		
+	numberPlayers(function(num){
+		numPlayers = num;
+		if(numPlayers > 0)
+		{
+			deletePlayer(numPlayers);
+			deletePlayers();
+		}
+	});
+}
+//Borra todos los proyectiles del servidor
+function deleteProyectiles(){	
+		numberProyectiles(function(num){			
+			numProyectiles = num;
+			if(numProyectiles > 0){
+				deleteProyectile(numProyectiles-1);
+				deleteProyectiles();
+			}
+		});	
+}
+
+//Borra todas las bases del servidor
+function deleteBases(){	
+	getNumberBases(function(num){
+		numBases = num;
+		if(numBases > 0){
+		deleteBase(numBases-1);
+		deleteBases();
+		}
+	});	
 }

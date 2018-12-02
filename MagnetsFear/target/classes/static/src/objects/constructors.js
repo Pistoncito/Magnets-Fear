@@ -12,6 +12,9 @@ function clientProyectile() {
 	this.id;
 	this.x;
 	this.y;
+	this.vx;
+	this.vy;
+	this.polarity = -1;
 }
 
 function Base() {

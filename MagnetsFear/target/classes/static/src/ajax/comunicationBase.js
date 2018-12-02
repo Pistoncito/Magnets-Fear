@@ -45,8 +45,32 @@ function getBase(callback,id)
         }
 
     }).done(function(base){
-    console.log("Get base: " + JSON.stringify(base));
+    	console.log("Get base: " + JSON.stringify(base));
         callback(base);
     })
 
+}
+
+function updateBase(callback, base) {
+    $.ajax({
+        method: 'PUT',
+        url: 'http://localhost:8080/bases/' + base.id,
+        data: JSON.stringify(base),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (base) {
+        console.log("Updated base: " + JSON.stringify(base));
+        callback();
+    })
+}
+
+function deleteBase(id) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://localhost:8080/bases/' + id
+    }).done(function (player) {
+        console.log("Deleted base " + id)
+    })
 }
