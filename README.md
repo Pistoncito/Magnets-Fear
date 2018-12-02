@@ -174,3 +174,11 @@ A continuación adjuntamos una imagen con el concepto.
 
 ## Diagrama de Clases
 ![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Diagrama%20de%20clases%20API%20REST/MagnetsFear%20Class.PNG)
+
+## Como usar la aplicacion
+Para poder ejecutar la aplicación será necesario:
+1. Tener instalado Spring o Eclipse STS.
+2. Introducir el proyecto en la carpeta de direccionamiento del programa.
+3. Una vez hecho esto hay que abrir el proyecto y ejecutar como aplicación java el documento situado en la carpeta:  src/main/java/CreativeCondors.MagnetsFear/Application.java
+4. Para terminar, la url que hay que escribir en el navegador es: localhost:8080.
+
