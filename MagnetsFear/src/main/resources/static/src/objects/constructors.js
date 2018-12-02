@@ -126,6 +126,7 @@ function Proyectile(PhOb)
   //Constructor del objeto base
 function Bases(PhOb)
   {
+    this.id;
     this.invincibleTime=3;
     this.hittable=false;
     this.PhaserObject=PhOb;
