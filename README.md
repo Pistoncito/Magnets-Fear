@@ -172,4 +172,5 @@ A continuación adjuntamos una imagen con el concepto.
 * Hardware: dos ordenadores con conexión a internet
 * Software: editor de imagen (Photoshop), editor de audio, editor de código (Netbeans), Navegador (Google Chrome, Firefox), lenguaje de programación (Javascript), motor de videojuegos 2D (Phaser), framework (Spring).
 
-
+## Diagrama de Clases
+![Error al cargar la imagen](https://github.com/Pistoncito/Magnets-Fear/blob/master/Images/Diagrama%20de%20clases%20API%20REST/MagnetsFear%20Class.PNG)
