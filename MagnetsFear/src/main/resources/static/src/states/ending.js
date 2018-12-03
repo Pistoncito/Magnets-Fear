@@ -61,35 +61,4 @@ MagnetsFear.endingState.prototype = {
     }
      
 }
-//Borra todos los jugadores del servidor
-function deletePlayers(){		
-	numberPlayers(function(num){
-		numPlayers = num;
-		if(numPlayers > 0)
-		{
-			deletePlayer(numPlayers);
-			deletePlayers();
-		}
-	});
-}
-//Borra todos los proyectiles del servidor
-function deleteProyectiles(){	
-		numberProyectiles(function(num){			
-			numProyectiles = num;
-			if(numProyectiles > 0){
-				deleteProyectile(numProyectiles-1);
-				deleteProyectiles();
-			}
-		});	
-}
 
-//Borra todas las bases del servidor
-function deleteBases(){	
-	getNumberBases(function(num){
-		numBases = num;
-		if(numBases > 0){
-		deleteBase(numBases-1);
-		deleteBases();
-		}
-	});	
-}

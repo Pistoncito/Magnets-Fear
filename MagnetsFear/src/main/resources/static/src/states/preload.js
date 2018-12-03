@@ -15,8 +15,10 @@ MagnetsFear.preloadState.prototype = {
         //Ejecutar en 2º plano
         game.stage.disableVisibilityChange=true;
         //Carga de los assets
-        game.load.onLoadComplete.addOnce(this.onLoadComplete,this);
-        this.loadResources();   
+        
+        this.loadFonts();
+        this.loadAssets();
+        game.load.onLoadComplete.addOnce(this.loadComplete,this);   
     },
     //Pasa al menú una vez cargados los assets
     update: function() {
@@ -29,12 +31,13 @@ MagnetsFear.preloadState.prototype = {
         this.fontsReady = true;
     },
     //Comunica que se han cargado los assets
-    onLoadComplete: function() {
+    loadComplete: function() {
         console.log('Assets Ready');
         this.ready = true;
     },
-    //Carga el script necesario para cargar las fuentes de google, las imágenes y el audio
-    loadResources: function() {
+    //Carga el script necesario para cargar las fuentes de google
+    loadFonts: function() 
+    {
         const WebFontConfig = {
             active: this.fontIsReady.bind(this),
 
@@ -45,8 +48,12 @@ MagnetsFear.preloadState.prototype = {
 
         game.load.script('webfont',
         "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
-        () => WebFont.load(WebFontConfig));
+        () => WebFont.load(WebFontConfig));  
+    },
 
+    //Carga las imágenes y los audios
+    loadAssets: function() 
+    {
         game.load.spritesheet('StarfieldBg','assets/images/backgrounds/StarfieldSpSheet.png',1280,720,10);
         game.load.spritesheet('sphere1','assets/images/sprites/player1SpSheet.png',80,80,8);
         game.load.spritesheet('sphere2','assets/images/sprites/player2SpSheet.png',80,80,8);
@@ -61,5 +68,5 @@ MagnetsFear.preloadState.prototype = {
         game.load.audio('select','assets/sounds/soundEffects/select.ogg');
         game.load.audio('menuMusic','assets/sounds/music/Menu_Music_1.0_0.ogg');
         game.load.audio('classicMusic','assets/sounds/music/Space music beta.ogg');    
-    }
+    },
 }

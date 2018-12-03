@@ -1,3 +1,5 @@
+//Funciones utilizadas en diversos estados
+
 
 //Inicialización de variables
 var PI = Math.PI;

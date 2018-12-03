@@ -317,49 +317,7 @@ MagnetsFear.classicState.prototype = {
 	 * Borra todas las bases restantes de un jugador y Aparecen 3 nuevas para
 	 * cada uno, equidistantes a un punto aleatorio Actualiza el tiempo para el
 	 * nuevo "spawn" de las bases a 0
-	 */
-    /*
-    spawnBases: function () {
-        var aux1 = bases1.children.length - 1;
-        var aux2 = bases2.children.length - 1;
-        // borrar bases antiguas
-        while (bases1.children.length > 0) {
-          bases1.children[aux1].body.clearCollision(true, true);
-          bases1.remove(bases1.children[aux1]);
-          aux1--;
-        }
-        while (bases2.children.length > 0) {
-          bases2.children[aux2].body.clearCollision(true, true);
-          bases2.remove(bases2.children[aux2]);
-          aux2--;
-        }
-
-
-        var updatedPlayer1 = false;
-        if (player === 1) {
-          player.ready = false;
-          //Creo nuevas posiciones para las bases del servidor y las subo
-          updatedPlayer1 = updateBasesClassic(6, 0);
-        } else {  //Si eres el jugador 2
-          //Actualizo jugador 1
-          while (true) {
-            getPlayer(function () {
-              if (opponent.ready === true)
-                saveBasesClassic(6, 0);
-            }, opponent);
-
-            if (opponent.ready === true) break;
-          }
-        }
-        //while (updatedPlayer1 === false) {
-        //}
-        initClientBases();
-
-
-        // Actualiza el tiempo en el que aparecieron las últimas bases
-        timeSinceLastBasesSpawn = 0;
-      },*/
-    
+	 */        
     spawnBases: function (){
       var aux1= bases1.children.length-1;
       var aux2= bases2.children.length-1;
