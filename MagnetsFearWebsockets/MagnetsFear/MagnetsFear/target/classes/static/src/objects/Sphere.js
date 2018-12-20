@@ -3,7 +3,7 @@ function Sphere()
   {
     this.playerId = 0;
     this.score=0;
-    this.PhaserObject;
+    this.PhaserObject= undefined;
     this.magnetism= new Magnetism();
     this.magnetism.maxSpeed = this.maxSpeed;
     this.accel=50;

@@ -35,10 +35,5 @@ function updateKeys() {
 	if (spacebar.isDown)
 		keys_bools1[4] = 1;
 
-	// Control de cada esfera dependiendo del id del jugador
-	if (player.id === 1) {
-		esfera1.Movement(keys_bools1);
-	} else {
-		esfera2.Movement(keys_bools1);
-	}
+	esfera1.Movement(keys_bools1);
 };

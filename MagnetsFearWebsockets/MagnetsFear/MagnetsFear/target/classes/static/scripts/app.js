@@ -34,9 +34,6 @@ ws.onclose = function (event) {
 ws.onJoin= function()
 {
 	data.type= 'PLAYER_WANT_JOIN';
-	data.messageToClient= true;
-	msgJoin= false;
-	msgDefault= false;
 	this.send(JSON.stringify(data));
 }
 
@@ -49,7 +46,6 @@ ws.onGetGS =  function()
 	data.bases2= serverBases2[2];
 	data.proy0= serverProyectiles[0];
 	data.proy1= serverProyectiles[1];
-    console.log("TERMINA LA LLAMADA A GET_GS");
 	this.send(JSON.stringify(data));
 }
 
@@ -71,19 +67,17 @@ ws.onUpdateGS= function()
 	this.send(JSON.stringify(data));
 }
 
-ws.onUpdatePlayer1= function()
+ws.onUpdateGameState= function()
 {
-data.type= 'UPDATE_PLAYER1';
-data.player = player;
-console.log("EL ID DEL JUGADOR QUE MANDA ESTE CLIENTE AL SERVIDOR ES: " +	player.id);
-this.send(JSON.stringify(data));
-}
-
-ws.onTest= function()
-{
-	data.type= "TEST";
+	data.type= 'UPDATE_GAME_STATE';
+	data.player = player;
+	data.bases0 = serverBases1[0];
+	data.bases1 = serverBases1[1];
+	data.bases2 = serverBases1[2];
+	console.log("EL ID DEL JUGADOR QUE MANDA ESTE CLIENTE AL SERVIDOR ES: " +	player.id);
 	this.send(JSON.stringify(data));
 }
+
 
 // Un monitor de eventos que es llamado cuando un mensaje es recibido desde un servidor. El monitor recibe un objeto MessageEvent llamado "mensaje".
 ws.onmessage = function (message) {
@@ -125,7 +119,7 @@ ws.onmessage = function (message) {
             console.log('##### GAME IS COMPLETE #####')
             break;
             
-        case "PLAYER_UPDATED1":
+        case "GAME_STATE_UPDATED":
         	//si hay dos jugadores
         	if(msg.serverOpponent != null)
         		{
@@ -138,7 +132,14 @@ ws.onmessage = function (message) {
             		opponent.score= msg.serverOpponent.score;
             		}
         		}
-        
+        	if(msg.oppBases0 !=null)
+        		{
+        		console.log("id base0: " + msg.oppBase0.id);
+        		console.log("id base1: " + msg.oppBase1.id);
+        		console.log("id base2: " + msg.oppBase2.id);
+        		}
+        	
+        	console.log("Numero de serverBases: " + msg.nServerBases);
 
         	break;
         	

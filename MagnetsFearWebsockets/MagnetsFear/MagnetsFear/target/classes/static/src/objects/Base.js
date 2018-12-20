@@ -15,7 +15,7 @@ function Bases(PhOb)
     this.PhaserObject=PhOb;
     this.rotSpeed=5;
     this.puntuation=10;
-    this.hp;
+    this.hp=1;
   };
 
   function isThisPlayerBase(base)

@@ -217,10 +217,9 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(json.toString()));
 				break;
 				
-			case "UPDATE_PLAYER1":
+			case "UPDATE_GAME_STATE":
+				Player clientPlayer = mapper.convertValue(node.get("player"),Player.class);
 				
-				String clientPlayerString= mapper.writeValueAsString(node.get("player"));
-				Player clientPlayer =  mapper.readValue(clientPlayerString, Player.class);
 				gameController.updatePlayer(clientPlayer);
 				Player opponent=null;
 	
@@ -232,8 +231,65 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 							break;
 						}
 				 }
-				json.put("type", "PLAYER_UPDATED1");
+				 
+					Base clientBase0 = mapper.convertValue(node.get("bases0"),Base.class);
+					Base clientBase1 = mapper.convertValue(node.get("bases1"),Base.class);
+					Base clientBase2 = mapper.convertValue(node.get("bases2"),Base.class);
+					
+					Base []clientBases= new Base[3];
+					clientBases[0]= clientBase0;
+					clientBases[1]= clientBase1;
+					clientBases[2]= clientBase2;
+					Base []oppBases= new Base[3];
+					int oppBasesIndex= 0;
+					
+					boolean notFound= true;
+					Base [] serverBases = new Base[gameController.getBases().size()];
+					gameController.getBases().toArray(serverBases);
+					
+					
+					for(int i=0; i< oppBases.length; i++)
+					{
+						oppBases[i]=null;
+					}
+					
+					if(gameController.getBases().size() >= 6)
+					{
+						
+						for(int i=0; i< serverBases.length; i++)
+						{
+							for(int j=0; j< clientBases.length; j++)
+							{
+								if(serverBases[i].getId() == clientBases[j].getId())
+								{
+									notFound=false;
+									break;
+								}
+							}
+							if(notFound== true)
+							{
+								oppBases[oppBasesIndex]= serverBases[i];
+								oppBasesIndex++;
+								if(oppBasesIndex >= oppBases.length) break;
+							}
+							notFound= true;
+						}			
+					}
+					
+					
+				json.put("type", "GAME_STATE_UPDATED");
 				json.putPOJO("serverOpponent", opponent);
+				json.putPOJO("oppBase0", oppBases[0]);
+				json.putPOJO("oppBase1", oppBases[1]);
+				json.putPOJO("oppBase2", oppBases[2]);
+				json.putPOJO("serverBase0", serverBases[0]);
+				json.putPOJO("serverBase1", serverBases[1]);
+				json.putPOJO("serverBase2", serverBases[2]);
+				json.putPOJO("serverBase3", serverBases[3]);
+				json.putPOJO("serverBase4", serverBases[4]);
+				json.putPOJO("serverBase5", serverBases[5]);
+				json.putPOJO("nServerBases", gameController.getBases().size());
+				
 				session.sendMessage(new TextMessage(json.toString()));
 					break;
 					

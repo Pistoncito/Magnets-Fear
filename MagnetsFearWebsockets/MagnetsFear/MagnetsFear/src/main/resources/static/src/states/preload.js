@@ -61,6 +61,7 @@ MagnetsFear.preloadState.prototype = {
         game.load.spritesheet('civilization2','assets/images/sprites/Base2SpSheet.png',60,60,4);
         game.load.spritesheet('proyectileSpSheet','assets/images/sprites/proyectileSpSheet.png',60,60,12);
         game.load.spritesheet('magnetRange', 'assets/images/sprites/magnetisms.png',400,400,8);
+        game.load.spritesheet('explosion','assets/images/sprites/ExplosionSpSheet.png',80,80,6);
         
         game.load.audio('crash','assets/sounds/soundEffects/crash.ogg');
         game.load.audio('impact','assets/sounds/soundEffects/Impact.ogg');

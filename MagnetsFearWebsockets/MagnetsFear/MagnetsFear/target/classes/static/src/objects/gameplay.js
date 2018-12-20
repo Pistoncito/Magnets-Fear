@@ -181,6 +181,23 @@ function updateMagnetCollision() {
 };
 
 
+function isBaseAlive(group, id){
+	  if (group[id].hp <= 0){
+	    group.children[id].body.clearCollision(!true,true);
+	    createExplosion(group.children[id].body.x, group.children[id].body.y);
+	    group.remove(group.children[id]);
+	  } 
+	}
+
+function createExplosion(x,y) {
+    this.game.camera.shake(0.01, 100);
+    var exp = this.game.add.sprite(x,y,'explosion');
+    exp.anchor.setTo(0.5, 0.5);
+    exp.frame = 0;
+    exp.animations.add('explode',[0,1,3,4,5]);
+    exp.animations.play('explode',15,false,true);
+}
+
 function refreshSpheres()
 {
 	/*
@@ -192,9 +209,26 @@ function refreshSpheres()
 	player.polarity = esfera1.PhaserObject.body.polarity.positive;
 	player.score= esfera1.score;
 	
+	
+	
 	esfera2.PhaserObject.body.x =opponent.x;
 	esfera2.PhaserObject.body.y =opponent.y;
-	esfera2.PhaserObject.body.polarity.positive = opponent.positive;
 	esfera2.score = opponent.score;
- 
+	esfera2.magnetism.PhaserObject.body.x= opponent.x;
+	esfera2.magnetism.PhaserObject.body.y= opponent.y;
+	
+	esfera2.PhaserObject.body.polarity.positive = opponent.polarity;
+	
+	if(esfera2.PhaserObject !== undefined)
+		{
+		    if (esfera2.PhaserObject.body.polarity.positive < 0) 
+		    {
+		        esfera2.PhaserObject.animations.play('negative');
+		        esfera2.magnetism.PhaserObject.animations.play('negative');
+		    } else {
+		        esfera2.PhaserObject.animations.play("positive");
+		        esfera2.magnetism.PhaserObject.animations.play('positive');
+		    }
+		}
+
 }

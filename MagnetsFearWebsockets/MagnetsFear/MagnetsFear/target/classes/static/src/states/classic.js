@@ -32,8 +32,9 @@ function hitBase(body1, body2, shape1, shape2, equation)
 			{
 				if((bases1.children[i].body.id== obj1_body.id) && (bases1[i].invincibleTime<=0))  
 				{
-					bases1.children[i].body.clearCollision(!true,true);
-					bases1.remove(bases1.children[i]);
+					
+					bases1[i].hp--;
+					isBaseAlive(bases1,i);
 					esfera2.score += 10;
 					this.printScore();
 					this.checkSpawnBases(); 
@@ -46,8 +47,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
 			
 				if((bases2.children[i].body.id== obj1_body.id) && (bases2[i].invincibleTime<=0))
 				{ 
-					bases2.children[i].body.clearCollision(!true,true);
-					bases2.remove(bases2.children[i]);
+					bases2[i].hp--;
+					isBaseAlive(bases2,i);
 					esfera1.score += 10;             
 					this.printScore();
 					this.checkSpawnBases(); 
@@ -66,8 +67,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
 			
 				if((bases1.children[i].body.id== obj2_body.id)&& (bases1[i].invincibleTime<=0))  
 				{
-					bases1.children[i].body.clearCollision(!true,true);
-					bases1.remove(bases1.children[i]);
+					bases1[i].hp--;
+					isBaseAlive(bases1,i);
 					esfera2.score += 10;
 					this.printScore();
 					this.checkSpawnBases(); 
@@ -81,8 +82,8 @@ function hitBase(body1, body2, shape1, shape2, equation)
 			
 				if((bases2.children[i].body.id== obj2_body.id) && (bases2[i].invincibleTime<=0))
 					{ 
-					bases2.children[i].body.clearCollision(!true,true);
-					bases2.remove(bases2.children[i]);
+					bases2[i].hp--;
+					isBaseAlive(bases2,i);
 					esfera1.score += 10;
 					this.printScore(); 
 					this.checkSpawnBases(); 
@@ -178,7 +179,7 @@ MagnetsFear.classicState.prototype = {
     	updateKeys();
     	updateMagnetCollision();
       //ws.onUpdatePlayer();
-      ws.onUpdatePlayer1();
+      ws.onUpdateGameState();
       //ws.onGetGameState();
 		refreshSpheres();
     },

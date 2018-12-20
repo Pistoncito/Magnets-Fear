@@ -9,7 +9,7 @@ public class Base {
 	private int hp;
 
 	Base(){
-		
+		hp=1;
 	}
 		public long getId() {
 			return id;

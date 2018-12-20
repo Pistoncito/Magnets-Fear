@@ -5,8 +5,6 @@ MagnetsFear.matchMakingState = function(game){
 var player = new Player();
 var opponent = new Player();
 
-
-
 var serverBases1= [];
 var serverBases2= [];
 
@@ -46,7 +44,7 @@ MagnetsFear.matchMakingState.prototype = {
     		console.log("opponent.id(debe ser undefined): " + opponent.id);
     		//solo funciona si el juego esta ya iniciado
     		//ws.onGetGS();
-    		ws.onUpdatePlayer1();
+    		ws.onUpdateGameState();
     		}else
     			{
     			console.log("opponent.id(NO debe de seer undefined): " + opponent.id);
