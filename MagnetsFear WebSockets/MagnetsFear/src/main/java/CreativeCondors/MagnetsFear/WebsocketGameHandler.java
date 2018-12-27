@@ -175,11 +175,6 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(json.toString()));
 				break;
 			
-			case "DELETE DATA":
-				for (int i = 0; i<gameController.numPlayers(); i++) {
-					
-				}
-				
 			case "CLEAR_GAME":
 				gameController.clearGame();
 				session.sendMessage(new TextMessage(json.toString()));
