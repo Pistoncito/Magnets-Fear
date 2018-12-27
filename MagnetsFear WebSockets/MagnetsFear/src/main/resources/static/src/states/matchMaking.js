@@ -29,13 +29,19 @@ MagnetsFear.matchMakingState.prototype = {
     		serverProyectiles[i]= new ServerProy();
     		}
 
+        if(player === undefined)
+    		player = new Player();
+        
+    	if(opponent === undefined)
+    		opponent = new Player();
     },
 
     create: function() {
-    	ws.onJoin();
-    	
+        
         MatchText = "Esperando contrincante..."
         spr_text = game.add.text(0,0, MatchText, style);
+        
+          ws.onJoin();
         
     },
     update: function() {        
