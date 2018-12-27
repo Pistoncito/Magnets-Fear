@@ -70,6 +70,11 @@ ws.onUpdateGameState= function()
 	this.send(JSON.stringify(data));
 }
 
+ws.onClearGame= function() 
+{
+data.type = 'CLEAR_GAME';	
+this.send(JSON.stringify(data));
+}
 
 // Un monitor de eventos que es llamado cuando un mensaje es recibido desde un servidor. El monitor recibe un objeto MessageEvent llamado "mensaje".
 ws.onmessage = function (message) {
