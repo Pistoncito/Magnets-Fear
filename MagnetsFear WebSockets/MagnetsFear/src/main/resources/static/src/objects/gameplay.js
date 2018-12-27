@@ -178,7 +178,9 @@ function updateMagnetCollision() {
 		esfera2.magnetCollision(proyectiles[i].PhaserObject.body, 16);
 	}
 };
-
+//Recibe un grupo de bases y un identificador
+//Comprueba la vida de la base.
+//Si es menor o igual a cero la destruye creando una explosión
 function isBaseAlive(group, id) {
 	if (group[id].hp <= 0) {
 		group.children[id].body.clearCollision(!true, true);
@@ -186,7 +188,8 @@ function isBaseAlive(group, id) {
 		group.remove(group.children[id]);
 	}
 }
-
+//Recibe coordenadas x,y
+//Reproduce una animación de explosión en esas coordenadas
 function createExplosion(x,y) {
     this.game.camera.shake(0.01, 100);
     var exp = this.game.add.sprite(x,y,'explosion');
@@ -196,7 +199,7 @@ function createExplosion(x,y) {
     exp.animations.play('explode',15,false,true);
     explosionSound.play();
 }
-
+//Actualiza la posición, puntuación y polaridad de las esferas y proyectiles
 function refreshSpheres() {
 	/*
 	 * player= esfera1 esfera2 = opponent
