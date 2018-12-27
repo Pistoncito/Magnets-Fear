@@ -133,4 +133,18 @@ public class GameController {
 		Player player = players.get(p.getId());
 		return player.getBasesSizePlayer();
 	}
+	
+	public void clearGame()
+	{
+		for(Player p: players.values())
+		{
+			p.clearPlayer();
+		}
+		this.players.clear();
+		this.proyectiles.clear();
+		
+		this.nextPlayerId = new AtomicLong(-1);
+		this.nextProyectileId = new AtomicLong(-1);
+	}
+	
 }
