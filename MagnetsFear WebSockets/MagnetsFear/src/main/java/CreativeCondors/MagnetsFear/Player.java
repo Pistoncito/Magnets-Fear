@@ -107,5 +107,11 @@ public class Player {
 		{
 			return bases.values().size();
 		}
+		public void clearPlayer()
+		{
+			this.bases.clear();
+			this.nextBaseId = new AtomicLong(-1);
+		}
+		
 		
 }
