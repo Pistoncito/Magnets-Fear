@@ -180,6 +180,10 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 					
 				}
 				
+			case "CLEAR_GAME":
+				gameController.clearGame();
+				session.sendMessage(new TextMessage(json.toString()));
+				break;
 			default:
 				break;
 			}
