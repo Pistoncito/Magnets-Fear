@@ -178,10 +178,9 @@ MagnetsFear.classicState.prototype = {
     update: function() {
     	updateKeys();
     	updateMagnetCollision();
-      //ws.onUpdatePlayer();
-      ws.onUpdateGameState();
-      //ws.onGetGameState();
-		refreshSpheres();
+      	ws.onUpdateGameState();
+	refreshSpheres();
+	this.printScore();
     },
 
     // Inicia el audio del juego
