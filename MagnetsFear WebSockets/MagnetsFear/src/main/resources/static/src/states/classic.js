@@ -205,8 +205,8 @@ MagnetsFear.classicState.prototype = {
     // Muestra la puntuación de cada jugador por pantalla
     printScore: function()
     {
-      points1Text.setText("P1: " + esfera1.score);
-      points2Text.setText("P2: " + esfera2.score);
+      points1Text.setText("YOU: " + esfera1.score);
+      points2Text.setText("OPPONENT: " + esfera2.score);
     },
 
     initGameTime: function()
